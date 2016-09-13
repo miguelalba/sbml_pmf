@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
+ * Example:
+ * <code>&lt;speciesMetaData source="007" detail="Salmonella spec." description="description" /&gt;</code>
  * @author Miguel Alba
  */
 public class SpeciesMetaData extends AbstractSBase {

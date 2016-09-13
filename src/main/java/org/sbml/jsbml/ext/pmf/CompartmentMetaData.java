@@ -8,6 +8,8 @@ import java.util.TreeMap;
 
 /**
  * Extended meta data for a {@link org.sbml.jsbml.Compartment}
+ * <p>
+ * Example: <code>&lt;compartmentMetaData source="7" detail="some details" /&gt;</code>
  *
  * @author Miguel Alba
  * @data 9.09.2016

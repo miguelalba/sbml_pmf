@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
+ * Example:
+ * <code>&lt;ruleMetaData formulaName="2 plus 2" pmmLabID="1" ruleClass="growth" /&gt;</code>
+ *
  * @author Miguel Alba
  */
 public class RuleMetaData extends AbstractSBase {

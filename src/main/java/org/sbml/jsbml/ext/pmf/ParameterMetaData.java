@@ -8,6 +8,10 @@ import java.util.TreeMap;
 
 /**
  * Extended meta data for a Parameter.
+ * <p>
+ * Example:
+ * <code>&lt;parameterMetaData p="2.220" t="34.394" error="9.922"
+ *              description="max conc" min="3.0" max="10.0" /&gt;</code>
  *
  * @author Miguel Alba
  */
