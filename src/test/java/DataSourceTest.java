@@ -2,12 +2,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.sbml.jsbml.ext.pmf.DataSource;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by de on 12.09.2016.
@@ -34,7 +36,7 @@ public class DataSourceTest {
     @Test
     public void testReadAttribute() throws Exception {
         DataSource dataSource = new DataSource();
-        Assert.assertTrue(dataSource.readAttribute("src", "pmf", "data.numl"));
+        assertTrue(dataSource.readAttribute("src", "pmf", "data.numl"));
         // read error: unrecognized attribute name
         assertFalse(dataSource.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }
@@ -43,14 +45,12 @@ public class DataSourceTest {
     public void testWriteXMLAttributes() throws Exception {
 
         // test attribute with empty DataSource
-        Assert.assertTrue(new DataSource().writeXMLAttributes().isEmpty());
+        assertTrue(new DataSource().writeXMLAttributes().isEmpty());
 
         // test attribute with filled DataSource
-        Map<String, String> expectedAttributes = new HashMap<String, String>();
-        expectedAttributes.put("src", "data.numl");
-
-        DataSource dataSource = new DataSource("data.numl");
-        Assert.assertEquals(expectedAttributes, dataSource.writeXMLAttributes());
+        Map<String, String> expectedAttributes = Collections.singletonMap("src", "data.numl");
+        Map<String, String> obtainedAttributes = new DataSource("data.numl").writeXMLAttributes();
+        assertEquals(expectedAttributes, obtainedAttributes);
     }
 
     // test2String

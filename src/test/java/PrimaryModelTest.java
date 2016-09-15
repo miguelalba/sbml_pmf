@@ -1,6 +1,7 @@
 import org.junit.Test;
 import org.sbml.jsbml.ext.pmf.PrimaryModel;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,10 +44,9 @@ public class PrimaryModelTest {
         assertTrue(new PrimaryModel().writeXMLAttributes().isEmpty());
 
         // test attributes with filled ModelVariable
-        Map<String, String> expectedAttributes = new HashMap<>();
-        expectedAttributes.put("src", "model1.sbml");
-
-        assertEquals(expectedAttributes, new PrimaryModel("model1.sbml").writeXMLAttributes());
+        Map<String, String> expectedAttributes = Collections.singletonMap("src", "model1.sbml");
+        Map<String, String> obtainedAttributes = new PrimaryModel("model1.sbml").writeXMLAttributes();
+        assertEquals(expectedAttributes, obtainedAttributes);
     }
 
     @Test

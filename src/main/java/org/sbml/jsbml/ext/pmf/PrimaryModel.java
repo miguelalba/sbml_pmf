@@ -2,6 +2,7 @@ package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.AbstractSBase;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -80,10 +81,7 @@ public class PrimaryModel extends AbstractSBase {
 
     @Override
     public Map<String, String> writeXMLAttributes() {
-        Map<String, String> attributes = new TreeMap<>();
-        if (src != null && !src.isEmpty())
-            attributes.put("src", src);
-        return attributes;
+        return (src == null || src.isEmpty()) ? Collections.emptyMap() : Collections.singletonMap("src", src);
     }
 
     @Override
