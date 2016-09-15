@@ -93,6 +93,43 @@ public class RuleMetaData extends AbstractSBase {
                     return UNKNOWN;
             }
         }
+
+        public String getName() {
+            switch (this) {
+                case UNKNOWN:
+                    return "unknown";
+                case GROWTH:
+                    return "growth";
+                case INACTIVATION:
+                    return "inactivation";
+                case SURVIVAL:
+                    return "survival";
+                case GROWTH_INACTIVATION:
+                    return "growth/inactivation";
+                case INACTIVATION_SURVIVAL:
+                    return "inactivation/survival";
+                case GROWTH_SURVIVAL:
+                    return "growth/survival";
+                case GROWTH_INACTIVATION_SURVIVAL:
+                    return "growth/inactivation/survival";
+                case T:
+                    return "T";
+                case PH:
+                    return "pH";
+                case AW:
+                    return "aw";
+                case T_PH:
+                    return "T/pH";
+                case T_AW:
+                    return "T/aw";
+                case PH_AW:
+                    return "pH/aw";
+                case T_PH_AW:
+                    return "T/pH/aw";
+                default:
+                    return "unknown";
+            }
+        }
     }
 
     public String formulaName;
@@ -166,12 +203,9 @@ public class RuleMetaData extends AbstractSBase {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(PmfConstants.ruleMetaData + " [");
-        if (formulaName != null && !formulaName.isEmpty())
-            sb.append(" formulaName=\"" + formulaName + "\"");
-        if (pmmLabId != null)
-            sb.append(" pmmLabID=\"" + pmmLabId + "\"");
-        if (modelClass != null)
-            sb.append(" ruleClass=\"" + modelClass + "\"");
+        sb.append("formulaName=\"" + (formulaName == null || formulaName.isEmpty() ? "" : formulaName) + "\"");
+        sb.append(" ruleClass=\"" + (modelClass == null ? "" : modelClass.getName()) + "\"");
+        sb.append(" pmmLabID=\"" + (pmmLabId == null ? "" : pmmLabId) + "\"]");
         return sb.toString();
     }
 }

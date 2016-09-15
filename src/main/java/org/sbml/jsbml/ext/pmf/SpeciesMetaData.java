@@ -73,13 +73,10 @@ public class SpeciesMetaData extends AbstractSBase {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(PmfConstants.speciesMetaData + "[");
-        if (source != null && !source.isEmpty())
-            sb.append(" source=\"" + source + "\"");
-        if (detail != null && !detail.isEmpty())
-            sb.append(" detail=\"" + detail + "\"");
-        if (description != null && !description.isEmpty())
-            sb.append(" description=\"" + description + "\"");
+        StringBuilder sb = new StringBuilder(PmfConstants.speciesMetaData + " [");
+        sb.append("source=\"" + (source == null || source.isEmpty() ? "" : source) + "\"");
+        sb.append(" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) + "\"");
+        sb.append(" description=\"" + (description == null || description.isEmpty() ? "" : description) + "\"]");
         return sb.toString();
     }
 }

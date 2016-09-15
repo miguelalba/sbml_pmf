@@ -3,6 +3,7 @@ package org.sbml.jsbml.ext.pmf;
 import org.sbml.jsbml.AbstractSBase;
 import org.sbml.jsbml.util.StringTools;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,7 +12,7 @@ import java.util.TreeMap;
  * <p>
  * Example:
  * <code>&lt;parameterMetaData p="2.220" t="34.394" error="9.922"
- *              description="max conc" min="3.0" max="10.0" /&gt;</code>
+ * description="max conc" min="3.0" max="10.0" /&gt;</code>
  *
  * @author Miguel Alba
  */
@@ -71,17 +72,17 @@ public class ParameterMetaData extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (!Double.isNaN(p))
-            attributes.put("p", StringTools.toString(p));
+            attributes.put("p", Double.toString(p));
         if (!Double.isNaN(t))
-            attributes.put("t", StringTools.toString(t));
+            attributes.put("t", Double.toString(t));
         if (!Double.isNaN(error))
-            attributes.put("error", StringTools.toString(error));
+            attributes.put("error", Double.toString(error));
         if (description != null && !description.isEmpty())
             attributes.put("description", description);
         if (!Double.isNaN(min))
-            attributes.put("min", StringTools.toString(min));
+            attributes.put("min", Double.toString(min));
         if (!Double.isNaN(max))
-            attributes.put("max", StringTools.toString(max));
+            attributes.put("max", Double.toString(max));
         return attributes;
     }
 
@@ -116,19 +117,13 @@ public class ParameterMetaData extends AbstractSBase {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(PmfConstants.parameterMetaData + "[");
-        if (!Double.isNaN(p))
-            sb.append(" p=\"" + p + "\"");
-        if (!Double.isNaN(t))
-            sb.append(" t=\"" + t + "\"");
-        if (!Double.isNaN(error))
-            sb.append(" error=\"" + error + "\"");
-        if (description != null && !description.isEmpty())
-            sb.append(" description=\"" + description + "\"");
-        if (!Double.isNaN(min))
-            sb.append(" min=\"" + min + "\"");
-        if (!Double.isNaN(max))
-            sb.append(" max=\"" + max + "\"");
+        StringBuilder sb = new StringBuilder(PmfConstants.parameterMetaData + " [");
+        sb.append("p=\"" + (Double.isNaN(p) ? "" : p) + "\"");
+        sb.append(" t=\"" + (Double.isNaN(t) ? "" : t) + "\"");
+        sb.append(" error=\"" + (Double.isNaN(error) ? "" : error) + "\"");
+        sb.append(" description=\"" + (description == null || description.isEmpty() ? "" : description) + "\"");
+        sb.append(" min=\"" + (Double.isNaN(min) ? "" : min) + "\"");
+        sb.append(" max=\"" + (Double.isNaN(max) ? "" : max) + "\"");
         sb.append("]");
 
         return sb.toString();

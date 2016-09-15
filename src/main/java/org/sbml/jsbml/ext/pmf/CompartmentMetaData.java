@@ -12,7 +12,7 @@ import java.util.TreeMap;
  * Example: <code>&lt;compartmentMetaData source="7" detail="some details" /&gt;</code>
  *
  * @author Miguel Alba
- * @data 9.09.2016
+ * @date 9.09.2016
  */
 public class CompartmentMetaData extends AbstractSBase {
 
@@ -86,11 +86,10 @@ public class CompartmentMetaData extends AbstractSBase {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(PmfConstants.compartmentMetaData + "[");
-        if (source != null)
-            sb.append("source =\"" + source + "\"");
-        if (detail != null)
-            sb.append("detail=\"" + detail + "\"");
+        StringBuilder sb = new StringBuilder(PmfConstants.compartmentMetaData + " [");
+        sb.append("source=\"" + (source == null ? "" : source) + "\"");
+        sb.append(" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) + "\"");
+        sb.append("]");
         return sb.toString();
     }
 }
