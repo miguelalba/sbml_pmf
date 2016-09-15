@@ -137,11 +137,11 @@ public class Reference extends AbstractSBase {
         }
         if (attributeName.equals("LB")) {
             approvalMode = StringTools.parseSBMLInt(value);
-            return false;
+            return true;
         }
         if (attributeName.equals("UR")) {
             website = value;
-            return false;
+            return true;
         }
         if (attributeName.equals("M3")) {
             type = ReferenceType.fromValue(StringTools.parseSBMLInt(value));
