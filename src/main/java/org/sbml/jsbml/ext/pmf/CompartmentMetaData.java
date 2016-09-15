@@ -61,22 +61,22 @@ public class CompartmentMetaData extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (source != null) {
-            attributes.put(PmfConstants.compartmentMetaDataSource, source.toString());
+            attributes.put("source", source.toString());
         }
         if (detail != null && !detail.isEmpty()) {
-            attributes.put(PmfConstants.compartmentMetaDataDetail, detail);
+            attributes.put("detail", detail);
         }
         return attributes;
     }
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals(PmfConstants.compartmentMetaDataSource)) {
+        if (attributeName.equals("source")) {
             source = StringTools.parseSBMLInt(value);
             return true;
         }
 
-        if (attributeName.equals(PmfConstants.compartmentMetaDataDetail)) {
+        if (attributeName.equals("detail")) {
             detail = value;
             return true;
         }
@@ -88,9 +88,9 @@ public class CompartmentMetaData extends AbstractSBase {
     public String toString() {
         StringBuilder sb = new StringBuilder(PmfConstants.compartmentMetaData + "[");
         if (source != null)
-            sb.append(PmfConstants.compartmentMetaDataSource + "=\"" + source + "\"");
+            sb.append("source =\"" + source + "\"");
         if (detail != null)
-            sb.append(PmfConstants.compartmentMetaDataDetail + "=\"" + detail + "\"");
+            sb.append("detail=\"" + detail + "\"");
         return sb.toString();
     }
 }

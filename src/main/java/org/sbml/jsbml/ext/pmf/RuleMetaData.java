@@ -134,15 +134,15 @@ public class RuleMetaData extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals(PmfConstants.ruleMetaDataFormula)) {
+        if (attributeName.equals("formulaName")) {
             formulaName = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.ruleMetaDataId)) {
+        if (attributeName.equals("pmmLabID")) {
             pmmLabId = StringTools.parseSBMLInt(value);
             return true;
         }
-        if (attributeName.equals(PmfConstants.ruleMetaDataClass)) {
+        if (attributeName.equals("ruleClass")) {
             modelClass = ModelClass.fromName(value);
             return true;
         }
@@ -153,11 +153,11 @@ public class RuleMetaData extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (formulaName != null && !formulaName.isEmpty())
-            attributes.put(PmfConstants.ruleMetaDataFormula, formulaName);
+            attributes.put("formulaName", formulaName);
         if (pmmLabId != null)
-            attributes.put(PmfConstants.ruleMetaDataId, pmmLabId.toString());
+            attributes.put("pmmLabID", pmmLabId.toString());
         if (modelClass != null)
-            attributes.put(PmfConstants.ruleMetaDataClass, modelClass.toString());
+            attributes.put("ruleClass", modelClass.toString());
 
         return attributes;
     }
@@ -167,11 +167,11 @@ public class RuleMetaData extends AbstractSBase {
         StringBuilder sb = new StringBuilder();
         sb.append(PmfConstants.ruleMetaData + " [");
         if (formulaName != null && !formulaName.isEmpty())
-            sb.append(" " + PmfConstants.ruleMetaDataFormula + "=\"" + formulaName + "\"");
+            sb.append(" formulaName=\"" + formulaName + "\"");
         if (pmmLabId != null)
-            sb.append(" " + PmfConstants.ruleMetaDataId + "=\"" + pmmLabId + "\"");
+            sb.append(" pmmLabID=\"" + pmmLabId + "\"");
         if (modelClass != null)
-            sb.append(" " + PmfConstants.ruleMetaDataClass + "=\"" + modelClass + "\"");
+            sb.append(" ruleClass=\"" + modelClass + "\"");
         return sb.toString();
     }
 }

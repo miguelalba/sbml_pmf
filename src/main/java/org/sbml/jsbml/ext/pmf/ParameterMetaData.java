@@ -71,43 +71,43 @@ public class ParameterMetaData extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (!Double.isNaN(p))
-            attributes.put(PmfConstants.parameterMetaDataP, StringTools.toString(p));
+            attributes.put("p", StringTools.toString(p));
         if (!Double.isNaN(t))
-            attributes.put(PmfConstants.parameterMetaDataT, StringTools.toString(t));
+            attributes.put("t", StringTools.toString(t));
         if (!Double.isNaN(error))
-            attributes.put(PmfConstants.parameterMetaDataError, StringTools.toString(error));
+            attributes.put("error", StringTools.toString(error));
         if (description != null && !description.isEmpty())
-            attributes.put(PmfConstants.parameterMetaDataDescription, description);
+            attributes.put("description", description);
         if (!Double.isNaN(min))
-            attributes.put(PmfConstants.parameterMetaDataMin, StringTools.toString(min));
+            attributes.put("min", StringTools.toString(min));
         if (!Double.isNaN(max))
-            attributes.put(PmfConstants.parameterMetaDataMax, StringTools.toString(max));
+            attributes.put("max", StringTools.toString(max));
         return attributes;
     }
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals(PmfConstants.parameterMetaDataP)) {
+        if (attributeName.equals("p")) {
             p = StringTools.parseSBMLDouble(value);
             return true;
         }
-        if (attributeName.equals(PmfConstants.parameterMetaDataT)) {
+        if (attributeName.equals("t")) {
             t = StringTools.parseSBMLDouble(value);
             return true;
         }
-        if (attributeName.equals(PmfConstants.parameterMetaDataError)) {
+        if (attributeName.equals("error")) {
             error = StringTools.parseSBMLDouble(value);
             return true;
         }
-        if (attributeName.equals(PmfConstants.parameterMetaDataDescription)) {
+        if (attributeName.equals("description")) {
             description = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.parameterMetaDataMin)) {
+        if (attributeName.equals("min")) {
             min = StringTools.parseSBMLDouble(value);
             return true;
         }
-        if (attributeName.equals(PmfConstants.parameterMetaDataMax)) {
+        if (attributeName.equals("max")) {
             max = StringTools.parseSBMLDouble(value);
             return true;
         }
@@ -118,17 +118,17 @@ public class ParameterMetaData extends AbstractSBase {
     public String toString() {
         StringBuilder sb = new StringBuilder(PmfConstants.parameterMetaData + "[");
         if (!Double.isNaN(p))
-            sb.append(" " + PmfConstants.parameterMetaDataP + "=\"" + p + "\"");
+            sb.append(" p=\"" + p + "\"");
         if (!Double.isNaN(t))
-            sb.append(" " + PmfConstants.parameterMetaDataT + "=\"" + t + "\"");
+            sb.append(" t=\"" + t + "\"");
         if (!Double.isNaN(error))
-            sb.append(" " + PmfConstants.parameterMetaDataError + "=\"" + error + "\"");
+            sb.append(" error=\"" + error + "\"");
         if (description != null && !description.isEmpty())
-            sb.append(" " + PmfConstants.parameterMetaDataDescription + "=\"" + description + "\"");
+            sb.append(" description=\"" + description + "\"");
         if (!Double.isNaN(min))
-            sb.append(" " + PmfConstants.parameterMetaDataMin + "=\"" + min + "\"");
+            sb.append(" min=\"" + min + "\"");
         if (!Double.isNaN(max))
-            sb.append(" " + PmfConstants.parameterMetaDataMax + "=\"" + max + "\"");
+            sb.append(" max=\"" + max + "\"");
         sb.append("]");
 
         return sb.toString();

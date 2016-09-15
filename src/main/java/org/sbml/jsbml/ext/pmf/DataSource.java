@@ -81,13 +81,13 @@ public class DataSource extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (src != null && !src.isEmpty())
-            attributes.put(PmfConstants.dataSourceSrc, src);
+            attributes.put("src", src);
         return attributes;
     }
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals(PmfConstants.dataSourceSrc)) {
+        if (attributeName.equals("src")) {
             src = value;
             return true;
         }
@@ -96,7 +96,6 @@ public class DataSource extends AbstractSBase {
 
     @Override
     public String toString() {
-        return "DataSource [" + PmfConstants.dataSourceSrc + "=\"" +
-                (src == null || src.isEmpty() ? "" : src) + "\"]";
+        return "DataSource [src=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
     }
 }

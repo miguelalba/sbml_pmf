@@ -83,19 +83,19 @@ public class ModelVariable extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (name != null && !name.isEmpty())
-            attributes.put(PmfConstants.modelVariableName, name);
+            attributes.put("name", name);
         if (!Double.isNaN(value))
-            attributes.put(PmfConstants.modelVariableValue, StringTools.toString(value));
+            attributes.put("value", StringTools.toString(value));
         return attributes;
     }
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals(PmfConstants.modelVariableName)) {
+        if (attributeName.equals("name")) {
             name = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.modelVariableValue)) {
+        if (attributeName.equals("value")) {
             this.value = StringTools.parseSBMLDouble(value);
             return true;
         }
@@ -106,9 +106,9 @@ public class ModelVariable extends AbstractSBase {
     public String toString() {
         StringBuilder sb = new StringBuilder("ModelVariable [");
         if (name != null && !name.isEmpty())
-            sb.append(PmfConstants.modelVariableName + "=\"" + name + "\"");
+            sb.append("name=\"" + name + "\"");
         if (!Double.isNaN(value))
-            sb.append(" " + PmfConstants.modelVariableValue + "=\"" + value + "\"");
+            sb.append(" value=\"" + value + "\"");
         sb.append("]");
 
         return sb.toString();

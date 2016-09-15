@@ -40,11 +40,11 @@ public class SpeciesMetaData extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (source != null && !source.isEmpty())
-            attributes.put(PmfConstants.speciesMetaDataSource, source);
+            attributes.put("source", source);
         if (detail != null && !detail.isEmpty())
-            attributes.put(PmfConstants.speciesMetaDataDetail, detail);
+            attributes.put("detail", detail);
         if (description != null && !description.isEmpty())
-            attributes.put(PmfConstants.speciesMetaDataDescription, description);
+            attributes.put("description", description);
 
         return attributes;
     }
@@ -52,15 +52,15 @@ public class SpeciesMetaData extends AbstractSBase {
     @Override
     public boolean readAttribute(String attributeName, String prefix,
                                  String value) {
-        if (attributeName.equals(PmfConstants.speciesMetaDataSource)) {
+        if (attributeName.equals("source")) {
             source = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.speciesMetaDataDetail)) {
+        if (attributeName.equals("detail")) {
             detail = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.speciesMetaDataDescription)) {
+        if (attributeName.equals("description")) {
             description = value;
             return true;
         }
@@ -75,11 +75,11 @@ public class SpeciesMetaData extends AbstractSBase {
     public String toString() {
         StringBuilder sb = new StringBuilder(PmfConstants.speciesMetaData + "[");
         if (source != null && !source.isEmpty())
-            sb.append(" " + PmfConstants.speciesMetaDataSource + "=\"" + source + "\"");
+            sb.append(" source=\"" + source + "\"");
         if (detail != null && !detail.isEmpty())
-            sb.append(" " + PmfConstants.speciesMetaDataDetail + "=\"" + detail + "\"");
+            sb.append(" detail=\"" + detail + "\"");
         if (description != null && !description.isEmpty())
-            sb.append(" " + PmfConstants.speciesMetaDataDescription + "=\"" + description + "\"");
+            sb.append(" description=\"" + description + "\"");
         return sb.toString();
     }
 }

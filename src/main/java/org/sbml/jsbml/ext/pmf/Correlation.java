@@ -65,11 +65,11 @@ public class Correlation extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals(PmfConstants.correlationName)) {
+        if (attributeName.equals("name")) {
             name = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.correlationValue)) {
+        if (attributeName.equals("value")) {
             this.value = StringTools.parseSBMLDouble(value);
             return true;
         }
@@ -80,20 +80,17 @@ public class Correlation extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (name != null && !name.isEmpty())
-            attributes.put(PmfConstants.correlationName, name);
+            attributes.put("name", name);
         if (!Double.isNaN(value))
-            attributes.put(PmfConstants.correlationValue, StringTools.toString(value));
+            attributes.put("value", StringTools.toString(value));
         return attributes;
     }
 
     @Override
     public String toString() {
         String sb = "Correlation [";
-        sb += PmfConstants.correlationName + "=\"" +
-                (name == null || name.isEmpty() ? "" : name) + "\"";
-        sb += " " + PmfConstants.correlationValue + "=\"" +
-                (Double.isNaN(value) ? "" : value) + "\"";
-        sb += "]";
+        sb += "name=\"" + (name == null || name.isEmpty() ? "" : name) + "\"";
+        sb += " value=\"" + (Double.isNaN(value) ? "" : value) + "\"]";
 
         return sb;
     }

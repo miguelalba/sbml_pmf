@@ -103,51 +103,51 @@ public class Reference extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals(PmfConstants.referenceAuthor)) {
+        if (attributeName.equals("AU")) {
             author = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.referenceYear)) {
+        if (attributeName.equals("PY")) {
             year = StringTools.parseSBMLInt(value);
             return true;
         }
-        if (attributeName.equals(PmfConstants.referenceTitle)) {
+        if (attributeName.equals("TI")) {
             title = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.referenceYear)) {
+        if (attributeName.equals("AB")) {
             abstractText = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.referenceJournal)) {
+        if (attributeName.equals("T2")) {
             journal = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.referenceVolume)) {
+        if (attributeName.equals("VL")) {
             volume = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.referenceIssue)) {
+        if (attributeName.equals("IS")) {
             issue = value;
             return true;
         }
-        if (attributeName.equals(PmfConstants.referencePage)) {
+        if (attributeName.equals("SP")) {
             page = StringTools.parseSBMLInt(value);
             return true;
         }
-        if (attributeName.equals(PmfConstants.referenceApproval)) {
+        if (attributeName.equals("LB")) {
             approvalMode = StringTools.parseSBMLInt(value);
             return false;
         }
-        if (attributeName.equals(PmfConstants.referenceWebsite)) {
+        if (attributeName.equals("UR")) {
             website = value;
             return false;
         }
-        if (attributeName.equals(PmfConstants.referenceType)) {
+        if (attributeName.equals("M3")) {
             type = ReferenceType.fromValue(StringTools.parseSBMLInt(value));
             return true;
         }
-        if (attributeName.equals(PmfConstants.referenceComment)) {
+        if (attributeName.equals("N1")) {
             comment = value;
             return true;
         }
@@ -160,29 +160,29 @@ public class Reference extends AbstractSBase {
         Map<String, String> attributes = new TreeMap<>();
 
         if (author != null && !author.isEmpty())
-            attributes.put(PmfConstants.referenceAuthor, author);
+            attributes.put("AU", author);
         if (year != null)
-            attributes.put(PmfConstants.referenceYear, StringTools.toString(year));
+            attributes.put("PY", StringTools.toString(year));
         if (title != null && !title.isEmpty())
-            attributes.put(PmfConstants.referenceTitle, title);
+            attributes.put("TI", title);
         if (abstractText != null && !abstractText.isEmpty())
-            attributes.put(PmfConstants.referenceAbstract, abstractText);
+            attributes.put("AB", abstractText);
         if (journal != null && !journal.isEmpty())
-            attributes.put(PmfConstants.referenceJournal, journal);
+            attributes.put("T2", journal);
         if (volume != null && !volume.isEmpty())
-            attributes.put(PmfConstants.referenceVolume, volume);
+            attributes.put("VL", volume);
         if (issue != null && !issue.isEmpty())
-            attributes.put(PmfConstants.referenceIssue, issue);
+            attributes.put("IS", issue);
         if (page != null)
-            attributes.put(PmfConstants.referencePage, StringTools.toString(page));
+            attributes.put("SP", StringTools.toString(page));
         if (approvalMode != null)
-            attributes.put(PmfConstants.referenceApproval, StringTools.toString(approvalMode));
+            attributes.put("LB", StringTools.toString(approvalMode));
         if (website != null && !website.isEmpty())
-            attributes.put(PmfConstants.referenceWebsite, website);
+            attributes.put("UR", website);
         if (type != null)
-            attributes.put(PmfConstants.referenceType, type.name());
+            attributes.put("M3", type.name());
         if (comment != null && !comment.isEmpty())
-            attributes.put(PmfConstants.referenceComment, comment);
+            attributes.put("N1", comment);
 
         return attributes;
     }
