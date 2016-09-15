@@ -91,17 +91,39 @@ public class ReferenceTest {
     @Test
     public void testReadAttribute() {
         Reference ref = new Reference();
+
         assertTrue(ref.readAttribute("AU", "pmf", "Baranyi, J."));
+        assertEquals("Baranyi, J.", ref.author);
+
         assertTrue(ref.readAttribute("PY", "pmf", "1994"));
+        assertTrue(1994 == ref.year);
+
         assertTrue(ref.readAttribute("TI", "pmf", "A dynamic approach to predicting bacterial growth in food"));
+        assertEquals("A dynamic approach to predicting bacterial growth in food", ref.title);
+
         assertTrue(ref.readAttribute("AB", "pmf", "A new member ..."));
+        assertEquals("A new member ...", ref.abstractText);
+
         assertTrue(ref.readAttribute("T2", "pmf", "International Journal of Food Microbiology"));
+        assertEquals("International Journal of Food Microbiology", ref.journal);
+
         assertTrue(ref.readAttribute("IS", "pmf", "3"));
+        assertEquals("3", ref.issue);
+
         assertTrue(ref.readAttribute("SP", "pmf", "277"));
+        assertTrue(277 == ref.page);
+
         assertTrue(ref.readAttribute("LB", "pmf", "1"));
+        assertTrue(1 == ref.approvalMode);
+
         assertTrue(ref.readAttribute("UR", "pmf", "http://www.sciencedirect.com/science/article/pii/0168160594901570"));
+        assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.website);
+
         assertTrue(ref.readAttribute("M3", "pmf", Reference.ReferenceType.Paper.name()));
+        assertEquals(Reference.ReferenceType.Paper, ref.type);
+
         assertTrue(ref.readAttribute("N1", "pmf", "improvised comment"));
+        assertEquals("improvised comment", ref.comment);
 
         assertFalse(ref.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
     }

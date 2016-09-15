@@ -32,8 +32,13 @@ public class CompartmentMetaDataTest {
     @Test
     public void testReadAttribute() {
         CompartmentMetaData metaData = new CompartmentMetaData();
+
         assertTrue(metaData.readAttribute("source", "pmf", "7"));
+        assertTrue(7 == metaData.source);
+
         assertTrue(metaData.readAttribute("detail", "pmf", "some details"));
+        assertEquals("some details", metaData.detail);
+
         assertFalse(metaData.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
     }
 

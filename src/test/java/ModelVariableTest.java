@@ -45,8 +45,13 @@ public class ModelVariableTest {
     @Test
     public void testReadAttribute() {
         ModelVariable mv = new ModelVariable();
+
         assertTrue(mv.readAttribute("name", "pmf", "Temperature"));
+        assertEquals("Temperature", mv.name);
+
         assertTrue(mv.readAttribute("value", "pmf", StringTools.toString(10.0)));
+        assertEquals(10.0, mv.value, 0.0);
+
         assertFalse(mv.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }
 

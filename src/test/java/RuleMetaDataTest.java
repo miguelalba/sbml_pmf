@@ -35,12 +35,18 @@ public class RuleMetaDataTest {
 
     @Test
     public void testReadAttribute() {
-        RuleMetaData ruleMetadata = new RuleMetaData();
+        RuleMetaData metadata = new RuleMetaData();
 
-        assertTrue(ruleMetadata.readAttribute("formulaName", "pmf", "2 plus 2"));
-        assertTrue(ruleMetadata.readAttribute("ruleClass", "pmf", RuleMetaData.ModelClass.GROWTH.name()));
-        assertTrue(ruleMetadata.readAttribute("pmmLabID", "pmf", "1"));
-        assertFalse(ruleMetadata.readAttribute("nonExistentAttribute", "pmf", "asdf"));
+        assertTrue(metadata.readAttribute("formulaName", "pmf", "2 plus 2"));
+        assertEquals("2 plus 2", metadata.formulaName);
+
+        assertTrue(metadata.readAttribute("ruleClass", "pmf", RuleMetaData.ModelClass.GROWTH.name()));
+        assertEquals(RuleMetaData.ModelClass.GROWTH, metadata.modelClass);
+
+        assertTrue(metadata.readAttribute("pmmLabID", "pmf", "1"));
+        assertTrue(1 == metadata.pmmLabId);
+        
+        assertFalse(metadata.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }
 
     @Test

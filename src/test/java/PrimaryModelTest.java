@@ -35,6 +35,8 @@ public class PrimaryModelTest {
     public void testReadAttribute() {
         PrimaryModel pm = new PrimaryModel();
         assertTrue(pm.readAttribute("src", "pmf", "model1.sbml"));
+        assertEquals("model1.sbml", pm.src);
+
         assertFalse(pm.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }
 

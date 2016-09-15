@@ -37,6 +37,8 @@ public class DataSourceTest {
     public void testReadAttribute() throws Exception {
         DataSource dataSource = new DataSource();
         assertTrue(dataSource.readAttribute("src", "pmf", "data.numl"));
+        assertEquals("data.numl", dataSource.src);
+
         // read error: unrecognized attribute name
         assertFalse(dataSource.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }

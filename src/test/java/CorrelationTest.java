@@ -6,8 +6,7 @@ import org.sbml.jsbml.util.StringTools;
 import java.util.HashMap;
 import java.util.Map;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by de on 12.09.2016.
@@ -43,9 +42,13 @@ public class CorrelationTest {
     public void testReadAttribute() {
         Correlation correlation = new Correlation();
 
-        Assert.assertTrue(correlation.readAttribute("name", "pmf", "h0"));
-        Assert.assertTrue(correlation.readAttribute("value", "pmf", Double.toString(7.0)));
-        Assert.assertFalse(correlation.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
+        assertTrue(correlation.readAttribute("name", "pmf", "h0"));
+        assertEquals("h0", correlation.name);
+
+        assertTrue(correlation.readAttribute("value", "pmf", Double.toString(7.0)));
+        assertEquals(7.0, correlation.value, 0.0);
+
+        assertFalse(correlation.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
     }
 
     @Test

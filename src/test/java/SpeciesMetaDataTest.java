@@ -39,8 +39,14 @@ public class SpeciesMetaDataTest {
         SpeciesMetaData metadata = new SpeciesMetaData();
 
         assertTrue(metadata.readAttribute("source", "pmf", "007"));
+        assertEquals("007", metadata.source);
+
         assertTrue(metadata.readAttribute("detail", "pmf", "Salmonella spec."));
+        assertEquals("Salmonella spec.", metadata.detail);
+
         assertTrue(metadata.readAttribute("description", "pmf", "description"));
+        assertEquals("description", metadata.description);
+
         assertFalse(metadata.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }
 

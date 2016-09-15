@@ -43,11 +43,23 @@ public class ParameterMetaDataTest {
         ParameterMetaData metadata = new ParameterMetaData();
 
         assertTrue(metadata.readAttribute("p", "pmf", "2.220"));
+        assertEquals(2.220, metadata.p, 0.0);
+
         assertTrue(metadata.readAttribute("t", "pmf", "34.394"));
+        assertEquals(34.394, metadata.t, 0.0);
+
         assertTrue(metadata.readAttribute("error", "pmf", "9.922"));
+        assertEquals(9.922, metadata.error, 0.0);
+
         assertTrue(metadata.readAttribute("description", "pmf", "max conc"));
+        assertEquals("max conc", metadata.description);
+
         assertTrue(metadata.readAttribute("min", "pmf", "3.0"));
+        assertEquals(3.0, metadata.min, 0.0);
+
         assertTrue(metadata.readAttribute("max", "pmf", "10.0"));
+        assertEquals(10.0, metadata.max, 0.0);
+
         assertFalse(metadata.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }
 

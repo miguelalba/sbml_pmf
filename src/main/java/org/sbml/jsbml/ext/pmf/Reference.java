@@ -144,7 +144,7 @@ public class Reference extends AbstractSBase {
             return true;
         }
         if (attributeName.equals("M3")) {
-            type = ReferenceType.fromValue(StringTools.parseSBMLInt(value));
+            type = ReferenceType.valueOf(value);
             return true;
         }
         if (attributeName.equals("N1")) {
