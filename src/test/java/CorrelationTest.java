@@ -1,4 +1,3 @@
-import org.junit.Assert;
 import org.junit.Test;
 import org.sbml.jsbml.ext.pmf.Correlation;
 import org.sbml.jsbml.util.StringTools;
@@ -9,13 +8,23 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 /**
- * Created by de on 12.09.2016.
+ * Tests for the {@link Correlation} class. Checks:
+ * <ul>
+ * <li>Constructors</li>
+ * <li>Clone method</li>
+ * <li>{@link Correlation#readAttribute(String, String, String)}</li>
+ * <li>{@link Correlation#toString()}</li>
+ * <li>{@link Correlation#writeXMLAttributes()}</li>
+ * </ul>
  */
 public class CorrelationTest {
 
+    /**
+     * Test constructors: empty, parametrized and copy.
+     */
     @Test
     public void testConstructors() {
-        // Test empty constructor
+        // Empty constructor initializes name to null and value to Double.NaN
         Correlation corr = new Correlation();
         assertTrue(corr.name == null);
         assertTrue(Double.isNaN(corr.value));
@@ -25,12 +34,20 @@ public class CorrelationTest {
         assertEquals("h0", corr.name);
         assertEquals(7.0, corr.value, .0);
 
+        // Test constructor with level and version
+        corr = new Correlation("h0", 7.0, 3, 1);
+        assertEquals("h0", corr.name);
+        assertEquals(7.0, corr.value, .0);
+
         // Test copy constructor
         corr = new Correlation(corr);
         assertEquals("h0", corr.name);
         assertEquals(7.0, corr.value, .0);
     }
 
+    /**
+     * Test clone method.
+     */
     @Test
     public void testClone() {
         Correlation corr = new Correlation("h0", 7.0).clone();
@@ -38,38 +55,62 @@ public class CorrelationTest {
         assertEquals(7.0, corr.value, .0);
     }
 
+    /**
+     * Test {@link Correlation#readAttribute(String, String, String)} for the name and value attributes.
+     */
     @Test
     public void testReadAttribute() {
         Correlation correlation = new Correlation();
 
+        // Parsing an string as the name should return true and set it as name
         assertTrue(correlation.readAttribute("name", "pmf", "h0"));
         assertEquals("h0", correlation.name);
 
+        // Parsing a non-double as the value attribute should return true and set Double.NaN as value
+        assertTrue(correlation.readAttribute("name", "pmf", "not a double"));
+        assertTrue(Double.isNaN(correlation.value));
+
+        // Parsing a double as the value attribute should return true and set it as value
         assertTrue(correlation.readAttribute("value", "pmf", Double.toString(7.0)));
         assertEquals(7.0, correlation.value, 0.0);
 
+        // Parsing an attribute other than name and value should return false
         assertFalse(correlation.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
     }
 
+    /**
+     * Test {@link Correlation#writeXMLAttributes()} for empty and initialized {@link Correlation}.
+     */
     @Test
     public void testWriteXMLAttributes() {
+        Correlation correlation = new Correlation();
 
-        // test attributes with empty correlation
-        Assert.assertTrue(new Correlation().writeXMLAttributes().isEmpty());
+        // Test attributes with empty correlation
+        assertTrue(correlation.writeXMLAttributes().isEmpty());
 
-        // test attributes with filled correlation
-        Correlation correlation = new Correlation("h0", 7.0);
+        // Test attributes with filled correlation
+        correlation.name = "h0";
+        correlation.value = 7.0;
 
-        Map<String, String> expectedAttributes = new HashMap<>();
+        Map<String, String> expectedAttributes = new HashMap<>(2);
         expectedAttributes.put("name", "h0");
         expectedAttributes.put("value", StringTools.toString(7.0));
 
-        Assert.assertEquals(expectedAttributes, correlation.writeXMLAttributes());
+        assertEquals(expectedAttributes, correlation.writeXMLAttributes());
     }
 
+    /**
+     * Test {@link Correlation#toString()} for empty and initialized {@link Correlation}.
+     */
     @Test
     public void test2String() {
-        assertEquals("Correlation [name=\"h0\" value=\"7.0\"]", new Correlation("h0", 7.0).toString());
-        assertEquals("Correlation [name=\"\" value=\"\"]", new Correlation().toString());
+        Correlation correlation = new Correlation();
+        String expected = "Correlation [name=\"\" value=\"\"]";
+        assertEquals(expected, correlation.toString());
+
+        correlation.name = "h0";
+        correlation.value = 7.0;
+        expected = "Correlation [name=\"h0\" value=\"7.0\"]";
+        assertEquals(expected, correlation.toString());
     }
 }

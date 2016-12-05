@@ -30,17 +30,8 @@ public class Reference extends AbstractSBase {
             return value;
         }
 
-        /**
-         * @param value Value of the reference type.
-         * @return The ReferenceType associated to the value. If value is invalid it will return null.
-         */
-        public static ReferenceType fromValue(final int value) {
-            for (final ReferenceType referenceType : values()) {
-                if (referenceType.value == value) {
-                    return referenceType;
-                }
-            }
-            return null;
+        public static ReferenceType valueOf(final int value) {
+            return ReferenceType.values()[value - 1];
         }
     }
 
@@ -91,68 +82,59 @@ public class Reference extends AbstractSBase {
         this.comment = obj.comment;
     }
 
+    /**
+     * Clones this class.
+     */
     @Override
     public Reference clone() {
         return new Reference(this);
     }
 
-    /**
-     * Clones this class.
-     */
-
-
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
+        boolean isAttributeRead;
+
         if (attributeName.equals("AU")) {
             author = value;
-            return true;
-        }
-        if (attributeName.equals("PY")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("PY")) {
             year = StringTools.parseSBMLInt(value);
-            return true;
-        }
-        if (attributeName.equals("TI")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("TI")) {
             title = value;
-            return true;
-        }
-        if (attributeName.equals("AB")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("AB")) {
             abstractText = value;
-            return true;
-        }
-        if (attributeName.equals("T2")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("T2")) {
             journal = value;
-            return true;
-        }
-        if (attributeName.equals("VL")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("VL")) {
             volume = value;
-            return true;
-        }
-        if (attributeName.equals("IS")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("IS")) {
             issue = value;
-            return true;
-        }
-        if (attributeName.equals("SP")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("SP")) {
             page = StringTools.parseSBMLInt(value);
-            return true;
-        }
-        if (attributeName.equals("LB")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("LB")) {
             approvalMode = StringTools.parseSBMLInt(value);
-            return true;
-        }
-        if (attributeName.equals("UR")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("UR")) {
             website = value;
-            return true;
-        }
-        if (attributeName.equals("M3")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("M3")) {
             type = ReferenceType.valueOf(value);
-            return true;
-        }
-        if (attributeName.equals("N1")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("N1")) {
             comment = value;
-            return true;
+            isAttributeRead = true;
+        } else {
+            isAttributeRead = false;
         }
 
-        return false;
+        return isAttributeRead;
     }
 
     @Override

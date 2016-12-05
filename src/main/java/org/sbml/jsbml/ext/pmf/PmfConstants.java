@@ -34,9 +34,9 @@ public class PmfConstants {
     }
 
     // Objects defined in this plugin
-    public static final String compartmentMetaData = "compartmentMetaData";
-    public static final String parameterMetaData = "parameterMetaData";
-    public static final String reference = "reference";
-    public static final String ruleMetaData = "ruleMetaData";
-    public static final String speciesMetaData = "speciesMetaData";
+    static final String compartmentMetaData = "compartmentMetaData";
+    static final String parameterMetaData = "parameterMetaData";
+    static final String reference = "reference";
+    static final String ruleMetaData = "ruleMetaData";
+    static final String speciesMetaData = "speciesMetaData";
 }

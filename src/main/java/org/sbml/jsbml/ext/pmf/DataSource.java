@@ -4,7 +4,6 @@ import org.sbml.jsbml.AbstractSBase;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Links to a separate file with data (E.g. NuMLDocument).
@@ -73,7 +72,7 @@ public class DataSource extends AbstractSBase {
     /**
      * Initializes the default values using the namespace.
      */
-    public void initDefaults() {
+    private void initDefaults() {
         setPackageVersion(-1);
         packageName = PmfConstants.shortLabel;
     }
@@ -85,11 +84,16 @@ public class DataSource extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
+
+        boolean attributeIsRead;
         if (attributeName.equals("src")) {
             src = value;
-            return true;
+            attributeIsRead = true;
+        } else {
+            attributeIsRead = false;
         }
-        return false;
+
+        return attributeIsRead;
     }
 
     @Override

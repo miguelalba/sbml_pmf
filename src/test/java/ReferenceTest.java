@@ -7,10 +7,38 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 /**
- * Created by de on 13.09.2016.
+ * Tests for the {@link Reference} class. Checks:
+ * <ul>
+ * <li>Constructors</li>
+ * TODO: ...
+ * </ul>
  */
 public class ReferenceTest {
 
+    @Test
+    public void testReferenceType() {
+        assertTrue(1 == Reference.ReferenceType.Paper.value());
+        assertTrue(2 == Reference.ReferenceType.SOP.value());
+        assertTrue(3 == Reference.ReferenceType.LA.value());
+        assertTrue(4 == Reference.ReferenceType.Handbuch.value());
+        assertTrue(5 == Reference.ReferenceType.Laborbuch.value());
+        assertTrue(6 == Reference.ReferenceType.Buch.value());
+        assertTrue(7 == Reference.ReferenceType.Webseite.value());
+        assertTrue(8 == Reference.ReferenceType.Bericht.value());
+
+        assertEquals(Reference.ReferenceType.Paper, Reference.ReferenceType.valueOf(1));
+        assertEquals(Reference.ReferenceType.SOP, Reference.ReferenceType.valueOf(2));
+        assertEquals(Reference.ReferenceType.LA, Reference.ReferenceType.valueOf(3));
+        assertEquals(Reference.ReferenceType.Handbuch, Reference.ReferenceType.valueOf(4));
+        assertEquals(Reference.ReferenceType.Laborbuch, Reference.ReferenceType.valueOf(5));
+        assertEquals(Reference.ReferenceType.Buch, Reference.ReferenceType.valueOf(6));
+        assertEquals(Reference.ReferenceType.Webseite, Reference.ReferenceType.valueOf(7));
+        assertEquals(Reference.ReferenceType.Bericht, Reference.ReferenceType.valueOf(8));
+    }
+
+    /**
+     * Test constructors: empty and copy
+     */
     @Test
     public void testConstructors() {
         // Test empty constructor
@@ -28,6 +56,22 @@ public class ReferenceTest {
         assertNull(ref.type);
         assertNull(ref.comment);
 
+        // Test constructor with level and version
+        ref = new Reference(3, 1);
+        assertNull(ref.author);
+        assertNull(ref.year);
+        assertNull(ref.title);
+        assertNull(ref.abstractText);
+        assertNull(ref.journal);
+        assertNull(ref.volume);
+        assertNull(ref.issue);
+        assertNull(ref.page);
+        assertNull(ref.approvalMode);
+        assertNull(ref.website);
+        assertNull(ref.type);
+        assertNull(ref.comment);
+
+        // Test copy constructor
         ref.author = "Baranyi, J.";
         ref.year = 1994;
         ref.title = "A dynamic approach to predicting bacterial growth in food";
@@ -41,7 +85,6 @@ public class ReferenceTest {
         ref.type = Reference.ReferenceType.Paper;
         ref.comment = "improvised comment";
 
-        // Test copy constructor
         ref = new Reference(ref);
         assertEquals("Baranyi, J.", ref.author);
         assertTrue(1994 == ref.year);
@@ -88,43 +131,83 @@ public class ReferenceTest {
         assertEquals("improvised comment", ref.comment);
     }
 
+    /**
+     * Test {@link Reference#readAttribute(String, String, String)
+     */
     @Test
     public void testReadAttribute() {
         Reference ref = new Reference();
 
+        // Parsing an string for the author attribute should return true and set it as author
         assertTrue(ref.readAttribute("AU", "pmf", "Baranyi, J."));
         assertEquals("Baranyi, J.", ref.author);
 
+        // Parsing a non-integer for the year attribute should return true and set 0 as year
+        assertTrue(ref.readAttribute("PY", "pmf", "0.5"));
+        assertTrue(ref.year == 0);
+
+        assertTrue(ref.readAttribute("PY", "pmf", "not an integer"));
+        assertTrue(ref.year == 0);
+
+        // Parsing an integer for the year attribute should return true and set it as year
         assertTrue(ref.readAttribute("PY", "pmf", "1994"));
         assertTrue(1994 == ref.year);
 
+        // Parsing an string for the title attribute should return true and set it as title
         assertTrue(ref.readAttribute("TI", "pmf", "A dynamic approach to predicting bacterial growth in food"));
         assertEquals("A dynamic approach to predicting bacterial growth in food", ref.title);
 
+        // Parsing an string for the abstract attribute should return true and set it as abstract
         assertTrue(ref.readAttribute("AB", "pmf", "A new member ..."));
         assertEquals("A new member ...", ref.abstractText);
 
+        // Parsing an string for the journal attribute should return true and set it as journal
         assertTrue(ref.readAttribute("T2", "pmf", "International Journal of Food Microbiology"));
         assertEquals("International Journal of Food Microbiology", ref.journal);
 
+        // Parsing an string for the volume attribute should return true and set it as volume
+        assertTrue(ref.readAttribute("VL", "pmf", "23"));
+        assertEquals("23", ref.volume);
+
+        // Parsing an string for the issue attribute should return true and set it as issue
         assertTrue(ref.readAttribute("IS", "pmf", "3"));
         assertEquals("3", ref.issue);
 
-        assertTrue(ref.readAttribute("SP", "pmf", "277"));
-        assertTrue(277 == ref.page);
+        // Parsing a non-integer for the page attribute should return true and set 0 as page
+        assertTrue(ref.readAttribute("SP", "pmf", "5.0"));
+        assertTrue(ref.page == 0);
 
+        assertTrue(ref.readAttribute("SP", "pmf", "not an integer"));
+        assertTrue(ref.page == 0);
+
+        // Parsing an integer for the page attribute should return true and set it as page
+        assertTrue(ref.readAttribute("SP", "pmf", "277"));
+        assertTrue(ref.page == 277);
+
+        // Parsing a non-integer for the approvalMode attribute should return true and set 0 as approvalMode
+        assertTrue(ref.readAttribute("LB", "pmf", "0.5"));
+        assertTrue(ref.approvalMode == 0);
+
+        assertTrue(ref.readAttribute("LB", "pmf", "not an integer"));
+        assertTrue(ref.approvalMode == 0);
+
+        // Parsing an integer for the approvalMode attribute should return true and set 1 as approvalMode
         assertTrue(ref.readAttribute("LB", "pmf", "1"));
         assertTrue(1 == ref.approvalMode);
 
+        // Parsing an string for the website attribute should return true and set it as website
         assertTrue(ref.readAttribute("UR", "pmf", "http://www.sciencedirect.com/science/article/pii/0168160594901570"));
         assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.website);
 
+        // Parsing an string for the type attribute should return true and set it as type
         assertTrue(ref.readAttribute("M3", "pmf", Reference.ReferenceType.Paper.name()));
         assertEquals(Reference.ReferenceType.Paper, ref.type);
 
+        // Parsing an string for the comment attribute should return true and set it as comment
         assertTrue(ref.readAttribute("N1", "pmf", "improvised comment"));
         assertEquals("improvised comment", ref.comment);
 
+        // Parsing other attribute should return false
         assertFalse(ref.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
     }
 

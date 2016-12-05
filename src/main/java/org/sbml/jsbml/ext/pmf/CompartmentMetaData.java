@@ -52,7 +52,7 @@ public class CompartmentMetaData extends AbstractSBase {
     /**
      * Initializes the default values using the namespace.
      */
-    public void initDefaults() {
+    private void initDefaults() {
         setPackageVersion(-1);
         packageName = PmfConstants.shortLabel;
     }
@@ -71,25 +71,24 @@ public class CompartmentMetaData extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
+
+        boolean attributeIsRead;
+
         if (attributeName.equals("source")) {
             source = StringTools.parseSBMLInt(value);
-            return true;
-        }
-
-        if (attributeName.equals("detail")) {
+            attributeIsRead = true;
+        } else if (attributeName.equals("detail")) {
             detail = value;
-            return true;
+            attributeIsRead = true;
+        } else {
+            attributeIsRead = false;
         }
 
-        return false;
+        return attributeIsRead;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(PmfConstants.compartmentMetaData + " [");
-        sb.append("source=\"" + (source == null ? "" : source) + "\"");
-        sb.append(" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) + "\"");
-        sb.append("]");
-        return sb.toString();
+        return PmfConstants.compartmentMetaData + " [source=\"" + (source == null ? "" : source) + "\" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) + "\"]";
     }
 }

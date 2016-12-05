@@ -3,7 +3,6 @@ package org.sbml.jsbml.ext.pmf;
 import org.sbml.jsbml.AbstractSBase;
 import org.sbml.jsbml.util.StringTools;
 
-import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -63,7 +62,7 @@ public class ParameterMetaData extends AbstractSBase {
     /**
      * Initializes the default value using the namespace.
      */
-    public void initDefaults() {
+    private void initDefaults() {
         setPackageVersion(-1);
         packageName = PmfConstants.shortLabel;
     }
@@ -88,44 +87,41 @@ public class ParameterMetaData extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
+        boolean isAttributeRead;
+
         if (attributeName.equals("p")) {
             p = StringTools.parseSBMLDouble(value);
-            return true;
-        }
-        if (attributeName.equals("t")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("t")) {
             t = StringTools.parseSBMLDouble(value);
-            return true;
-        }
-        if (attributeName.equals("error")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("error")) {
             error = StringTools.parseSBMLDouble(value);
-            return true;
-        }
-        if (attributeName.equals("description")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("description")) {
             description = value;
-            return true;
-        }
-        if (attributeName.equals("min")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("min")) {
             min = StringTools.parseSBMLDouble(value);
-            return true;
-        }
-        if (attributeName.equals("max")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("max")) {
             max = StringTools.parseSBMLDouble(value);
-            return true;
+            isAttributeRead = true;
+        } else {
+            isAttributeRead = false;
         }
-        return false;
+
+        return isAttributeRead;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(PmfConstants.parameterMetaData + " [");
-        sb.append("p=\"" + (Double.isNaN(p) ? "" : p) + "\"");
-        sb.append(" t=\"" + (Double.isNaN(t) ? "" : t) + "\"");
-        sb.append(" error=\"" + (Double.isNaN(error) ? "" : error) + "\"");
-        sb.append(" description=\"" + (description == null || description.isEmpty() ? "" : description) + "\"");
-        sb.append(" min=\"" + (Double.isNaN(min) ? "" : min) + "\"");
-        sb.append(" max=\"" + (Double.isNaN(max) ? "" : max) + "\"");
-        sb.append("]");
-
-        return sb.toString();
+        return PmfConstants.parameterMetaData +
+                " [p=\"" + (Double.isNaN(p) ? "" : p) +
+                "\" t=\"" + (Double.isNaN(t) ? "" : t) +
+                "\" error=\"" + (Double.isNaN(error) ? "" : error) +
+                "\" description=\"" + (description == null || description.isEmpty() ? "" : description) +
+                "\" min=\"" + (Double.isNaN(min) ? "" : min) +
+                "\" max=\"" + (Double.isNaN(max) ? "" : max) + "\"]";
     }
 }

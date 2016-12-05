@@ -65,15 +65,19 @@ public class Correlation extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
+        boolean attributeIsRead;
+
         if (attributeName.equals("name")) {
             name = value;
-            return true;
-        }
-        if (attributeName.equals("value")) {
+            attributeIsRead = true;
+        } else if (attributeName.equals("value")) {
             this.value = StringTools.parseSBMLDouble(value);
-            return true;
+            attributeIsRead = true;
+        } else {
+            attributeIsRead = false;
         }
-        return false;
+
+        return attributeIsRead;
     }
 
     @Override

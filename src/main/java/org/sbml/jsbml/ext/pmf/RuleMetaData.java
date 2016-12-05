@@ -21,114 +21,80 @@ public class RuleMetaData extends AbstractSBase {
 
         @Override
         public String toString() {
-            switch (this) {
-                case UNKNOWN:
-                    return "unknown";
-                case GROWTH:
-                    return "growth";
-                case INACTIVATION:
-                    return "inactivation";
-                case SURVIVAL:
-                    return "survival";
-                case GROWTH_INACTIVATION:
-                    return "growth/inactivation";
-                case INACTIVATION_SURVIVAL:
-                    return "inactivation/survival";
-                case GROWTH_SURVIVAL:
-                    return "growth/survival";
-                case GROWTH_INACTIVATION_SURVIVAL:
-                    return "growth/inactivation/survival";
-                case T:
-                    return "T";
-                case PH:
-                    return "pH";
-                case AW:
-                    return "aw";
-                case T_PH:
-                    return "T/pH";
-                case T_AW:
-                    return "T/aw";
-                case PH_AW:
-                    return "pH/aw";
-                case T_PH_AW:
-                    return "T/pH/aw";
-                default:
-                    return "unknown";
+            String classStr = "";
+
+            if (this.equals(UNKNOWN)) {
+                classStr = "unknown";
+            } else if (this.equals(GROWTH)) {
+                classStr = "growth";
+            } else if (this.equals(INACTIVATION)) {
+                classStr = "inactivation";
+            } else if (this.equals(SURVIVAL)) {
+                classStr = "survival";
+            } else if (this.equals(GROWTH_INACTIVATION)) {
+                classStr = "growth/inactivation";
+            } else if (this.equals(INACTIVATION_SURVIVAL)) {
+                classStr = "inactivation/survival";
+            } else if (this.equals(GROWTH_SURVIVAL)) {
+                classStr = "growth/survival";
+            } else if (this.equals(GROWTH_INACTIVATION_SURVIVAL)) {
+                classStr = "growth/inactivation/survival";
+            } else if (this.equals(T)) {
+                classStr = "T";
+            } else if (this.equals(PH)) {
+                classStr = "pH";
+            } else if (this.equals(AW)) {
+                classStr = "aw";
+            } else if (this.equals(T_PH)) {
+                classStr = "T/pH";
+            } else if (this.equals(T_AW)) {
+                classStr = "T/aw";
+            } else if (this.equals(PH_AW)) {
+                classStr = "pH/aw";
+            } else if (this.equals(T_PH_AW)) {
+                classStr = "T/pH/aw";
             }
+
+            return classStr;
         }
 
         public static ModelClass fromName(String name) {
-            switch (name.toLowerCase()) {
-                case "unknown":
-                    return UNKNOWN;
-                case "growth":
-                    return GROWTH;
-                case "inactivation":
-                    return INACTIVATION;
-                case "survival":
-                    return SURVIVAL;
-                case "growth/inactivation":
-                    return GROWTH_INACTIVATION;
-                case "inactivation/survival":
-                    return INACTIVATION_SURVIVAL;
-                case "growth/survival":
-                    return GROWTH_SURVIVAL;
-                case "growth/inactivation/survival":
-                    return GROWTH_INACTIVATION_SURVIVAL;
-                case "T":
-                    return T;
-                case "PH":
-                    return PH;
-                case "aw":
-                    return AW;
-                case "T/pH":
-                    return T_PH;
-                case "T/aw":
-                    return T_AW;
-                case "pH/aw":
-                    return PH_AW;
-                case "T/pH/aw":
-                    return T_PH_AW;
-                default:
-                    return UNKNOWN;
+            ModelClass modelClass;
+            if (name.toLowerCase().equals("unknown")) {
+                modelClass = ModelClass.UNKNOWN;
+            } else if (name.toLowerCase().equals("growth")) {
+                modelClass = ModelClass.GROWTH;
+            } else if (name.toLowerCase().equals("inactivation")) {
+                modelClass = ModelClass.INACTIVATION;
+            } else if (name.toLowerCase().equals("survival")) {
+                modelClass = ModelClass.SURVIVAL;
+            } else if (name.toLowerCase().equals("growth/inactivation")) {
+                modelClass = ModelClass.GROWTH_INACTIVATION;
+            } else if (name.toLowerCase().equals("inactivation/survival")) {
+                modelClass = ModelClass.INACTIVATION_SURVIVAL;
+            } else if (name.toLowerCase().equals("growth/survival")) {
+                modelClass = ModelClass.GROWTH_SURVIVAL;
+            } else if (name.toLowerCase().equals("growth/inactivation/survival")) {
+                modelClass = ModelClass.GROWTH_INACTIVATION_SURVIVAL;
+            } else if (name.toLowerCase().equals("t")) {
+                modelClass = ModelClass.T;
+            } else if (name.toLowerCase().equals("ph")) {
+                modelClass = ModelClass.PH;
+            } else if (name.toLowerCase().equals("aw")) {
+                modelClass = ModelClass.AW;
+            } else if (name.toLowerCase().equals("t/ph")) {
+                modelClass = ModelClass.T_PH;
+            } else if (name.toLowerCase().equals("t/aw")) {
+                modelClass = ModelClass.T_AW;
+            } else if (name.toLowerCase().equals("ph/aw")) {
+                modelClass = ModelClass.PH_AW;
+            } else if (name.toLowerCase().equals("t/ph/aw")) {
+                modelClass = ModelClass.T_PH_AW;
+            } else {
+                modelClass = ModelClass.UNKNOWN;
             }
-        }
 
-        public String getName() {
-            switch (this) {
-                case UNKNOWN:
-                    return "unknown";
-                case GROWTH:
-                    return "growth";
-                case INACTIVATION:
-                    return "inactivation";
-                case SURVIVAL:
-                    return "survival";
-                case GROWTH_INACTIVATION:
-                    return "growth/inactivation";
-                case INACTIVATION_SURVIVAL:
-                    return "inactivation/survival";
-                case GROWTH_SURVIVAL:
-                    return "growth/survival";
-                case GROWTH_INACTIVATION_SURVIVAL:
-                    return "growth/inactivation/survival";
-                case T:
-                    return "T";
-                case PH:
-                    return "pH";
-                case AW:
-                    return "aw";
-                case T_PH:
-                    return "T/pH";
-                case T_AW:
-                    return "T/aw";
-                case PH_AW:
-                    return "pH/aw";
-                case T_PH_AW:
-                    return "T/pH/aw";
-                default:
-                    return "unknown";
-            }
+            return modelClass;
         }
     }
 
@@ -141,6 +107,7 @@ public class RuleMetaData extends AbstractSBase {
      */
     public RuleMetaData() {
         initDefaults();
+        modelClass = ModelClass.UNKNOWN;
     }
 
     /**
@@ -164,26 +131,28 @@ public class RuleMetaData extends AbstractSBase {
     /**
      * Initializes the default values using the namespace.
      */
-    public void initDefaults() {
+    private void initDefaults() {
         setPackageVersion(-1);
         packageName = PmfConstants.shortLabel;
     }
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
+        boolean isAttributeRead;
         if (attributeName.equals("formulaName")) {
             formulaName = value;
-            return true;
-        }
-        if (attributeName.equals("pmmLabID")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("pmmLabID")) {
             pmmLabId = StringTools.parseSBMLInt(value);
-            return true;
-        }
-        if (attributeName.equals("ruleClass")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("ruleClass")) {
             modelClass = ModelClass.fromName(value);
-            return true;
+            isAttributeRead = true;
+        } else {
+            isAttributeRead = false;
         }
-        return false;
+
+        return isAttributeRead;
     }
 
     @Override
@@ -201,11 +170,9 @@ public class RuleMetaData extends AbstractSBase {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PmfConstants.ruleMetaData + " [");
-        sb.append("formulaName=\"" + (formulaName == null || formulaName.isEmpty() ? "" : formulaName) + "\"");
-        sb.append(" ruleClass=\"" + (modelClass == null ? "" : modelClass.getName()) + "\"");
-        sb.append(" pmmLabID=\"" + (pmmLabId == null ? "" : pmmLabId) + "\"]");
-        return sb.toString();
+        return PmfConstants.ruleMetaData +
+                " [formulaName=\"" + (formulaName == null || formulaName.isEmpty() ? "" : formulaName) + "\"" +
+                " ruleClass=\"" + (modelClass == null ? "" : modelClass) + "\"" +
+                " pmmLabID=\"" + (pmmLabId == null ? "" : pmmLabId) + "\"]";
     }
 }

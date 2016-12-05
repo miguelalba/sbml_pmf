@@ -31,7 +31,7 @@ public class SpeciesMetaData extends AbstractSBase {
         return new SpeciesMetaData(this);
     }
 
-    public void initDefaults() {
+    private void initDefaults() {
         setPackageVersion(-1);
         packageName = PmfConstants.shortLabel;
     }
@@ -52,31 +52,30 @@ public class SpeciesMetaData extends AbstractSBase {
     @Override
     public boolean readAttribute(String attributeName, String prefix,
                                  String value) {
+
+        boolean isAttributeRead;
+
         if (attributeName.equals("source")) {
             source = value;
-            return true;
-        }
-        if (attributeName.equals("detail")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("detail")) {
             detail = value;
-            return true;
-        }
-        if (attributeName.equals("description")) {
+            isAttributeRead = true;
+        } else if (attributeName.equals("description")) {
             description = value;
-            return true;
+            isAttributeRead = true;
+        } else {
+            isAttributeRead = false;
         }
-        return false;
+
+        return isAttributeRead;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.sbml.jsbml.AbstractSBase#toString()
-     */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(PmfConstants.speciesMetaData + " [");
-        sb.append("source=\"" + (source == null || source.isEmpty() ? "" : source) + "\"");
-        sb.append(" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) + "\"");
-        sb.append(" description=\"" + (description == null || description.isEmpty() ? "" : description) + "\"]");
-        return sb.toString();
+        return PmfConstants.speciesMetaData +
+                " [source=\"" + (source == null || source.isEmpty() ? "" : source) +
+                "\" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) +
+                "\" description=\"" + (description == null || description.isEmpty() ? "" : description) + "\"]";
     }
 }

@@ -104,13 +104,7 @@ public class ModelVariable extends AbstractSBase {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("ModelVariable [");
-        if (name != null && !name.isEmpty())
-            sb.append("name=\"" + name + "\"");
-        if (!Double.isNaN(value))
-            sb.append(" value=\"" + value + "\"");
-        sb.append("]");
-
-        return sb.toString();
+        return "ModelVariable [name=\"" + (name == null || name.isEmpty() ? "" : name) + "\" value=\"" +
+                (Double.isNaN(value) ? "" : value) + "\"]";
     }
 }
