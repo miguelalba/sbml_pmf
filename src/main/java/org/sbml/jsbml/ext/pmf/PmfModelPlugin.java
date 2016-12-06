@@ -139,7 +139,6 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         return getListOfModelVariables().add(modelVariable);
     }
 
-
     /**
      * Removes an element from the {@link #listOfModelVariables}.
      *
@@ -151,7 +150,6 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
     public boolean removeModelVariable(ModelVariable modelVariable) {
         return isSetListOfModelVariables() && getListOfModelVariables().remove(modelVariable);
     }
-
 
     /**
      * Removes an element from the {@link #listOfModelVariables} at the given
@@ -168,7 +166,6 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         return getListOfModelVariables().remove(i);
     }
 
-
     /**
      * Creates a new {@link ModelVariable} element and adds it to this
      * {@link #listOfModelVariables} list.
@@ -183,7 +180,6 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         return mv;
     }
 
-
     /**
      * Creates a new instance of {@link ModelVariable} and add it to this
      * {@link PmfModelPlugin}.
@@ -197,7 +193,6 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         addModelVariable(mv);
         return mv;
     }
-
 
     /**
      * Returns the number of {@link ModelVariable} of this {@link PmfModelPlugin}.
@@ -230,7 +225,6 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         }
         return listOfModelVariables;
     }
-
 
     /**
      * Returns {@code true}, if listOfModelVariables contains at least one
