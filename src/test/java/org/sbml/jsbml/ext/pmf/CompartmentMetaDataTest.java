@@ -1,3 +1,5 @@
+package org.sbml.jsbml.ext.pmf;
+
 import org.junit.Test;
 import org.sbml.jsbml.ext.pmf.CompartmentMetaData;
 

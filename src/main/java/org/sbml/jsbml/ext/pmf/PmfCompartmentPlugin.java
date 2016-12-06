@@ -43,9 +43,7 @@ public class PmfCompartmentPlugin extends AbstractSBasePlugin {
     }
 
     @Override
-    public boolean readAttribute(String s, String s1, String s2) {
-        return false;
-    }
+    public boolean readAttribute(String attributeName, String prefix, String value) { return false; }
 
     @Override
     public Map<String, String> writeXMLAttributes() {
