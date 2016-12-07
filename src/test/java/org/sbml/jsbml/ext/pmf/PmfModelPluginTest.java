@@ -1,13 +1,8 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.junit.Test;
-import org.sbml.jsbml.Compartment;
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Model;
-import org.sbml.jsbml.SBase;
-
-import javax.swing.tree.TreeNode;
-import java.text.MessageFormat;
 
 import static org.junit.Assert.*;
 
