@@ -2,13 +2,10 @@ package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Model;
-import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.ext.AbstractSBasePlugin;
-import org.sbml.jsbml.ext.SBasePlugin;
 
 import java.text.MessageFormat;
-import java.util.Map;
 
 /**
  * @author Miguel Alba
@@ -32,6 +29,8 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
 
     public PmfModelPlugin(Model model) {
         super(model);
+        setPackageVersion(-1);
+        setNamespace(PmfConstants.namespaceURI);
     }
 
     // --- common ---
@@ -56,14 +55,9 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         return false;
     }
 
-    @Override
-    public Map<String, String> writeXMLAttributes() {
-        return null;
-    }
-
     // --- other ---
     @Override
-    public SBasePlugin clone() {
+    public PmfModelPlugin clone() {
         return new PmfModelPlugin(this);
     }
 
@@ -113,16 +107,16 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
                 MessageFormat.format("Index {0, number, integer} >= {1, number, integer}",
                         childIndex, Math.min(pos, 0)));
     }
+//
+//    @Override
+//    public SBMLDocument getParent() {
+//        return isSetExtendedSBase() ? (SBMLDocument) getExtendedSBase().getParent() : null;
+//    }
 
-    @Override
-    public SBMLDocument getParent() {
-        return isSetExtendedSBase() ? (SBMLDocument) getExtendedSBase().getParent() : null;
-    }
-
-    @Override
-    public SBase getParentSBMLObject() {
-        return getParent();
-    }
+//    @Override
+//    public SBase getParentSBMLObject() {
+//        return getParent();
+//    }
 
     // --- ModelVariable ---
 

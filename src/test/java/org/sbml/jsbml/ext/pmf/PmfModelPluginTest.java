@@ -27,45 +27,60 @@ public class PmfModelPluginTest {
      */
     @Test
     public void testConstructors() {
-        // TODO: Test PmfModelPlugin#PmfModelPlugin(PmfModelPlugin)
-        // TODO: Test PmfModelPlugin#PmgModelPlugin(Model)
-        fail("To be implemented");
+        // Test PmfModelPlugin#PmfModelPlugin(PmfModelPlugin)
+        PmfModelPlugin plugin = new PmfModelPlugin(new Model());
+        assertFalse(plugin.isSetListOfModelVariables());
+        assertFalse(plugin.isSetListOfDataSources());
+        assertFalse(plugin.isSetListOfPrimaryModels());
+
+        // Test PmfModelPlugin#PmgModelPlugin(Model)
+        plugin = new PmfModelPlugin(plugin);
+        assertFalse(plugin.isSetListOfModelVariables());
+        assertFalse(plugin.isSetListOfDataSources());
+        assertFalse(plugin.isSetListOfPrimaryModels());
     }
 
     /**
-     * Test common methods.
+     * Test common methods: getPackageName(), getPrefix(), getURI() and readAttribute(String, String, String).
      */
     @Test
     public void testCommon() {
-
         PmfModelPlugin plugin = new PmfModelPlugin(new Model());
 
         assertEquals("pmf", plugin.getPackageName());
         assertEquals("pmf", plugin.getPrefix());
-        // TODO: PmfModelPlugin#getURI is failing: returning null.
-//        assertEquals("___", plugin.getURI());
+        assertEquals("http://www.sbml.org/sbml/level3/version1/pmf/version1", plugin.getURI());
         assertFalse(plugin.readAttribute("a", "b", "c"));
         assertNull(plugin.writeXMLAttributes());
     }
 
     /**
-     * Test other misc methods.
-     * <ul>
-     * <li>{@link PmfModelPlugin#clone()}</li>
-     * <li>{@link PmfModelPlugin#getParent()}</li>
-     * <li>{@link PmfModelPlugin#getParentSBMLObject()}</li>
-     * <li>{@link PmfModelPlugin#getAllowsChildren()}</li>
-     * <li>{@link PmfModelPlugin#getChildCount()}</li>
-     * <li>{@link PmfModelPlugin#getChildAt(int)}</li>
-     * </ul>
+     * Test other misc methods: clone(), getAllowsChildren(), getChildCount() and getChildAt().
      */
     @Test
     public void testOther() {
-        // TODO: Test PmfModelPlugin#clone()
-        // TODO: Test PmfModelPlugin#getParent()
-        // TODO: Test PmfModelPlugin#getParentSBMLObject()
-        // TODO: Test PmfModelPlugin#getAllowsChildrent()
+        // Test PmfModelPlugin#clone()
+        Model model = new Model();
+        PmfModelPlugin plugin = new PmfModelPlugin(model).clone();
+        assertFalse(plugin.isSetListOfModelVariables());
+        assertFalse(plugin.isSetListOfDataSources());
+        assertFalse(plugin.isSetListOfPrimaryModels());
+
+        // Test PmfModelPlugin#getAllowsChildren()
+        assertTrue(plugin.getAllowsChildren());
+
         // TODO: Test PmfModelPlugin#getChildCount()
+        {
+            PmfModelPlugin emptyPlugin = new PmfModelPlugin(new Model());
+            assertTrue(emptyPlugin.getChildCount() == 0);
+
+            PmfModelPlugin filledPlugin = new PmfModelPlugin(new Model());
+            filledPlugin.createPrimaryModel("a_model.sbml");
+            filledPlugin.createDataSource("a_data.numl");
+            filledPlugin.createModelVariable("a_variable");
+            assertTrue(filledPlugin.getChildCount() == 3);
+        }
+
         // TODO: Test PmfModelPlugin#getChildAt()
         fail("To be implemented");
     }
