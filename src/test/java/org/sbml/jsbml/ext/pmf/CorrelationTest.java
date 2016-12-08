@@ -1,7 +1,8 @@
 package org.sbml.jsbml.ext.pmf;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.Correlation;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
@@ -62,6 +63,10 @@ public class CorrelationTest {
      */
     @Test
     public void testReadAttribute() {
+        Logger logger = Logger.getLogger(StringTools.class);
+        Level defaultLevel = logger.getLevel();
+        logger.setLevel(Level.OFF);
+
         Correlation correlation = new Correlation();
 
         // Parsing an string as the name should return true and set it as name
@@ -78,6 +83,8 @@ public class CorrelationTest {
 
         // Parsing an attribute other than name and value should return false
         assertFalse(correlation.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
+
+        logger.setLevel(defaultLevel);
     }
 
     /**

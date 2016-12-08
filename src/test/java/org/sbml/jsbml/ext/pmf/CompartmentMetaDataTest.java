@@ -1,7 +1,9 @@
 package org.sbml.jsbml.ext.pmf;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.CompartmentMetaData;
+import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,6 +80,10 @@ public class CompartmentMetaDataTest {
      */
     @Test
     public void testReadAttribute() {
+        Logger logger = Logger.getLogger(StringTools.class);
+        Level defaultLevel = logger.getLevel();
+        logger.setLevel(Level.OFF);
+
         CompartmentMetaData metaData = new CompartmentMetaData();
 
         // Parsing an integer as the source attribute should return true and set this integer as source
@@ -94,6 +100,8 @@ public class CompartmentMetaDataTest {
 
         // Parsing an attribute other than source and detail should return false
         assertFalse(metaData.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
+
+        logger.setLevel(defaultLevel);
     }
 
     /**

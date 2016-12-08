@@ -1,7 +1,8 @@
 package org.sbml.jsbml.ext.pmf;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.ModelVariable;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
@@ -69,6 +70,10 @@ public class ModelVariableTest {
      */
     @Test
     public void testReadAttribute() {
+        Logger logger = Logger.getLogger(StringTools.class);
+        Level defaultLevel = logger.getLevel();
+        logger.setLevel(Level.OFF);
+
         ModelVariable mv = new ModelVariable();
 
         // Parsing an string as the name should return true and set it as name
@@ -85,6 +90,8 @@ public class ModelVariableTest {
 
         // Parsing an attribute other than name and value should return false
         assertFalse(mv.readAttribute("nonExistentAttribute", "pmf", "asdf"));
+
+        logger.setLevel(defaultLevel);
     }
 
     /**

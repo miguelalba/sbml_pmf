@@ -1,7 +1,9 @@
 package org.sbml.jsbml.ext.pmf;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.ParameterMetaData;
+import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,6 +104,10 @@ public class ParameterMetaDataTest {
 
     @Test
     public void testReadAttribute() {
+        Logger logger = Logger.getLogger(StringTools.class);
+        Level defaultLevel = logger.getLevel();
+        logger.setLevel(Level.OFF);
+
         ParameterMetaData metaData = new ParameterMetaData();
 
         // Parsing a non-double as the p attribute should return true and set Double.NaN as p
@@ -150,6 +156,8 @@ public class ParameterMetaDataTest {
 
         // Parsing an attribute other than p, t, error, description, min or max should return false
         assertFalse(metaData.readAttribute("nonExistentAttribute", "pmf", "asdf"));
+
+        logger.setLevel(defaultLevel);
     }
 
     /**

@@ -3,13 +3,15 @@ import org.sbml.jsbml.ext.pmf.*;
 import org.sbml.jsbml.text.parser.ParseException;
 
 import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * Created by de on 08.12.2016.
  */
 public class Test {
 
-    public static void main(String[] args) throws XMLStreamException, ParseException {
+    public static void main(String[] args) throws XMLStreamException, ParseException, IOException {
 
         SBMLDocument doc = new SBMLDocument(3, 1);
         doc.enablePackage(PmfConstants.shortLabel);
@@ -79,6 +81,12 @@ public class Test {
         rulePlugin.addReference(ref);
 
         // Create string with document and print it
+        System.out.println(JSBML.writeSBMLToString(doc));
+
+        // Write and read document
+        String filename = Files.createTempFile("temp", "sbml").toString();
+        JSBML.writeSBML(doc, filename);
+        doc = JSBML.readSBML(filename);
         System.out.println(JSBML.writeSBMLToString(doc));
     }
 }

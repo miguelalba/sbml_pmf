@@ -1,7 +1,9 @@
 package org.sbml.jsbml.ext.pmf;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.Reference;
+import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -138,6 +140,10 @@ public class ReferenceTest {
      */
     @Test
     public void testReadAttribute() {
+        Logger logger = Logger.getLogger(StringTools.class);
+        Level defaultLevel = logger.getLevel();
+        logger.setLevel(Level.OFF);
+
         Reference ref = new Reference();
 
         // Parsing an string for the author attribute should return true and set it as author
@@ -211,6 +217,8 @@ public class ReferenceTest {
 
         // Parsing other attribute should return false
         assertFalse(ref.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
+
+        logger.setLevel(defaultLevel);
     }
 
     @Test
