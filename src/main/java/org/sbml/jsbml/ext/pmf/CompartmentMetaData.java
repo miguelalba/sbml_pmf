@@ -30,13 +30,19 @@ public class CompartmentMetaData extends AbstractSBase {
      * Creates a CompartmentMetaData instance.
      */
     public CompartmentMetaData() {
-        initDefaults();
+        packageName = PmfConstants.shortLabel;
+    }
+
+    public CompartmentMetaData(int level, int version) {
+        super(level, version);
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
      * Clone constructor.
      */
     public CompartmentMetaData(CompartmentMetaData obj) {
+        super(obj);
         source = obj.source;
         detail = obj.detail;
     }
@@ -47,14 +53,6 @@ public class CompartmentMetaData extends AbstractSBase {
     @Override
     public CompartmentMetaData clone() {
         return new CompartmentMetaData(this);
-    }
-
-    /**
-     * Initializes the default values using the namespace.
-     */
-    private void initDefaults() {
-        setPackageVersion(-1);
-        packageName = PmfConstants.shortLabel;
     }
 
     @Override
@@ -89,6 +87,11 @@ public class CompartmentMetaData extends AbstractSBase {
 
     @Override
     public String toString() {
-        return PmfConstants.compartmentMetaData + " [source=\"" + (source == null ? "" : source) + "\" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) + "\"]";
+        String sb = PmfConstants.compartmentMetaData + " [";
+        sb += "source=\"" + (source == null ? "" : source) + "\"";
+        sb += " detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) + "\"]";
+
+        return sb;
     }
+
 }

@@ -33,26 +33,17 @@ public class ModelVariableTest {
         assertNull(mv.name);
         assertTrue(Double.isNaN(mv.value));
 
-        // Test parametrized constructor: name
-        mv = new ModelVariable("Temperature");
-        assertEquals("Temperature", mv.name);
-        assertTrue(Double.isNaN(mv.value));
-
-        // Test parametrized constructor: name and value
-        mv = new ModelVariable("Temperature", 10.0);
-        assertEquals("Temperature", mv.name);
-        assertEquals(mv.value, 10.0, 0.0);
-
         // Test copy constructor
+        mv.name = "Temperature";
+        mv.value = 10.0;
         mv = new ModelVariable(mv);
         assertEquals("Temperature", mv.name);
         assertEquals(mv.value, 10.0, 0.0);
 
         // Test constructor with level and version
-        mv = new ModelVariable("Temperature", 10.0, 3, 1);
-        assertEquals("Temperature", mv.name);
-        assertEquals(mv.name, "Temperature");
-        assertEquals(mv.value, 10.0, 0.0);
+        mv = new ModelVariable(3, 1);
+        assertTrue(3 == mv.getLevel());
+        assertTrue(1 == mv.getVersion());
     }
 
     /**
@@ -60,7 +51,11 @@ public class ModelVariableTest {
      */
     @Test
     public void testClone() {
-        ModelVariable mv = new ModelVariable("h0", 7.0).clone();
+        ModelVariable mv = new ModelVariable();
+        mv.name = "h0";
+        mv.value = 7.0;
+        mv = mv.clone();
+
         assertEquals(mv.name, "h0");
         assertEquals(mv.value, 7.0, .0);
     }
@@ -121,10 +116,10 @@ public class ModelVariableTest {
     @Test
     public void test2String() {
         ModelVariable mv = new ModelVariable();
-        assertEquals("ModelVariable [name=\"\" value=\"\"]", mv.toString());
+        assertEquals("modelVariable [name=\"\" value=\"\"]", mv.toString());
 
         mv.name = "h0";
         mv.value = 7.0;
-        assertEquals("ModelVariable [name=\"h0\" value=\"7.0\"]", mv.toString());
+        assertEquals("modelVariable [name=\"h0\" value=\"7.0\"]", mv.toString());
     }
 }

@@ -2,12 +2,10 @@ package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Rule;
-import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.ext.AbstractSBasePlugin;
 
 import javax.swing.tree.TreeNode;
 import java.text.MessageFormat;
-import java.util.Map;
 
 /**
  * Created by de on 12.09.2016.
@@ -32,16 +30,6 @@ public class PmfRulePlugin extends AbstractSBasePlugin {
     @Override
     public PmfRulePlugin clone() {
         return new PmfRulePlugin(this);
-    }
-
-    @Override
-    public Rule getParent() {
-        return isSetExtendedSBase() ? (Rule) extendedSBase : null;
-    }
-
-    @Override
-    public SBase getParentSBMLObject() {
-        return getParent();
     }
 
     @Override
@@ -101,11 +89,6 @@ public class PmfRulePlugin extends AbstractSBasePlugin {
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
         return false;
-    }
-
-    @Override
-    public Map<String, String> writeXMLAttributes() {
-        return null;
     }
 
     // --- meta data ---

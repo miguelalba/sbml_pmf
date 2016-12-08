@@ -31,44 +31,21 @@ public class ModelVariable extends AbstractSBase {
      */
     public ModelVariable() {
         packageName = PmfConstants.shortLabel;
-        setPackageVersion(-1);
     }
 
-    /**
-     * Creates a ModelVariable instance from a name.
-     */
-    public ModelVariable(String name) {
-        this.name = name;
-        packageName = PmfConstants.shortLabel;
-        setPackageVersion(-1);
-    }
-
-    /**
-     * Creates a ModelVariable instance from a name and value.
-     */
-    public ModelVariable(String name, double value) {
-        this.name = name;
-        this.value = value;
-        packageName = PmfConstants.shortLabel;
-        setPackageVersion(-1);
-    }
-
-    /**
-     * Creates a ModelVariable instance from a name, value, level and version.
-     */
-    public ModelVariable(String name, double value, int level, int version) {
+    public ModelVariable(int level, int version) {
         super(level, version);
-        this.name = name;
-        this.value = value;
         packageName = PmfConstants.shortLabel;
-        setPackageVersion(-1);
     }
 
     /**
      * Clone constructor.
      */
     public ModelVariable(ModelVariable obj) {
-        this(obj.name, obj.value, obj.getLevel(), obj.getVersion());
+        super(obj);
+        name = obj.name;
+        value = obj.value;
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
@@ -91,20 +68,28 @@ public class ModelVariable extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
+
+        boolean attributeIsRead;
+
         if (attributeName.equals("name")) {
             name = value;
-            return true;
-        }
-        if (attributeName.equals("value")) {
+            attributeIsRead = true;
+        } else if (attributeName.equals("value")) {
             this.value = StringTools.parseSBMLDouble(value);
-            return true;
+            attributeIsRead = true;
+        } else {
+            attributeIsRead = false;
         }
-        return false;
+
+        return attributeIsRead;
     }
 
     @Override
     public String toString() {
-        return "ModelVariable [name=\"" + (name == null || name.isEmpty() ? "" : name) + "\" value=\"" +
-                (Double.isNaN(value) ? "" : value) + "\"]";
+        String sb = PmfConstants.modelVariable + " [";
+        sb += "name=\"" + (name == null || name.isEmpty() ? "" : name) + "\"";
+        sb += " value=\"" + (Double.isNaN(value) ? "" : value) + "\"]";
+
+        return sb;
     }
 }

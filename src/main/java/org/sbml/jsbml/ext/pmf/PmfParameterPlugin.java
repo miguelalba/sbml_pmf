@@ -6,7 +6,6 @@ import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.ext.AbstractSBasePlugin;
 
 import java.text.MessageFormat;
-import java.util.Map;
 
 /**
  * Created by de on 12.09.2016.
@@ -26,10 +25,7 @@ public class PmfParameterPlugin extends AbstractSBasePlugin {
 
     public PmfParameterPlugin(Parameter parameter) {
         super(parameter);
-    }
-
-    public PmfParameterPlugin clone() {
-        return new PmfParameterPlugin(this);
+        setNamespace(PmfConstants.namespaceURI);
     }
 
     // --- common ---
@@ -54,21 +50,11 @@ public class PmfParameterPlugin extends AbstractSBasePlugin {
         return false;
     }
 
-    @Override
-    public Map<String, String> writeXMLAttributes() {
-        return null;
-    }
-
     // --- plugin methods ---
 
     @Override
-    public Parameter getParent() {
-        return isSetExtendedSBase() ? (Parameter) getExtendedSBase() : null;
-    }
-
-    @Override
-    public SBase getParentSBMLObject() {
-        return getParent();
+    public PmfParameterPlugin clone() {
+        return new PmfParameterPlugin(this);
     }
 
     @Override
@@ -155,8 +141,9 @@ public class PmfParameterPlugin extends AbstractSBasePlugin {
     }
 
     public Correlation createCorrelation(String name, double value) {
-        Correlation correlation =
-                new Correlation(name, value, getLevel(), getVersion());
+        Correlation correlation = new Correlation(getLevel(), getVersion());
+        correlation.name = name;
+        correlation.value = value;
         addCorrelation(correlation);
         return correlation;
     }

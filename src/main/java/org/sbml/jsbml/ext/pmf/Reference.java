@@ -80,6 +80,8 @@ public class Reference extends AbstractSBase {
         this.website = obj.website;
         this.type = obj.type;
         this.comment = obj.comment;
+
+        packageName = PmfConstants.shortLabel;
     }
 
     /**

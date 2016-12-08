@@ -1,12 +1,10 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.Compartment;
-import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.ext.AbstractSBasePlugin;
 
 import javax.swing.tree.TreeNode;
 import java.text.MessageFormat;
-import java.util.Map;
 
 /**
  * @author Miguel Alba
@@ -23,6 +21,7 @@ public class PmfCompartmentPlugin extends AbstractSBasePlugin {
 
     public PmfCompartmentPlugin(Compartment compartment) {
         super(compartment);
+        setNamespace(PmfConstants.namespaceURI);
     }
 
     // --- Common plugin methods ---
@@ -45,28 +44,11 @@ public class PmfCompartmentPlugin extends AbstractSBasePlugin {
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) { return false; }
 
-    @Override
-    public Map<String, String> writeXMLAttributes() {
-        return null;
-    }
-
     // other
 
     @Override
     public PmfCompartmentPlugin clone() {
         return new PmfCompartmentPlugin(this);
-    }
-
-    @Override
-    public Compartment getParent() {
-        if (isSetExtendedSBase())
-            return (Compartment) getExtendedSBase();
-        return null;
-    }
-
-    @Override
-    public SBase getParentSBMLObject() {
-        return getParent();
     }
 
     @Override

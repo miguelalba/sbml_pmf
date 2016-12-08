@@ -1,9 +1,10 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.junit.Test;
+import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Parameter;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Test the {@link PmfParameterPlugin} class. Checks:
@@ -23,9 +24,15 @@ public class PmfParameterPluginTest {
      */
     @Test
     public void testConstructors() {
-        // TODO: Test PmfParameterPlugin#PmfParameterPlugin(PmfParameterPlugin)
-        // TODO: Test PmfParameterPlugin#PmfParameterPlugin(Parameter)
-        fail("To be implemented");
+        // Test PmfParameterPlugin#PmfParameterPlugin(PmfParameterPlugin)
+        PmfParameterPlugin plugin = new PmfParameterPlugin(new Parameter());
+        assertFalse(plugin.isSetMetaData());
+        assertFalse(plugin.isSetListOfCorrelations());
+
+        // Test PmfParameterPlugin#PmfParameterPlugin(Parameter)
+        plugin = new PmfParameterPlugin(plugin);
+        assertFalse(plugin.isSetMetaData());
+        assertFalse(plugin.isSetListOfCorrelations());
     }
 
     /**
@@ -34,24 +41,38 @@ public class PmfParameterPluginTest {
      */
     @Test
     public void testCommon() {
-        // TODO: Test PmfParameterPlugin#getPackageName()
-        // TODO: Test PmfParameterPlugin#getPrefix()
-        // TODO: Test PmfParameterPlugin#readAttribute(String, String, String)
-        // TODO: Test PmfParameterPlugin#writeXMLAttributes()
-        fail("To be implemented");
+        PmfParameterPlugin plugin = new PmfParameterPlugin(new Parameter());
+
+        assertEquals("pmf", plugin.getPackageName());
+        assertEquals("pmf", plugin.getPrefix());
+        assertEquals("http://www.sbml.org/sbml/level3/version1/pmf/version1", plugin.getURI());
+        assertFalse(plugin.readAttribute("a", "b", "c"));
+        assertTrue(plugin.writeXMLAttributes().isEmpty());
     }
 
     /**
-     * Test misc methods: clone(), getParent(), getAllowsChildren(), getChildCount() and getChildAt().
+     * Test misc methods: clone(), getAllowsChildren(), getChildCount() and getChildAt().
      */
     @Test
     public void testMisc() {
-        // TODO: Test PmfParameterPlugin#clone()
-        // TODO: Test PmfParameterPlugin#getParent()
-        // TODO: Test PmfParameterPlugin#getAllowsChildren()
-        // TODO: Test PmfParameterPlugin#getChildCount()
-        // TODO: Test PmfParameterPlugin#getChildAt()
-        fail("To be implemented");
+        // Test clone()
+        Parameter parameter = new Parameter();
+        PmfParameterPlugin plugin = new PmfParameterPlugin(parameter).clone();
+        assertFalse(plugin.isSetMetaData());
+        assertFalse(plugin.isSetListOfCorrelations());
+
+        // Test getAllowsChildren()
+        assertTrue(plugin.getAllowsChildren());
+
+        // Test getChildCount and getChildAt
+        assertTrue(plugin.getChildCount() == 0);
+
+        plugin.setMetaData(new ParameterMetaData());
+        plugin.createCorrelation("a", 0.0);
+        assertTrue(plugin.getChildCount() == 2);
+
+        assertTrue(plugin.getChildAt(0) instanceof ParameterMetaData);
+        assertTrue(plugin.getChildAt(1) instanceof ListOf<?>);
     }
 
     /**
@@ -59,10 +80,17 @@ public class PmfParameterPluginTest {
      */
     @Test
     public void testMetaData() {
-        fail("Test PmfParameterPlugin#getMetaData()");
-        fail("Test PmfParameterPlugin#isSetMetaData()");
-        fail("Test PmfParameterPlugin#setMetaData()");
-        fail("Test PmfParameterPlugin#unsetMetaData()");
+        // Test plugin without metadata
+        PmfParameterPlugin plugin = new PmfParameterPlugin(new Parameter());
+        assertNull(plugin.getMetaData());
+        assertFalse(plugin.isSetMetaData());
+        assertFalse(plugin.unsetMetaData());
+
+        // Test plugin with metadata
+        plugin.setMetaData(new ParameterMetaData());
+        assertNotNull(plugin.getMetaData());
+        assertTrue(plugin.isSetMetaData());
+        assertTrue(plugin.unsetMetaData());
     }
 
     /**
@@ -71,22 +99,48 @@ public class PmfParameterPluginTest {
      */
     @Test
     public void testCorrelations() {
-        fail("Test PmfParameterPlugin#addCorrelation(Correlation)");
-        fail("Test PmfParameterPlugin#removeCorrelation(Correlation)");
-        fail("Test PmfParameterPlugin#removeCorrelation(int)");
-        fail("Test PmfParameterPlugin#createCorrelation(String, double)");
-        fail("Test PmfParameterPlugin#getCorrelationCount()");
+        PmfParameterPlugin plugin = new PmfParameterPlugin(new Parameter());
+        assertTrue(0 == plugin.getCorrelationCount());
+
+        Correlation corr = new Correlation();
+
+        assertTrue(plugin.addCorrelation(corr));
+        assertTrue(1 == plugin.getCorrelationCount());
+
+        assertTrue(plugin.removeCorrelation(corr));
+        assertTrue(0 == plugin.getCorrelationCount());
+
+        plugin.addCorrelation(corr);
+        plugin.removeCorrelation(0);
+        assertTrue(0 == plugin.getCorrelationCount());
+
+        plugin.createCorrelation("a", 0);
+        assertTrue(1 == plugin.getCorrelationCount());
     }
 
     /**
-     * Test listOfCorrelations: getListOfCorrelations(), isSetListOfCorrelations(), setListOfCorrelations(ListOf) and
-     * unsetListOfCorrelations().
+     * Test listOfCorrelations:
+     * <ul>
+     * <li>getListOfCorrelations()</li>
+     * <li>isSetListOfCorrelations()</li>
+     * <li>setListOfCorrelations(ListOf)</li>
+     * <li>unsetListOfCorrelations()</li>
+     * </ul>
      */
     @Test
     public void testListOfCorrelations() {
-        fail("Test PmfParameterPlugin#getListOfCorrelations()");
-        fail("Test PmfParameterPlugin#isSetListOfCorrelations()");
-        fail("Test PmfParameterPlugin#setListOfCorrelations(ListOf)");
-        fail("Test PmfParameterPlugin#unsetListOfCorrelations()");
+        PmfParameterPlugin plugin = new PmfParameterPlugin(new Parameter());
+        assertFalse(plugin.unsetListOfCorrelations());
+
+        // Test plugin without correlations
+        assertTrue(plugin.getListOfCorrelations().isEmpty());
+        assertFalse(plugin.isSetListOfCorrelations());
+        assertTrue(plugin.unsetListOfCorrelations());
+
+        // Test plugin with correlations
+        plugin.createCorrelation("pH", 7.0);
+        assertFalse(plugin.getListOfCorrelations().isEmpty());
+        assertTrue(plugin.isSetListOfCorrelations());
+        assertTrue(plugin.unsetListOfCorrelations());
     }
 }

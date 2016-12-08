@@ -4,7 +4,6 @@ import org.sbml.jsbml.AbstractSBase;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Link to a primary model.
@@ -22,36 +21,21 @@ public class PrimaryModel extends AbstractSBase {
     public String src;
 
     public PrimaryModel() {
-        initDefaults();
+        packageName = PmfConstants.shortLabel;
     }
 
-    /**
-     * Creates a PrimaryModel instance with a src.
-     *
-     * @param src
-     */
-    public PrimaryModel(String src) {
-        this.src = src;
-        initDefaults();
-    }
-
-    /**
-     * Creates a PrimaryModel instance with a level and version.
-     *
-     * @param level   SBML level
-     * @param version SBML version
-     */
-    public PrimaryModel(String src, int level, int version) {
+    public PrimaryModel(int level, int version) {
         super(level, version);
-        this.src = src;
-        initDefaults();
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
      * Clone constructor.
      */
     public PrimaryModel(PrimaryModel primaryModel) {
-        this(primaryModel.src, primaryModel.getLevel(), primaryModel.getVersion());
+        super(primaryModel);
+        src = primaryModel.src;
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
@@ -60,14 +44,6 @@ public class PrimaryModel extends AbstractSBase {
     @Override
     public PrimaryModel clone() {
         return new PrimaryModel(this);
-    }
-
-    /**
-     * Initializes the default values using the namespace.
-     */
-    private void initDefaults() {
-        setPackageVersion(-1);
-        packageName = PmfConstants.shortLabel;
     }
 
     @Override
@@ -86,6 +62,6 @@ public class PrimaryModel extends AbstractSBase {
 
     @Override
     public String toString() {
-        return "PrimaryModel [src=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
+        return "primaryModel [src=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
     }
 }

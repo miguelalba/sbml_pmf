@@ -41,7 +41,13 @@ public class PmfModelPluginTest {
     }
 
     /**
-     * Test common methods: getPackageName(), getPrefix(), getURI() and readAttribute(String, String, String).
+     * Test common methods:
+     * <ul>
+     * <li>getPackageName()</li>
+     * <li>getPrefix()</li>
+     * <li>getPrefix()</li>
+     * <li>readAttribute(String,String,String)</li>
+     * </ul>
      */
     @Test
     public void testCommon() {
@@ -51,11 +57,17 @@ public class PmfModelPluginTest {
         assertEquals("pmf", plugin.getPrefix());
         assertEquals("http://www.sbml.org/sbml/level3/version1/pmf/version1", plugin.getURI());
         assertFalse(plugin.readAttribute("a", "b", "c"));
-        assertNull(plugin.writeXMLAttributes());
+        assertTrue(plugin.writeXMLAttributes().isEmpty());
     }
 
     /**
-     * Test other misc methods: clone(), getAllowsChildren(), getChildCount() and getChildAt().
+     * Test other misc methods:
+     * <ul>
+     * <li>clone()</li>
+     * <li>getAllowsChildren()</li>
+     * <li>getChildCount()</li>
+     * <li>getChildAt()</li>
+     * </ul>
      */
     @Test
     public void testOther() {
@@ -69,83 +81,192 @@ public class PmfModelPluginTest {
         // Test PmfModelPlugin#getAllowsChildren()
         assertTrue(plugin.getAllowsChildren());
 
-        // TODO: Test PmfModelPlugin#getChildCount()
-        {
-            PmfModelPlugin emptyPlugin = new PmfModelPlugin(new Model());
-            assertTrue(emptyPlugin.getChildCount() == 0);
+        // Test getChildCount and getChildAt
+        assertTrue(plugin.getChildCount() == 0);
 
-            PmfModelPlugin filledPlugin = new PmfModelPlugin(new Model());
-            filledPlugin.createPrimaryModel("a_model.sbml");
-            filledPlugin.createDataSource("a_data.numl");
-            filledPlugin.createModelVariable("a_variable");
-            assertTrue(filledPlugin.getChildCount() == 3);
-        }
+        plugin.createPrimaryModel("a_model.sbml");
+        plugin.createDataSource("a_data.numl");
+        plugin.createModelVariable("a_variable");
+        assertTrue(plugin.getChildCount() == 3);
 
-        // TODO: Test PmfModelPlugin#getChildAt()
-        fail("To be implemented");
+        assertTrue(plugin.getChildAt(0) instanceof ListOf<?>);
+        assertTrue(plugin.getChildAt(1) instanceof ListOf<?>);
+        assertTrue(plugin.getChildAt(2) instanceof ListOf<?>);
     }
 
     /**
      * Test model variable methods:
      * <ul>
-     * <li>{@link PmfModelPlugin#addModelVariable(ModelVariable)}</li>
-     * <li>{@link PmfModelPlugin#removeModelVariable(ModelVariable)}</li>
-     * <li>{@link PmfModelPlugin#removeModelVariable(int)}</li>
-     * <li>{@link PmfModelPlugin#createModelVariable(String)}</li>
-     * <li>{@link PmfModelPlugin#createModelVariable(String, double)}</li>
-     * <li>{@link PmfModelPlugin#getModelVariableCount()}</li>
+     * <li>addModelVariable(ModelVariable)</li>
+     * <li>removeModelVariable(ModelVariable)</li>
+     * <li>removeModelVariable(int)</li>
+     * <li>createModelVariable(String)</li>
+     * <li>createModelVariable(String, double)</li>
+     * <li>getModelVariableCount()</li>
      * </ul>
      */
     @Test
     public void testModelVariable() {
-        // TODO: Test PmfModelPlugin#addModelVariable(ModelVariable)
-        // TODO: Test PmfModelPlugin#removeModelVariable(ModelVariable)
-        // TODO: Test PmfModelPlugin#removeModelVariable(int)
-        // TODO: Test PmfModelPlugin#createModelVariable(String)
-        // TODO: Test PmfModelPlugin#createModelVariable(String, double)
-        // TODO: Test PmfModelPlugin#getModelVariableCount()
-        fail("To be implemented");
+        PmfModelPlugin plugin = new PmfModelPlugin(new Model());
+        assertTrue(0 == plugin.getModelVariableCount());
+
+        ModelVariable mv = new ModelVariable();
+
+        assertTrue(plugin.addModelVariable(mv));
+        assertTrue(1 == plugin.getModelVariableCount());
+
+        assertTrue(plugin.removeModelVariable(mv));
+        assertTrue(0 == plugin.getModelVariableCount());
+
+        plugin.addModelVariable(mv);
+        plugin.removeModelVariable(0);
+        assertTrue(0 == plugin.getModelVariableCount());
+
+        plugin.createModelVariable("a", 0);
+        assertTrue(1 == plugin.getModelVariableCount());
     }
 
     /**
      * Test listOfModelVariable methods:
+     * <p>
      * <ul>
-     * <li>{@link PmfModelPlugin#getListOfModelVariables()}</li>
-     * <li>{@link PmfModelPlugin#isSetListOfModelVariables()}</li>
-     * <li>{@link PmfModelPlugin#setListOfModelVariables(ListOf)}</li>
-     * <li>{@link PmfModelPlugin#unsetListOfModelVariables()}</li>
+     * <li>getListOfModelVariables()</li>
+     * <li>isSetListOfModelVariables()</li>
+     * <li>setListOfModelVariables(ListOf)</li>
+     * <li>unsetListOfModelVariables()</li>
      * </ul>
      */
     @Test
     public void testListOfModelVariables() {
-        // TODO: Test PmfModelPlugin#getListOfModelVariables()
-        // TODO: Test PmfModelPlugin#isSetListOfModelVariables()
-        // TODO: Test PmfModelPlugin#setListOfModelVariables()
-        // TODO: Test PmfModelPlugin#unsetListOfModelVariables()
-        fail("To be implemented");
+        PmfModelPlugin plugin = new PmfModelPlugin(new Model());
+        assertFalse(plugin.unsetListOfModelVariables());
+
+        // Test plugin without model variables
+        assertTrue(plugin.getListOfModelVariables().isEmpty());
+        assertFalse(plugin.isSetListOfModelVariables());
+        assertFalse(plugin.unsetListOfModelVariables());
+
+        // Test plugin with correlations
+        plugin.createModelVariable("pH", 7.0);
+        assertFalse(plugin.getListOfModelVariables().isEmpty());
+        assertTrue(plugin.isSetListOfModelVariables());
+        assertTrue(plugin.unsetListOfModelVariables());
     }
 
-    // TODO: Test DataSource as in testModelVariable
+    /**
+     * Test data source methods:
+     * <p>
+     * <ul>
+     * <li>addDataSource(DataSource)</li>
+     * <li>removeDataSource(DataSource)</li>
+     * <li>removeDataSource(int)</li>
+     * <li>createDataSource(String)</li>
+     * <li>getDataSourceCount()</li>
+     * </ul>
+     */
     @Test
     public void testDataSource() {
-        fail("To be implemented");
+        PmfModelPlugin plugin = new PmfModelPlugin(new Model());
+        assertTrue(0 == plugin.getDataSourceCount());
+
+        DataSource ds = new DataSource();
+
+        assertTrue(plugin.addDataSource(ds));
+        assertTrue(1 == plugin.getDataSourceCount());
+
+        assertTrue(plugin.removeDataSource(ds));
+        assertTrue(0 == plugin.getDataSourceCount());
+
+        plugin.addDataSource(ds);
+        plugin.removeDataSource(0);
+        assertTrue(0 == plugin.getDataSourceCount());
+
+        plugin.createDataSource("data.numl");
+        assertTrue(1 == plugin.getDataSourceCount());
     }
 
-    // TODO: Test listOfDataSources as in testListOfModelVariables
+    /**
+     * Test listOfDataSources methods:
+     * <p>
+     * <ul>
+     * <li>getListOfDataSources()</li>
+     * <li>isSetListOfDataSources()</li>
+     * <li>setListOfDataSources(ListOf)</li>
+     * <li>unsetListOfDataSources()</li>
+     * </ul>
+     */
     @Test
     public void testListOfDataSources() {
-        fail("To be implemented");
+        PmfModelPlugin plugin = new PmfModelPlugin(new Model());
+        assertFalse(plugin.unsetListOfDataSources());
+
+        // Test plugin without model variables
+        assertTrue(plugin.getListOfDataSources().isEmpty());
+        assertFalse(plugin.isSetListOfDataSources());
+        assertFalse(plugin.unsetListOfDataSources());
+
+        // Test plugin with correlations
+        plugin.createDataSource("data.numl");
+        assertFalse(plugin.getListOfDataSources().isEmpty());
+        assertTrue(plugin.isSetListOfDataSources());
+        assertTrue(plugin.unsetListOfDataSources());
     }
 
-    // TODO: Test PrimaryModel as in testModelVariable
+    /**
+     * Test primary model methods:
+     * <p>
+     * <ul>
+     * <li>addPrimaryModel(PrimaryModel)</li>
+     * <li>removePrimaryModel(PrimaryModel)</li>
+     * <li>removePrimaryModel(int)</li>
+     * <li>createPrimaryModel(String)</li>
+     * <li>getPrimaryModelCount()</li>
+     * </ul>
+     */
     @Test
     public void testPrimaryModel() {
-        fail("To be implemented");
+
+        PmfModelPlugin plugin = new PmfModelPlugin(new Model());
+        assertTrue(0 == plugin.getPrimaryModelCount());
+
+        PrimaryModel pm = new PrimaryModel();
+
+        assertTrue(plugin.addPrimaryModel(pm));
+        assertTrue(1 == plugin.getPrimaryModelCount());
+
+        assertTrue(plugin.removePrimaryModel(pm));
+        assertTrue(0 == plugin.getPrimaryModelCount());
+
+        plugin.addPrimaryModel(pm);
+        plugin.removePrimaryModel(0);
+        assertTrue(0 == plugin.getPrimaryModelCount());
+
+        plugin.createPrimaryModel("model.sbml");
+        assertTrue(1 == plugin.getPrimaryModelCount());
     }
 
-    // TODO: Test listOfPrimaryModels as in testListOfModelVariables
+    /**
+     * Test listOfPrimaryModels methods:
+     * <p>
+     * <ul>
+     * <li>getListOfPrimaryModels</li>
+     * <li>isSetListOfPrimaryModels</li>
+     * <li>setListOfPrimaryModels(ListOf)</li>
+     * <li>unsetListOfPrimaryModels()</li>
+     * </ul>
+     */
     @Test
     public void testListOfPrimaryModels() {
-        fail("To be implemented");
+        // Test plugin without primary models
+        PmfModelPlugin plugin = new PmfModelPlugin(new Model());
+        assertTrue(plugin.getListOfPrimaryModels().isEmpty());
+        assertFalse(plugin.isSetListOfPrimaryModels());
+        assertFalse(plugin.unsetListOfPrimaryModels());
+
+        // Test plugin with primary models
+        plugin.createPrimaryModel("model.sbml");
+        assertFalse(plugin.getListOfPrimaryModels().isEmpty());
+        assertTrue(plugin.isSetListOfPrimaryModels());
+        assertTrue(plugin.unsetListOfPrimaryModels());
     }
 }

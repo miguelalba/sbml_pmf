@@ -106,8 +106,14 @@ public class RuleMetaData extends AbstractSBase {
      * Creates a RuleMetaData instance.
      */
     public RuleMetaData() {
-        initDefaults();
         modelClass = ModelClass.UNKNOWN;
+        packageName = PmfConstants.shortLabel;
+    }
+
+    public RuleMetaData(int level, int version) {
+        super(level, version);
+        modelClass = ModelClass.UNKNOWN;
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
@@ -118,6 +124,8 @@ public class RuleMetaData extends AbstractSBase {
         this.formulaName = obj.formulaName;
         this.pmmLabId = obj.pmmLabId;
         this.modelClass = obj.modelClass;
+
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
@@ -126,14 +134,6 @@ public class RuleMetaData extends AbstractSBase {
     @Override
     public RuleMetaData clone() {
         return new RuleMetaData(this);
-    }
-
-    /**
-     * Initializes the default values using the namespace.
-     */
-    private void initDefaults() {
-        setPackageVersion(-1);
-        packageName = PmfConstants.shortLabel;
     }
 
     @Override

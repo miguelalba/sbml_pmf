@@ -679,3 +679,196 @@
 [17:05:57,161  WARN StringTools:404] - Could not create an integer from the string not an integer
 [17:05:57,161  WARN StringTools:404] - Could not create an integer from the string 0.5
 [17:05:57,161  WARN StringTools:404] - Could not create an integer from the string not an integer
+[13:24:12,740  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[13:24:12,851  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:24:12,855  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:24:12,855  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:24:12,856  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:24:12,856  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:24:12,857  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:24:12,962  WARN StringTools:404] - Could not create an integer from the string 0.5
+[13:24:12,963  WARN StringTools:404] - Could not create an integer from the string not an integer
+[13:24:12,963  WARN StringTools:404] - Could not create an integer from the string 5.0
+[13:24:12,964  WARN StringTools:404] - Could not create an integer from the string not an integer
+[13:24:12,964  WARN StringTools:404] - Could not create an integer from the string 0.5
+[13:24:12,964  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:14:30,736  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:14:30,806  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:14:30,816  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:14:30,816  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:14:30,816  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:14:30,816  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:14:30,816  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:14:31,170  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:14:31,171  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:14:31,171  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:14:31,171  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:14:31,172  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:14:31,172  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:19:14,285  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:19:14,301  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:19:14,301  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:19:14,301  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:19:14,301  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:19:14,301  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:19:14,301  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:19:14,425  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:19:14,425  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:19:14,425  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:19:14,425  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:19:14,425  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:19:14,425  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:20:24,508  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:20:24,555  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:20:24,555  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:20:24,555  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:20:24,555  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:20:24,555  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:20:24,555  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:20:24,711  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:20:24,711  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:20:24,711  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:20:24,711  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:20:24,711  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:20:24,711  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:24:35,832  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:24:35,879  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:24:35,894  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:24:35,894  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:24:35,894  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:24:35,894  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:24:35,894  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:24:36,097  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:24:36,097  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:24:36,097  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:24:36,097  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:24:36,097  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:24:36,097  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:35:15,044  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:35:15,076  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:35:15,091  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:35:15,091  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:35:15,091  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:35:15,091  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:35:15,091  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:35:15,216  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:35:15,216  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:35:15,216  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:35:15,216  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:35:15,216  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:35:15,216  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:40:11,584  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:40:11,600  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:40:11,600  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:40:11,600  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:40:11,600  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:40:11,600  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:40:11,600  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:40:11,787  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:40:11,787  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:40:11,787  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:40:11,787  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:40:11,787  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:40:11,787  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:42:38,545  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:42:38,561  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:42:38,577  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:42:38,577  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:42:38,577  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:42:38,592  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:42:38,592  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:42:38,748  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:42:38,748  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:42:38,748  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:42:38,748  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:42:38,748  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:42:38,748  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:03:56,869  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[15:03:56,916  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:03:56,916  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:03:56,931  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:03:56,931  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:03:56,931  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:03:56,931  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:03:57,072  WARN StringTools:404] - Could not create an integer from the string 0.5
+[15:03:57,072  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:03:57,072  WARN StringTools:404] - Could not create an integer from the string 5.0
+[15:03:57,072  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:03:57,072  WARN StringTools:404] - Could not create an integer from the string 0.5
+[15:03:57,072  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:12:20,275  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[15:12:20,291  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:12:20,291  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:12:20,291  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:12:20,291  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:12:20,291  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:12:20,291  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:12:20,447  WARN StringTools:404] - Could not create an integer from the string 0.5
+[15:12:20,447  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:12:20,447  WARN StringTools:404] - Could not create an integer from the string 5.0
+[15:12:20,447  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:12:20,447  WARN StringTools:404] - Could not create an integer from the string 0.5
+[15:12:20,447  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:14:30,296  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[15:14:30,312  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:14:30,327  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:14:30,327  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:14:30,327  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:14:30,327  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:14:30,327  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[15:14:30,483  WARN StringTools:404] - Could not create an integer from the string 0.5
+[15:14:30,483  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:14:30,483  WARN StringTools:404] - Could not create an integer from the string 5.0
+[15:14:30,483  WARN StringTools:404] - Could not create an integer from the string not an integer
+[15:14:30,483  WARN StringTools:404] - Could not create an integer from the string 0.5
+[15:14:30,483  WARN StringTools:404] - Could not create an integer from the string not an integer
+[13:43:14,214  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[13:43:14,245  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:43:14,261  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:43:14,261  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:43:14,261  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:43:14,261  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:43:14,261  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[13:43:14,651  WARN StringTools:404] - Could not create an integer from the string 0.5
+[13:43:14,651  WARN StringTools:404] - Could not create an integer from the string not an integer
+[13:43:14,651  WARN StringTools:404] - Could not create an integer from the string 5.0
+[13:43:14,651  WARN StringTools:404] - Could not create an integer from the string not an integer
+[13:43:14,651  WARN StringTools:404] - Could not create an integer from the string 0.5
+[13:43:14,651  WARN StringTools:404] - Could not create an integer from the string not an integer
+[13:48:32,492  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[13:48:32,508  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:27:01,760  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:27:01,775  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:27:01,775  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:27:01,775  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:27:01,775  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:27:01,775  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:27:01,775  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:27:02,321  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:27:02,321  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:27:02,321  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:27:02,321  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:27:02,321  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:27:02,321  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:33:57,645  WARN StringTools:404] - Could not create an integer from the string not-an-integer
+[14:33:57,661  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:33:58,020  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:33:58,020  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:33:58,020  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:33:58,020  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:33:58,020  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:33:58,020  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:38:16,961  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:38:17,387  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:38:17,387  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:38:17,388  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:38:17,388  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:38:17,388  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:38:17,389  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:39:45,193  WARN StringTools:382] - Could not create a double from the string 'not a double'
+[14:39:45,553  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:39:45,554  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:39:45,555  WARN StringTools:404] - Could not create an integer from the string 5.0
+[14:39:45,555  WARN StringTools:404] - Could not create an integer from the string not an integer
+[14:39:45,556  WARN StringTools:404] - Could not create an integer from the string 0.5
+[14:39:45,556  WARN StringTools:404] - Could not create an integer from the string not an integer

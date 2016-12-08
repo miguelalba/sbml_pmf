@@ -1,15 +1,12 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.RuleMetaData;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Test for the {@link RuleMetaData} class. Checks:
@@ -71,6 +68,14 @@ public class RuleMetaDataTest {
         assertNull(metaData.formulaName);
         assertNull(metaData.pmmLabId);
         assertEquals(RuleMetaData.ModelClass.UNKNOWN, metaData.modelClass);
+
+        // Constructor with level and version
+        metaData = new RuleMetaData(3, 1);
+        assertNull(metaData.formulaName);
+        assertNull(metaData.pmmLabId);
+        assertEquals(RuleMetaData.ModelClass.UNKNOWN, metaData.modelClass);
+        assertTrue(3 == metaData.getLevel());
+        assertTrue(1 == metaData.getVersion());
 
         // Test copy constructor
         metaData.formulaName = "a formula";

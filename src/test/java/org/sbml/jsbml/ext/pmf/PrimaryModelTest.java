@@ -1,7 +1,6 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.PrimaryModel;
 
 import java.util.Collections;
 import java.util.Map;
@@ -28,17 +27,25 @@ public class PrimaryModelTest {
         // Test empty constructor
         assertNull(new PrimaryModel().src);
 
-        // Test parametrized constructor
-        PrimaryModel pm = new PrimaryModel("model1.sbml");
-        assertEquals("model1.sbml", pm.src);
+        // Test constructor with level and version
+        PrimaryModel pm = new PrimaryModel(3, 1);
+        assertTrue(3 == pm.getLevel());
+        assertTrue(1 == pm.getVersion());
 
         // Test copy constructor
+        pm.src = "model1.sbml";
         assertEquals("model1.sbml", new PrimaryModel(pm).src);
     }
 
     @Test
     public void testClone() {
-        assertEquals("model1.sbml", new PrimaryModel("model1.sbml").clone().src);
+        PrimaryModel pm = new PrimaryModel(3, 1);
+        pm.src = "model1.sbml";
+        pm = pm.clone();
+
+        assertTrue(3 == pm.getLevel());
+        assertTrue(1 == pm.getVersion());
+        assertEquals("model1.sbml", pm.src);
     }
 
     /**
@@ -77,10 +84,10 @@ public class PrimaryModelTest {
         PrimaryModel pm = new PrimaryModel();
 
         // Test with empty PrimaryModel
-        assertEquals("PrimaryModel [src=\"\"]", pm.toString());
+        assertEquals("primaryModel [src=\"\"]", pm.toString());
 
         // Test with filled PrimaryModel
         pm.src = "model1.sbml";
-        assertEquals("PrimaryModel [src=\"model1.sbml\"]", pm.toString());
+        assertEquals("primaryModel [src=\"model1.sbml\"]", pm.toString());
     }
 }

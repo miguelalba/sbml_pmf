@@ -30,22 +30,8 @@ public class Correlation extends AbstractSBase {
         packageName = PmfConstants.shortLabel;
     }
 
-    /**
-     * Creates a Correlation instance from a name and value.
-     */
-    public Correlation(String name, double value) {
-        this.name = name;
-        this.value = value;
-        packageName = PmfConstants.shortLabel;
-    }
-
-    /**
-     * Creates a Correlation instance from a name, value, level and version.
-     */
-    public Correlation(String name, double value, int level, int version) {
+    public Correlation(int level, int version) {
         super(level, version);
-        this.name = name;
-        this.value = value;
         packageName = PmfConstants.shortLabel;
     }
 
@@ -53,7 +39,9 @@ public class Correlation extends AbstractSBase {
      * Clone constructor.
      */
     public Correlation(Correlation correlation) {
-        this(correlation.name, correlation.value, correlation.getLevel(), correlation.getVersion());
+        super(correlation);
+        name = correlation.name;
+        value = correlation.value;
     }
 
     /**
@@ -92,7 +80,7 @@ public class Correlation extends AbstractSBase {
 
     @Override
     public String toString() {
-        String sb = "Correlation [";
+        String sb = PmfConstants.correlation + " [";
         sb += "name=\"" + (name == null || name.isEmpty() ? "" : name) + "\"";
         sb += " value=\"" + (Double.isNaN(value) ? "" : value) + "\"]";
 

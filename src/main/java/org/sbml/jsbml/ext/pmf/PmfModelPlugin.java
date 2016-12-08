@@ -107,16 +107,6 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
                 MessageFormat.format("Index {0, number, integer} >= {1, number, integer}",
                         childIndex, Math.min(pos, 0)));
     }
-//
-//    @Override
-//    public SBMLDocument getParent() {
-//        return isSetExtendedSBase() ? (SBMLDocument) getExtendedSBase().getParent() : null;
-//    }
-
-//    @Override
-//    public SBase getParentSBMLObject() {
-//        return getParent();
-//    }
 
     // --- ModelVariable ---
 
@@ -169,7 +159,8 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      * element in the {@link #listOfModelVariables}.
      */
     public ModelVariable createModelVariable(String name) {
-        ModelVariable mv = new ModelVariable(name);
+        ModelVariable mv = new ModelVariable(getLevel(), getVersion());
+        mv.name = name;
         addModelVariable(mv);
         return mv;
     }
@@ -183,7 +174,9 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      * @return the new {@link ModelVariable} instance.
      */
     public ModelVariable createModelVariable(String name, double value) {
-        ModelVariable mv = new ModelVariable(name, value, getLevel(), getVersion());
+        ModelVariable mv = new ModelVariable(getLevel(), getVersion());
+        mv.name = name;
+        mv.value = value;
         addModelVariable(mv);
         return mv;
     }
@@ -264,7 +257,7 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      * structure.
      */
     public boolean unsetListOfModelVariables() {
-        if (listOfModelVariables != null) {
+        if (isSetListOfModelVariables()) {
             ListOf<ModelVariable> oldListOfModelVariables = listOfModelVariables;
             listOfModelVariables = null;
             oldListOfModelVariables.fireNodeRemovedEvent();
@@ -323,7 +316,8 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      * last element in the {@link #listOfDataSources}.
      */
     public DataSource createDataSource(String src) {
-        DataSource dataSource = new DataSource(src);
+        DataSource dataSource = new DataSource();
+        dataSource.src = src;
         addDataSource(dataSource);
         return dataSource;
     }
@@ -415,7 +409,7 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      * one element, otherwise {@code false}.
      */
     public boolean unsetListOfDataSources() {
-        if (listOfDataSources != null) {
+        if (isSetListOfDataSources()) {
             ListOf<DataSource> oldDataSources = listOfDataSources;
             listOfDataSources = null;
             oldDataSources.fireNodeRemovedEvent();
@@ -476,7 +470,8 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      * element in the {@link #listOfPrimaryModels}.
      */
     public PrimaryModel createPrimaryModel(String src) {
-        PrimaryModel primaryModel = new PrimaryModel(src);
+        PrimaryModel primaryModel = new PrimaryModel(getLevel(), getVersion());
+        primaryModel.src = src;
         addPrimaryModel(primaryModel);
         return primaryModel;
     }

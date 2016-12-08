@@ -36,7 +36,12 @@ public class ParameterMetaData extends AbstractSBase {
      * Creates a ParameterMetaData instance.
      */
     public ParameterMetaData() {
-        initDefaults();
+        packageName = PmfConstants.shortLabel;
+    }
+
+    public ParameterMetaData(int level, int version) {
+        super(level, version);
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
@@ -50,6 +55,8 @@ public class ParameterMetaData extends AbstractSBase {
         description = obj.description;
         min = obj.min;
         max = obj.max;
+
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
@@ -59,13 +66,6 @@ public class ParameterMetaData extends AbstractSBase {
         return new ParameterMetaData(this);
     }
 
-    /**
-     * Initializes the default value using the namespace.
-     */
-    private void initDefaults() {
-        setPackageVersion(-1);
-        packageName = PmfConstants.shortLabel;
-    }
 
     @Override
     public Map<String, String> writeXMLAttributes() {

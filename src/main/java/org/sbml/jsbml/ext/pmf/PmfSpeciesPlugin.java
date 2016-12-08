@@ -5,14 +5,12 @@ import org.sbml.jsbml.Species;
 import org.sbml.jsbml.ext.AbstractSBasePlugin;
 
 import java.text.MessageFormat;
-import java.util.Map;
 
 /**
  * Created by de on 12.09.2016.
  */
 public class PmfSpeciesPlugin extends AbstractSBasePlugin {
 
-    // TODO: serialVersionUID
     private SpeciesMetaData metaData;
 
     public PmfSpeciesPlugin(PmfSpeciesPlugin plugin) {
@@ -23,6 +21,7 @@ public class PmfSpeciesPlugin extends AbstractSBasePlugin {
 
     public PmfSpeciesPlugin(Species species) {
         super(species);
+        setNamespace(PmfConstants.namespaceURI);
     }
 
     public PmfSpeciesPlugin clone() {
@@ -50,22 +49,7 @@ public class PmfSpeciesPlugin extends AbstractSBasePlugin {
         return false;
     }
 
-    @Override
-    public Map<String, String> writeXMLAttributes() {
-        return null;
-    }
-
     // --- plugin methods ---
-    @Override
-    public Species getParent() {
-        return isSetExtendedSBase() ? (Species) extendedSBase : null;
-    }
-
-    @Override
-    public Species getParentSBMLObject() {
-        return getParent();
-    }
-
     @Override
     public boolean getAllowsChildren() {
         return true;

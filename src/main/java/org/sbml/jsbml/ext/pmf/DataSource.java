@@ -21,15 +21,7 @@ public class DataSource extends AbstractSBase {
     public String src;
 
     public DataSource() {
-        initDefaults();
-    }
-
-    /**
-     * Creates a DataSource instance with a src.
-     */
-    public DataSource(String src) {
-        this.src = src;
-        initDefaults();
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
@@ -40,20 +32,7 @@ public class DataSource extends AbstractSBase {
      */
     public DataSource(int level, int version) {
         super(level, version);
-        initDefaults();
-    }
-
-    /**
-     * Creates a DataSource instance with a src, level and version.
-     *
-     * @param src
-     * @param level   SBML level
-     * @param version SBML version
-     */
-    public DataSource(String src, int level, int version) {
-        super(level, version);
-        this.src = src;
-        initDefaults();
+        packageName = PmfConstants.shortLabel;
     }
 
     /**
@@ -62,19 +41,12 @@ public class DataSource extends AbstractSBase {
     public DataSource(DataSource obj) {
         super(obj);
         src = obj.src;
+        packageName = PmfConstants.shortLabel;
     }
 
     @Override
     public DataSource clone() {
         return new DataSource(this);
-    }
-
-    /**
-     * Initializes the default values using the namespace.
-     */
-    private void initDefaults() {
-        setPackageVersion(-1);
-        packageName = PmfConstants.shortLabel;
     }
 
     @Override
@@ -98,6 +70,6 @@ public class DataSource extends AbstractSBase {
 
     @Override
     public String toString() {
-        return "DataSource [src=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
+        return PmfConstants.dataSource + " [src=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
     }
 }

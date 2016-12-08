@@ -34,6 +34,15 @@ public class ParameterMetaDataTest {
         assertTrue(Double.isNaN(metaData.error));
         assertNull(metaData.description);
 
+        // Constructor with level and version
+        metaData = new ParameterMetaData(3, 1);
+        assertTrue(Double.isNaN(metaData.p));
+        assertTrue(Double.isNaN(metaData.t));
+        assertTrue(Double.isNaN(metaData.error));
+        assertNull(metaData.description);
+        assertTrue(3 == metaData.getLevel());
+        assertTrue(1 == metaData.getVersion());
+
         // Test copy constructor
         metaData.p = 0.006;
         metaData.error = 0.471;

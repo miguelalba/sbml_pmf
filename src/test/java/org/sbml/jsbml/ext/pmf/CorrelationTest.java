@@ -32,17 +32,14 @@ public class CorrelationTest {
         assertTrue(corr.name == null);
         assertTrue(Double.isNaN(corr.value));
 
-        // Test parametrized constructor
-        corr = new Correlation("h0", 7.0);
-        assertEquals("h0", corr.name);
-        assertEquals(7.0, corr.value, .0);
-
         // Test constructor with level and version
-        corr = new Correlation("h0", 7.0, 3, 1);
-        assertEquals("h0", corr.name);
-        assertEquals(7.0, corr.value, .0);
+        corr = new Correlation(3, 1);
+        assertTrue(3 == corr.getLevel());
+        assertTrue(1 == corr.getVersion());
 
         // Test copy constructor
+        corr.name = "h0";
+        corr.value = 7.0;
         corr = new Correlation(corr);
         assertEquals("h0", corr.name);
         assertEquals(7.0, corr.value, .0);
@@ -53,7 +50,11 @@ public class CorrelationTest {
      */
     @Test
     public void testClone() {
-        Correlation corr = new Correlation("h0", 7.0).clone();
+        Correlation corr = new Correlation();
+        corr.name = "h0";
+        corr.value = 7.0;
+        corr = corr.clone();
+
         assertEquals("h0", corr.name);
         assertEquals(7.0, corr.value, .0);
     }
@@ -114,12 +115,12 @@ public class CorrelationTest {
     @Test
     public void test2String() {
         Correlation correlation = new Correlation();
-        String expected = "Correlation [name=\"\" value=\"\"]";
+        String expected = "correlation [name=\"\" value=\"\"]";
         assertEquals(expected, correlation.toString());
 
         correlation.name = "h0";
         correlation.value = 7.0;
-        expected = "Correlation [name=\"h0\" value=\"7.0\"]";
+        expected = "correlation [name=\"h0\" value=\"7.0\"]";
         assertEquals(expected, correlation.toString());
     }
 }

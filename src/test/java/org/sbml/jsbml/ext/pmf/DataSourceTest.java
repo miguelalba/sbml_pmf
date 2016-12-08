@@ -1,7 +1,6 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.DataSource;
 
 import java.util.Collections;
 import java.util.Map;
@@ -31,18 +30,14 @@ public class DataSourceTest {
         // Constructor with level and version
         ds = new DataSource(3, 1);
         assertNull(ds.src);
-
-        // Constructor with src, level and version
-        ds = new DataSource("data.numl", 3, 1);
-        assertEquals("data.numl", ds.src);
-
-        // Test parametrized constructor
-        ds = new DataSource("data.numl");
-        assertEquals("data.numl", ds.src);
+        assertTrue(3 == ds.getLevel());
+        assertTrue(1 == ds.getVersion());
 
         // Test copy constructor
         ds = new DataSource(ds);
-        assertEquals("data.numl", ds.src);
+        assertNull(ds.src);
+        assertTrue(3 == ds.getLevel());
+        assertTrue(1 == ds.getVersion());
     }
 
     /**
@@ -50,7 +45,12 @@ public class DataSourceTest {
      */
     @Test
     public void testClone() {
-        assertEquals(new DataSource("data.numl").clone().src, "data.numl");
+        DataSource ds = new DataSource(3, 1);
+        ds.src = "data.numl";
+        ds = ds.clone();
+        assertTrue(3 == ds.getLevel());
+        assertTrue(1 == ds.getVersion());
+        assertEquals("data.numl", ds.src);
     }
 
     /**
@@ -91,10 +91,10 @@ public class DataSourceTest {
     public void test2String() {
         // Test with empty DataSource
         DataSource ds = new DataSource();
-        assertEquals("DataSource [src=\"\"]", ds.toString());
+        assertEquals("dataSource [src=\"\"]", ds.toString());
 
         // Test with initialized DataSource
         ds.src = "data.numl";
-        assertEquals("DataSource [src=\"data.numl\"]", ds.toString());
+        assertEquals("dataSource [src=\"data.numl\"]", ds.toString());
     }
 }

@@ -32,6 +32,13 @@ public class CompartmentMetaDataTest {
         assertNull(metaData.source);
         assertNull(metaData.detail);
 
+        // Test constructor with level and version
+        metaData = new CompartmentMetaData(3, 1);
+        assertNull(metaData.source);
+        assertNull(metaData.detail);
+        assertTrue(3 == metaData.getLevel());
+        assertTrue(1 == metaData.getVersion());
+
         // Test copy constructor
         metaData.source = 7;
         metaData.detail = "some details";
