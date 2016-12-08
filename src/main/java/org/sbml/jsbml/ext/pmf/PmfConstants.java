@@ -34,9 +34,20 @@ public class PmfConstants {
     }
 
     // Objects defined in this plugin
-    static final String compartmentMetaData = "compartmentMetaData";
-    static final String parameterMetaData = "parameterMetaData";
-    static final String reference = "reference";
-    static final String ruleMetaData = "ruleMetaData";
-    static final String speciesMetaData = "speciesMetaData";
+    public static final String correlation = "correlation";
+    public static final String dataSource = "dataSource";
+    public static final String modelVariable = "modelVariable";
+    public static final String primaryModel = "primaryModel";
+    public static final String reference = "reference";
+
+    public static final String compartmentMetaData = "compartmentMetaData";
+    public static final String parameterMetaData = "parameterMetaData";
+    public static final String ruleMetaData = "ruleMetaData";
+    public static final String speciesMetaData = "speciesMetaData";
+
+    public static final String listOfCorrelations = "listOfCorrelations";
+    public static final String listOfDataSources = "listOfDataSources";
+    public static final String listOfModelVariables = "listOfModelVariables";
+    public static final String listOfPrimaryModels = "listOfPrimaryModels";
+    public static final String listOfReferences = "listOfReferences";
 }
