@@ -189,7 +189,7 @@ public class PmfParameterPlugin extends AbstractSBasePlugin {
     }
 
     public boolean unsetListOfCorrelations() {
-        if (listOfCorrelations != null) {
+        if (isSetListOfCorrelations()) {
             ListOf<Correlation> oldListOfCorrelations = this.listOfCorrelations;
             listOfCorrelations = null;
             oldListOfCorrelations.fireNodeRemovedEvent();

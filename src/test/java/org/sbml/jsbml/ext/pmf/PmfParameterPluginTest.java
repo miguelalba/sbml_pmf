@@ -19,9 +19,6 @@ import static org.junit.Assert.*;
  */
 public class PmfParameterPluginTest {
 
-    /**
-     * Test constructors: copy and with {@link Parameter} parameter.
-     */
     @Test
     public void testConstructors() {
         // Test PmfParameterPlugin#PmfParameterPlugin(PmfParameterPlugin)
@@ -135,7 +132,7 @@ public class PmfParameterPluginTest {
         // Test plugin without correlations
         assertTrue(plugin.getListOfCorrelations().isEmpty());
         assertFalse(plugin.isSetListOfCorrelations());
-        assertTrue(plugin.unsetListOfCorrelations());
+        assertFalse(plugin.unsetListOfCorrelations());
 
         // Test plugin with correlations
         plugin.createCorrelation("pH", 7.0);

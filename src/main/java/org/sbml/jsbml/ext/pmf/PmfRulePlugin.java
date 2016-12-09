@@ -15,6 +15,8 @@ public class PmfRulePlugin extends AbstractSBasePlugin {
     private RuleMetaData metaData;
     private ListOf<Reference> listOfReferences;
 
+    // Constructors
+
     public PmfRulePlugin(PmfRulePlugin plugin) {
         super(plugin);
         if (plugin.isSetMetaData())
@@ -25,6 +27,7 @@ public class PmfRulePlugin extends AbstractSBasePlugin {
 
     public PmfRulePlugin(Rule rule) {
         super(rule);
+        setNamespace(PmfConstants.namespaceURI);
     }
 
     @Override
@@ -120,7 +123,6 @@ public class PmfRulePlugin extends AbstractSBasePlugin {
     }
 
     // --- Reference ---
-    // addReference(Reference) : boolean
     public boolean addReference(Reference reference) {
         return getListOfReferences().add(reference);
     }
@@ -170,7 +172,7 @@ public class PmfRulePlugin extends AbstractSBasePlugin {
     }
 
     public boolean unsetListOfReferences() {
-        if (listOfReferences != null) {
+        if (isSetListOfReferences()) {
             ListOf<Reference> oldListOfReferences = listOfReferences;
             listOfReferences = null;
             oldListOfReferences.fireNodeRemovedEvent();
