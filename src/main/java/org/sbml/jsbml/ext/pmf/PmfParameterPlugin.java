@@ -142,8 +142,8 @@ public class PmfParameterPlugin extends AbstractSBasePlugin {
 
     public Correlation createCorrelation(String name, double value) {
         Correlation correlation = new Correlation(getLevel(), getVersion());
-        correlation.name = name;
-        correlation.value = value;
+        correlation.setName(name);
+        correlation.setValue(value);
         addCorrelation(correlation);
         return correlation;
     }

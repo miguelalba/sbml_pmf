@@ -29,8 +29,8 @@ public class CorrelationTest {
     public void testConstructors() {
         // Empty constructor initializes name to null and value to Double.NaN
         Correlation corr = new Correlation();
-        assertTrue(corr.name == null);
-        assertTrue(Double.isNaN(corr.value));
+        assertFalse(corr.isSetName());
+        assertFalse(corr.isSetValue());
 
         // Test constructor with level and version
         corr = new Correlation(3, 1);
@@ -38,11 +38,11 @@ public class CorrelationTest {
         assertTrue(1 == corr.getVersion());
 
         // Test copy constructor
-        corr.name = "h0";
-        corr.value = 7.0;
+        corr.setName("h0");
+        corr.setValue(7.0);
         corr = new Correlation(corr);
-        assertEquals("h0", corr.name);
-        assertEquals(7.0, corr.value, .0);
+        assertEquals("h0", corr.getName());
+        assertEquals(7.0, corr.getValue(), .0);
     }
 
     /**
@@ -51,12 +51,12 @@ public class CorrelationTest {
     @Test
     public void testClone() {
         Correlation corr = new Correlation();
-        corr.name = "h0";
-        corr.value = 7.0;
+        corr.setName("h0");
+        corr.setValue(7.0);
         corr = corr.clone();
 
-        assertEquals("h0", corr.name);
-        assertEquals(7.0, corr.value, .0);
+        assertEquals("h0", corr.getName());
+        assertEquals(7.0, corr.getValue(), .0);
     }
 
     /**
@@ -72,15 +72,15 @@ public class CorrelationTest {
 
         // Parsing an string as the name should return true and set it as name
         assertTrue(correlation.readAttribute("name", "pmf", "h0"));
-        assertEquals("h0", correlation.name);
+        assertEquals("h0", correlation.getName());
 
         // Parsing a non-double as the value attribute should return true and set Double.NaN as value
         assertTrue(correlation.readAttribute("name", "pmf", "not a double"));
-        assertTrue(Double.isNaN(correlation.value));
+        assertFalse(correlation.isSetValue());
 
         // Parsing a double as the value attribute should return true and set it as value
         assertTrue(correlation.readAttribute("value", "pmf", Double.toString(7.0)));
-        assertEquals(7.0, correlation.value, 0.0);
+        assertEquals(7.0, correlation.getValue(), 0.0);
 
         // Parsing an attribute other than name and value should return false
         assertFalse(correlation.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
@@ -99,8 +99,8 @@ public class CorrelationTest {
         assertTrue(correlation.writeXMLAttributes().isEmpty());
 
         // Test attributes with filled correlation
-        correlation.name = "h0";
-        correlation.value = 7.0;
+        correlation.setName("h0");
+        correlation.setValue(7.0);
 
         Map<String, String> expectedAttributes = new HashMap<>(2);
         expectedAttributes.put("name", "h0");
@@ -118,8 +118,8 @@ public class CorrelationTest {
         String expected = "correlation [name=\"\" value=\"\"]";
         assertEquals(expected, correlation.toString());
 
-        correlation.name = "h0";
-        correlation.value = 7.0;
+        correlation.setName("h0");
+        correlation.setValue(7.0);
         expected = "correlation [name=\"h0\" value=\"7.0\"]";
         assertEquals(expected, correlation.toString());
     }

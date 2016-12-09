@@ -1,6 +1,7 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.AbstractSBase;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
@@ -17,14 +18,14 @@ import java.util.TreeMap;
 public class Correlation extends AbstractSBase {
 
     /**
-     * Parameter name. Null or empty string if not set.
+     * Parameter name.
      */
-    public String name;
+    private String name;
 
     /**
-     * Correlation value. Double.NaN if not set.
+     * Correlation value.
      */
-    public double value = Double.NaN;
+    private Double value;
 
     public Correlation() {
         packageName = PmfConstants.shortLabel;
@@ -71,19 +72,72 @@ public class Correlation extends AbstractSBase {
     @Override
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
-        if (name != null && !name.isEmpty())
+        if (isSetName()) {
             attributes.put("name", name);
-        if (!Double.isNaN(value))
+        }
+        if (isSetValue()) {
             attributes.put("value", StringTools.toString(value));
+        }
         return attributes;
     }
 
     @Override
     public String toString() {
-        String sb = PmfConstants.correlation + " [";
-        sb += "name=\"" + (name == null || name.isEmpty() ? "" : name) + "\"";
-        sb += " value=\"" + (Double.isNaN(value) ? "" : value) + "\"]";
+        return PmfConstants.correlation + " [name=\"" + (isSetName() ? name : "") + "\" value=\"" +
+                (isSetValue() ? value : "") + "\"]";
+    }
 
-        return sb;
+    // --- name attribute ---
+    public String getName() {
+        return isSetName() ? name : null;
+    }
+
+    public boolean isSetName() {
+        return name != null;
+    }
+
+    public void setName(String name) {
+        String oldName = this.name;
+        this.name = name;
+        firePropertyChange(PmfConstants.name, oldName, this.name);
+    }
+
+    public boolean unsetName() {
+        if (isSetName()) {
+            String oldName = this.name;
+            name = null;
+            firePropertyChange(PmfConstants.name, oldName, name);
+            return true;
+        }
+        return false;
+    }
+
+    // --- value attribute ---
+    public double getValue() {
+        if (isSetValue()) {
+            return value;
+        }
+        // This is necessary if we cannot return null here
+        throw new PropertyUndefinedError(PmfConstants.value, this);
+    }
+
+    public boolean isSetValue() {
+        return value != null;
+    }
+
+    public void setValue(double value) {
+        Double oldValue = this.value;
+        this.value = value;
+        firePropertyChange(PmfConstants.value, oldValue, this.value);
+    }
+
+    public boolean unsetValue() {
+        if (isSetValue()) {
+            Double oldValue = value;
+            value = null;
+            firePropertyChange(PmfConstants.value, oldValue, value);
+            return true;
+        }
+        return false;
     }
 }

@@ -50,4 +50,8 @@ public class PmfConstants {
     public static final String listOfModelVariables = "listOfModelVariables";
     public static final String listOfPrimaryModels = "listOfPrimaryModels";
     public static final String listOfReferences = "listOfReferences";
+
+    // Attributes
+    public static final String name = "name";
+    public static final String value = "value";
 }
