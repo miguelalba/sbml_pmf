@@ -25,7 +25,7 @@ public class PrimaryModelTest {
     @Test
     public void testConstructors() {
         // Test empty constructor
-        assertNull(new PrimaryModel().src);
+        assertFalse(new PrimaryModel().isSetSrc());
 
         // Test constructor with level and version
         PrimaryModel pm = new PrimaryModel(3, 1);
@@ -33,19 +33,19 @@ public class PrimaryModelTest {
         assertTrue(1 == pm.getVersion());
 
         // Test copy constructor
-        pm.src = "model1.sbml";
-        assertEquals("model1.sbml", new PrimaryModel(pm).src);
+        pm.setSrc("model1.sbml");
+        assertEquals("model1.sbml", new PrimaryModel(pm).getSrc());
     }
 
     @Test
     public void testClone() {
         PrimaryModel pm = new PrimaryModel(3, 1);
-        pm.src = "model1.sbml";
+        pm.setSrc("model1.sbml");
         pm = pm.clone();
 
         assertTrue(3 == pm.getLevel());
         assertTrue(1 == pm.getVersion());
-        assertEquals("model1.sbml", pm.src);
+        assertEquals("model1.sbml", pm.getSrc());
     }
 
     /**
@@ -55,7 +55,7 @@ public class PrimaryModelTest {
     public void testReadAttribute() {
         PrimaryModel pm = new PrimaryModel();
         assertTrue(pm.readAttribute("src", "pmf", "model1.sbml"));
-        assertEquals("model1.sbml", pm.src);
+        assertEquals("model1.sbml", pm.getSrc());
 
         assertFalse(pm.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }
@@ -71,7 +71,7 @@ public class PrimaryModelTest {
         assertTrue(pm.writeXMLAttributes().isEmpty());
 
         // test attributes with filled PrimaryModel
-        pm.src = "model1.sbml";
+        pm.setSrc("model1.sbml");
         Map<String, String> expectedAttributes = Collections.singletonMap("src", "model1.sbml");
         assertEquals(expectedAttributes, pm.writeXMLAttributes());
     }
@@ -87,7 +87,7 @@ public class PrimaryModelTest {
         assertEquals("primaryModel [src=\"\"]", pm.toString());
 
         // Test with filled PrimaryModel
-        pm.src = "model1.sbml";
+        pm.setSrc("model1.sbml");
         assertEquals("primaryModel [src=\"model1.sbml\"]", pm.toString());
     }
 }

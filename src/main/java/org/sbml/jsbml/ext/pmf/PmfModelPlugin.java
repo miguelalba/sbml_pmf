@@ -471,7 +471,7 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      */
     public PrimaryModel createPrimaryModel(String src) {
         PrimaryModel primaryModel = new PrimaryModel(getLevel(), getVersion());
-        primaryModel.src = src;
+        primaryModel.setSrc(src);
         addPrimaryModel(primaryModel);
         return primaryModel;
     }

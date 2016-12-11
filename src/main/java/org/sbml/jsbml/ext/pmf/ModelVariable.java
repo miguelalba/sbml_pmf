@@ -144,5 +144,4 @@ public class ModelVariable extends AbstractSBase {
         }
         return false;
     }
-
 }
