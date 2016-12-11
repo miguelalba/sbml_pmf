@@ -160,7 +160,7 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      */
     public ModelVariable createModelVariable(String name) {
         ModelVariable mv = new ModelVariable(getLevel(), getVersion());
-        mv.name = name;
+        mv.setName(name);
         addModelVariable(mv);
         return mv;
     }
@@ -175,8 +175,8 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      */
     public ModelVariable createModelVariable(String name, double value) {
         ModelVariable mv = new ModelVariable(getLevel(), getVersion());
-        mv.name = name;
-        mv.value = value;
+        mv.setName(name);
+        mv.setValue(value);
         addModelVariable(mv);
         return mv;
     }

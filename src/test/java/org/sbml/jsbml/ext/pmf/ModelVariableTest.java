@@ -30,15 +30,16 @@ public class ModelVariableTest {
         ModelVariable mv = new ModelVariable();
 
         // Test empty constructor
-        assertNull(mv.name);
-        assertTrue(Double.isNaN(mv.value));
+        assertFalse(mv.isSetName());
+        assertFalse(mv.isSetValue());
 
         // Test copy constructor
-        mv.name = "Temperature";
-        mv.value = 10.0;
+        mv.setName("Temperature");
+        mv.setValue(10.0);
+
         mv = new ModelVariable(mv);
-        assertEquals("Temperature", mv.name);
-        assertEquals(mv.value, 10.0, 0.0);
+        assertEquals("Temperature", mv.getName());
+        assertEquals(10.0, mv.getValue(), 0.0);
 
         // Test constructor with level and version
         mv = new ModelVariable(3, 1);
@@ -52,12 +53,12 @@ public class ModelVariableTest {
     @Test
     public void testClone() {
         ModelVariable mv = new ModelVariable();
-        mv.name = "h0";
-        mv.value = 7.0;
+        mv.setName("h0");
+        mv.setValue(7.0);
         mv = mv.clone();
 
-        assertEquals(mv.name, "h0");
-        assertEquals(mv.value, 7.0, .0);
+        assertEquals("h0", mv.getName());
+        assertEquals(7.0, mv.getValue(), .0);
     }
 
     /**
@@ -73,15 +74,15 @@ public class ModelVariableTest {
 
         // Parsing an string as the name should return true and set it as name
         assertTrue(mv.readAttribute("name", "pmf", "Temperature"));
-        assertEquals("Temperature", mv.name);
+        assertEquals("Temperature", mv.getName());
 
         // Parsing a non-double as the value attribute should return true and set Double.NaN as value
         assertTrue(mv.readAttribute("value", "pmf", "not a double"));
-        assertTrue(Double.isNaN(mv.value));
+        assertTrue(Double.isNaN(mv.getValue()));
 
         // Parsing a double as the value attribute should return true and set it as value
         assertTrue(mv.readAttribute("value", "pmf", StringTools.toString(10.0)));
-        assertEquals(10.0, mv.value, 0.0);
+        assertEquals(10.0, mv.getValue(), 0.0);
 
         // Parsing an attribute other than name and value should return false
         assertFalse(mv.readAttribute("nonExistentAttribute", "pmf", "asdf"));
@@ -100,8 +101,8 @@ public class ModelVariableTest {
         assertTrue(mv.writeXMLAttributes().isEmpty());
 
         // Test attribute with filled ModelVariable
-        mv.name = "Temperature";
-        mv.value = 10.0;
+        mv.setName("Temperature");
+        mv.setValue(10.0);
 
         Map<String, String> expectedAttributes = new HashMap<>(2);
         expectedAttributes.put("name", "Temperature");
@@ -118,8 +119,8 @@ public class ModelVariableTest {
         ModelVariable mv = new ModelVariable();
         assertEquals("modelVariable [name=\"\" value=\"\"]", mv.toString());
 
-        mv.name = "h0";
-        mv.value = 7.0;
+        mv.setName("h0");
+        mv.setValue(7.0);
         assertEquals("modelVariable [name=\"h0\" value=\"7.0\"]", mv.toString());
     }
 }
