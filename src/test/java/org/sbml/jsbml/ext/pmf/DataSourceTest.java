@@ -23,19 +23,20 @@ public class DataSourceTest {
      */
     @Test
     public void testConstructors() {
-        // Empty constructor initializes src to null
+        // Empty constructor
         DataSource ds = new DataSource();
-        assertNull(ds.src);
+        assertFalse(ds.isSetSrc());
 
         // Constructor with level and version
         ds = new DataSource(3, 1);
-        assertNull(ds.src);
+        assertNull(ds.getSrc());
+        assertFalse(ds.isSetSrc());
         assertTrue(3 == ds.getLevel());
         assertTrue(1 == ds.getVersion());
 
         // Test copy constructor
         ds = new DataSource(ds);
-        assertNull(ds.src);
+        assertFalse(ds.isSetSrc());
         assertTrue(3 == ds.getLevel());
         assertTrue(1 == ds.getVersion());
     }
@@ -46,11 +47,11 @@ public class DataSourceTest {
     @Test
     public void testClone() {
         DataSource ds = new DataSource(3, 1);
-        ds.src = "data.numl";
+        ds.setSrc("data.numl");
         ds = ds.clone();
         assertTrue(3 == ds.getLevel());
         assertTrue(1 == ds.getVersion());
-        assertEquals("data.numl", ds.src);
+        assertEquals("data.numl", ds.getSrc());
     }
 
     /**
@@ -61,7 +62,7 @@ public class DataSourceTest {
         // Parsing an string as the src should return true and set it as src
         DataSource dataSource = new DataSource();
         assertTrue(dataSource.readAttribute("src", "pmf", "data.numl"));
-        assertEquals("data.numl", dataSource.src);
+        assertEquals("data.numl", dataSource.getSrc());
 
         // read error: unrecognized attribute name
         assertFalse(dataSource.readAttribute("nonExistentAttribute", "pmf", "asdf"));
@@ -79,7 +80,7 @@ public class DataSourceTest {
         assertTrue(ds.writeXMLAttributes().isEmpty());
 
         // Test attribute with filled DataSource
-        ds.src = "data.numl";
+        ds.setSrc("data.numl");
         Map<String, String> expectedAttributes = Collections.singletonMap("src", "data.numl");
         assertEquals(expectedAttributes, ds.writeXMLAttributes());
     }
@@ -94,7 +95,7 @@ public class DataSourceTest {
         assertEquals("dataSource [src=\"\"]", ds.toString());
 
         // Test with initialized DataSource
-        ds.src = "data.numl";
+        ds.setSrc("data.numl");
         assertEquals("dataSource [src=\"data.numl\"]", ds.toString());
     }
 }

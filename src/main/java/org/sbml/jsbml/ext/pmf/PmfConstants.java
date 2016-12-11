@@ -54,4 +54,6 @@ public class PmfConstants {
     // Attributes
     public static final String name = "name";
     public static final String value = "value";
+
+    public static final String src = "src";
 }

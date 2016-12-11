@@ -317,7 +317,7 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
      */
     public DataSource createDataSource(String src) {
         DataSource dataSource = new DataSource();
-        dataSource.src = src;
+        dataSource.setSrc(src);
         addDataSource(dataSource);
         return dataSource;
     }

@@ -16,9 +16,9 @@ import java.util.Map;
 public class DataSource extends AbstractSBase {
 
     /**
-     * Path to external file with data. Null or empty string if not set.
+     * Path to external file with data.
      */
-    public String src;
+    private String src;
 
     public DataSource() {
         packageName = PmfConstants.shortLabel;
@@ -71,5 +71,30 @@ public class DataSource extends AbstractSBase {
     @Override
     public String toString() {
         return PmfConstants.dataSource + " [src=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
+    }
+
+    // --- src attribute ---
+    public String getSrc() {
+        return isSetSrc() ? src : null;
+    }
+
+    public boolean isSetSrc() {
+        return src != null;
+    }
+
+    public void setSrc(String src) {
+        String oldSrc = this.src;
+        this.src = src;
+        firePropertyChange(PmfConstants.src, oldSrc, this.src);
+    }
+
+    public boolean unsetSrc() {
+        if (isSetSrc()) {
+            String oldSrc = this.src;
+            src = null;
+            firePropertyChange(PmfConstants.src, oldSrc, src);
+            return true;
+        }
+        return false;
     }
 }
