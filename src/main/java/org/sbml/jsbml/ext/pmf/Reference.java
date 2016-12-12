@@ -119,40 +119,40 @@ public class Reference extends AbstractSBase {
     public boolean readAttribute(String attributeName, String prefix, String value) {
         boolean isAttributeRead;
 
-        if (attributeName.equals("AU")) {
+        if (attributeName.equals(Tag.author.value)) {
             author = value;
             isAttributeRead = true;
-        } else if (attributeName.equals("PY")) {
+        } else if (attributeName.equals(Tag.year.value)) {
             year = StringTools.parseSBMLInt(value);
             isAttributeRead = true;
-        } else if (attributeName.equals("TI")) {
+        } else if (attributeName.equals(Tag.title.value)) {
             title = value;
             isAttributeRead = true;
-        } else if (attributeName.equals("AB")) {
+        } else if (attributeName.equals(Tag.abstract_text.value)) {
             abstractText = value;
             isAttributeRead = true;
-        } else if (attributeName.equals("T2")) {
+        } else if (attributeName.equals(Tag.journal.value)) {
             journal = value;
             isAttributeRead = true;
-        } else if (attributeName.equals("VL")) {
+        } else if (attributeName.equals(Tag.volume.value)) {
             volume = value;
             isAttributeRead = true;
-        } else if (attributeName.equals("IS")) {
+        } else if (attributeName.equals(Tag.issue.value)) {
             issue = value;
             isAttributeRead = true;
-        } else if (attributeName.equals("SP")) {
+        } else if (attributeName.equals(Tag.page.value)) {
             page = StringTools.parseSBMLInt(value);
             isAttributeRead = true;
-        } else if (attributeName.equals("LB")) {
+        } else if (attributeName.equals(Tag.approval_mode.value)) {
             approvalMode = StringTools.parseSBMLInt(value);
             isAttributeRead = true;
-        } else if (attributeName.equals("UR")) {
+        } else if (attributeName.equals(Tag.website.value)) {
             website = value;
             isAttributeRead = true;
-        } else if (attributeName.equals("M3")) {
+        } else if (attributeName.equals(Tag.type.value)) {
             type = ReferenceType.valueOf(value);
             isAttributeRead = true;
-        } else if (attributeName.equals("N1")) {
+        } else if (attributeName.equals(Tag.comment.value)) {
             comment = value;
             isAttributeRead = true;
         } else {
@@ -166,30 +166,30 @@ public class Reference extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
 
-        if (author != null && !author.isEmpty())
-            attributes.put("AU", author);
-        if (year != null)
-            attributes.put("PY", StringTools.toString(year));
-        if (title != null && !title.isEmpty())
-            attributes.put("TI", title);
-        if (abstractText != null && !abstractText.isEmpty())
-            attributes.put("AB", abstractText);
-        if (journal != null && !journal.isEmpty())
-            attributes.put("T2", journal);
-        if (volume != null && !volume.isEmpty())
-            attributes.put("VL", volume);
-        if (issue != null && !issue.isEmpty())
-            attributes.put("IS", issue);
-        if (page != null)
-            attributes.put("SP", StringTools.toString(page));
-        if (approvalMode != null)
-            attributes.put("LB", StringTools.toString(approvalMode));
-        if (website != null && !website.isEmpty())
-            attributes.put("UR", website);
-        if (type != null)
-            attributes.put("M3", type.name());
-        if (comment != null && !comment.isEmpty())
-            attributes.put("N1", comment);
+        if (isSetAuthor())
+            attributes.put(Tag.author.value, author);
+        if (isSetYear())
+            attributes.put(Tag.year.value, StringTools.toString(year));
+        if (isSetTitle())
+            attributes.put(Tag.title.value, title);
+        if (isSetAbstractText())
+            attributes.put(Tag.abstract_text.value, abstractText);
+        if (isSetJournal())
+            attributes.put(Tag.journal.value, journal);
+        if (isSetVolume())
+            attributes.put(Tag.volume.value, volume);
+        if (isSetIssue())
+            attributes.put(Tag.issue.value, issue);
+        if (isSetPage())
+            attributes.put(Tag.page.value, StringTools.toString(page));
+        if (isSetApprovalMode())
+            attributes.put(Tag.approval_mode.value, StringTools.toString(approvalMode));
+        if (isSetWebsite())
+            attributes.put(Tag.website.value, website);
+        if (isSetType())
+            attributes.put(Tag.type.value, type.name());
+        if (isSetComment())
+            attributes.put(Tag.comment.value, comment);
 
         return attributes;
     }
