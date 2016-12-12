@@ -77,7 +77,7 @@ public class Test {
         rulePlugin.setMetaData(ruleMetaData);
 
         Reference ref = new Reference();
-        ref.title = "Baranyi latest model";
+        ref.setTitle("Baranyi latest model");
         rulePlugin.addReference(ref);
 
         // Create string with document and print it

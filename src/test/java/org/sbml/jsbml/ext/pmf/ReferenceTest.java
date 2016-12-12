@@ -47,92 +47,96 @@ public class ReferenceTest {
     public void testConstructors() {
         // Test empty constructor
         Reference ref = new Reference();
-        assertNull(ref.author);
-        assertNull(ref.year);
-        assertNull(ref.title);
-        assertNull(ref.abstractText);
-        assertNull(ref.journal);
-        assertNull(ref.volume);
-        assertNull(ref.issue);
-        assertNull(ref.page);
-        assertNull(ref.approvalMode);
-        assertNull(ref.website);
-        assertNull(ref.type);
-        assertNull(ref.comment);
+        assertFalse(ref.isSetAuthor());
+        assertFalse(ref.isSetYear());
+        assertFalse(ref.isSetTitle());
+        assertFalse(ref.isSetAbstractText());
+        assertFalse(ref.isSetJournal());
+        assertFalse(ref.isSetVolume());
+        assertFalse(ref.isSetIssue());
+        assertFalse(ref.isSetPage());
+        assertFalse(ref.isSetApprovalMode());
+        assertFalse(ref.isSetWebsite());
+        assertFalse(ref.isSetType());
+        assertFalse(ref.isSetComment());
 
         // Test constructor with level and version
         ref = new Reference(3, 1);
-        assertNull(ref.author);
-        assertNull(ref.year);
-        assertNull(ref.title);
-        assertNull(ref.abstractText);
-        assertNull(ref.journal);
-        assertNull(ref.volume);
-        assertNull(ref.issue);
-        assertNull(ref.page);
-        assertNull(ref.approvalMode);
-        assertNull(ref.website);
-        assertNull(ref.type);
-        assertNull(ref.comment);
+        assertTrue(3 == ref.getLevel());
+        assertTrue(1 == ref.getVersion());
+
+        assertFalse(ref.isSetAuthor());
+        assertFalse(ref.isSetYear());
+        assertFalse(ref.isSetTitle());
+        assertFalse(ref.isSetAbstractText());
+        assertFalse(ref.isSetJournal());
+        assertFalse(ref.isSetVolume());
+        assertFalse(ref.isSetIssue());
+        assertFalse(ref.isSetPage());
+        assertFalse(ref.isSetApprovalMode());
+        assertFalse(ref.isSetWebsite());
+        assertFalse(ref.isSetType());
+        assertFalse(ref.isSetComment());
 
         // Test copy constructor
-        ref.author = "Baranyi, J.";
-        ref.year = 1994;
-        ref.title = "A dynamic approach to predicting bacterial growth in food";
-        ref.abstractText = "A new member ...";
-        ref.journal = "International Journal of Food Microbiology";
-        ref.volume = "23";
-        ref.issue = "3";
-        ref.page = 277;
-        ref.approvalMode = 1;
-        ref.website = "http://www.sciencedirect.com/science/article/pii/0168160594901570";
-        ref.type = Reference.ReferenceType.Paper;
-        ref.comment = "improvised comment";
+        ref.setAuthor("Baranyi, J.");
+        ref.setYear(1994);
+        ref.setTitle("A dynamic approach to predicting bacterial growth in food");
+        ref.setAbstractText("A new member ...");
+        ref.setJournal("International Journal of Food Microbiology");
+        ref.setVolume("23");
+        ref.setIssue("3");
+        ref.setPage(277);
+        ref.setApprovalMode(1);
+        ref.setWebsite("http://www.sciencedirect.com/science/article/pii/0168160594901570");
+        ref.setType(Reference.ReferenceType.Paper);
+        ref.setComment("improvised comment");
+
 
         ref = new Reference(ref);
-        assertEquals("Baranyi, J.", ref.author);
-        assertTrue(1994 == ref.year);
-        assertEquals("A dynamic approach to predicting bacterial growth in food", ref.title);
-        assertEquals("A new member ...", ref.abstractText);
-        assertEquals("International Journal of Food Microbiology", ref.journal);
-        assertEquals("23", ref.volume);
-        assertEquals("3", ref.issue);
-        assertTrue(277 == ref.page);
-        assertTrue(1 == ref.approvalMode);
-        assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.website);
-        assertEquals(Reference.ReferenceType.Paper, ref.type);
-        assertEquals("improvised comment", ref.comment);
+        assertEquals("Baranyi, J.", ref.getAuthor());
+        assertTrue(1994 == ref.getYear());
+        assertEquals("A dynamic approach to predicting bacterial growth in food", ref.getTitle());
+        assertEquals("A new member ...", ref.getAbstractText());
+        assertEquals("International Journal of Food Microbiology", ref.getJournal());
+        assertEquals("23", ref.getVolume());
+        assertEquals("3", ref.getIssue());
+        assertTrue(277 == ref.getPage());
+        assertTrue(1 == ref.getApprovalMode());
+        assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.getWebsite());
+        assertEquals(Reference.ReferenceType.Paper, ref.getType());
+        assertEquals("improvised comment", ref.getComment());
     }
 
     @Test
     public void testClone() {
         Reference ref = new Reference();
-        ref.author = "Baranyi, J.";
-        ref.year = 1994;
-        ref.title = "A dynamic approach to predicting bacterial growth in food";
-        ref.abstractText = "A new member ...";
-        ref.journal = "International Journal of Food Microbiology";
-        ref.volume = "23";
-        ref.issue = "3";
-        ref.page = 277;
-        ref.approvalMode = 1;
-        ref.website = "http://www.sciencedirect.com/science/article/pii/0168160594901570";
-        ref.type = Reference.ReferenceType.Paper;
-        ref.comment = "improvised comment";
+        ref.setAuthor("Baranyi, J.");
+        ref.setYear(1994);
+        ref.setTitle("A dynamic approach to predicting bacterial growth in food");
+        ref.setAbstractText("A new member ...");
+        ref.setJournal("International Journal of Food Microbiology");
+        ref.setVolume("23");
+        ref.setIssue("3");
+        ref.setPage(277);
+        ref.setApprovalMode(1);
+        ref.setWebsite("http://www.sciencedirect.com/science/article/pii/0168160594901570");
+        ref.setType(Reference.ReferenceType.Paper);
+        ref.setComment("improvised comment");
 
         ref = ref.clone();
-        assertEquals("Baranyi, J.", ref.author);
-        assertTrue(1994 == ref.year);
-        assertEquals("A dynamic approach to predicting bacterial growth in food", ref.title);
-        assertEquals("A new member ...", ref.abstractText);
-        assertEquals("International Journal of Food Microbiology", ref.journal);
-        assertEquals("23", ref.volume);
-        assertEquals("3", ref.issue);
-        assertTrue(277 == ref.page);
-        assertTrue(1 == ref.approvalMode);
-        assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.website);
-        assertEquals(Reference.ReferenceType.Paper, ref.type);
-        assertEquals("improvised comment", ref.comment);
+        assertEquals("Baranyi, J.", ref.getAuthor());
+        assertTrue(1994 == ref.getYear());
+        assertEquals("A dynamic approach to predicting bacterial growth in food", ref.getTitle());
+        assertEquals("A new member ...", ref.getAbstractText());
+        assertEquals("International Journal of Food Microbiology", ref.getJournal());
+        assertEquals("23", ref.getVolume());
+        assertEquals("3", ref.getIssue());
+        assertTrue(277 == ref.getPage());
+        assertTrue(1 == ref.getApprovalMode());
+        assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.getWebsite());
+        assertEquals(Reference.ReferenceType.Paper, ref.getType());
+        assertEquals("improvised comment", ref.getComment());
     }
 
     /**
@@ -148,72 +152,72 @@ public class ReferenceTest {
 
         // Parsing an string for the author attribute should return true and set it as author
         assertTrue(ref.readAttribute("AU", "pmf", "Baranyi, J."));
-        assertEquals("Baranyi, J.", ref.author);
+        assertEquals("Baranyi, J.", ref.getAuthor());
 
         // Parsing a non-integer for the year attribute should return true and set 0 as year
         assertTrue(ref.readAttribute("PY", "pmf", "0.5"));
-        assertTrue(ref.year == 0);
+        assertTrue(ref.getYear() == 0);
 
         assertTrue(ref.readAttribute("PY", "pmf", "not an integer"));
-        assertTrue(ref.year == 0);
+        assertTrue(ref.getYear() == 0);
 
         // Parsing an integer for the year attribute should return true and set it as year
         assertTrue(ref.readAttribute("PY", "pmf", "1994"));
-        assertTrue(1994 == ref.year);
+        assertTrue(1994 == ref.getYear());
 
         // Parsing an string for the title attribute should return true and set it as title
         assertTrue(ref.readAttribute("TI", "pmf", "A dynamic approach to predicting bacterial growth in food"));
-        assertEquals("A dynamic approach to predicting bacterial growth in food", ref.title);
+        assertEquals("A dynamic approach to predicting bacterial growth in food", ref.getTitle());
 
         // Parsing an string for the abstract attribute should return true and set it as abstract
         assertTrue(ref.readAttribute("AB", "pmf", "A new member ..."));
-        assertEquals("A new member ...", ref.abstractText);
+        assertEquals("A new member ...", ref.getAbstractText());
 
         // Parsing an string for the journal attribute should return true and set it as journal
         assertTrue(ref.readAttribute("T2", "pmf", "International Journal of Food Microbiology"));
-        assertEquals("International Journal of Food Microbiology", ref.journal);
+        assertEquals("International Journal of Food Microbiology", ref.getJournal());
 
         // Parsing an string for the volume attribute should return true and set it as volume
         assertTrue(ref.readAttribute("VL", "pmf", "23"));
-        assertEquals("23", ref.volume);
+        assertEquals("23", ref.getVolume());
 
         // Parsing an string for the issue attribute should return true and set it as issue
         assertTrue(ref.readAttribute("IS", "pmf", "3"));
-        assertEquals("3", ref.issue);
+        assertEquals("3", ref.getIssue());
 
         // Parsing a non-integer for the page attribute should return true and set 0 as page
         assertTrue(ref.readAttribute("SP", "pmf", "5.0"));
-        assertTrue(ref.page == 0);
+        assertTrue(ref.getPage() == 0);
 
         assertTrue(ref.readAttribute("SP", "pmf", "not an integer"));
-        assertTrue(ref.page == 0);
+        assertTrue(ref.getPage() == 0);
 
         // Parsing an integer for the page attribute should return true and set it as page
         assertTrue(ref.readAttribute("SP", "pmf", "277"));
-        assertTrue(ref.page == 277);
+        assertTrue(ref.getPage() == 277);
 
         // Parsing a non-integer for the approvalMode attribute should return true and set 0 as approvalMode
         assertTrue(ref.readAttribute("LB", "pmf", "0.5"));
-        assertTrue(ref.approvalMode == 0);
+        assertTrue(ref.getApprovalMode() == 0);
 
         assertTrue(ref.readAttribute("LB", "pmf", "not an integer"));
-        assertTrue(ref.approvalMode == 0);
+        assertTrue(ref.getApprovalMode() == 0);
 
         // Parsing an integer for the approvalMode attribute should return true and set 1 as approvalMode
         assertTrue(ref.readAttribute("LB", "pmf", "1"));
-        assertTrue(1 == ref.approvalMode);
+        assertTrue(1 == ref.getApprovalMode());
 
         // Parsing an string for the website attribute should return true and set it as website
         assertTrue(ref.readAttribute("UR", "pmf", "http://www.sciencedirect.com/science/article/pii/0168160594901570"));
-        assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.website);
+        assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.getWebsite());
 
         // Parsing an string for the type attribute should return true and set it as type
         assertTrue(ref.readAttribute("M3", "pmf", Reference.ReferenceType.Paper.name()));
-        assertEquals(Reference.ReferenceType.Paper, ref.type);
+        assertEquals(Reference.ReferenceType.Paper, ref.getType());
 
         // Parsing an string for the comment attribute should return true and set it as comment
         assertTrue(ref.readAttribute("N1", "pmf", "improvised comment"));
-        assertEquals("improvised comment", ref.comment);
+        assertEquals("improvised comment", ref.getComment());
 
         // Parsing other attribute should return false
         assertFalse(ref.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
@@ -230,32 +234,32 @@ public class ReferenceTest {
         assertTrue(ref.writeXMLAttributes().isEmpty());
 
         // test attributes with filled Reference
-        ref.author = "Baranyi, J.";
-        ref.year = 1994;
-        ref.title = "A dynamic approach to predicting bacterial growth in food";
-        ref.abstractText = "A new member ...";
-        ref.journal = "International Journal of Food Microbiology";
-        ref.volume = "23";
-        ref.issue = "3";
-        ref.page = 277;
-        ref.approvalMode = 1;
-        ref.website = "http://www.sciencedirect.com/science/article/pii/0168160594901570";
-        ref.type = Reference.ReferenceType.Paper;
-        ref.comment = "improvised comment";
+        ref.setAuthor("Baranyi, J.");
+        ref.setYear(1994);
+        ref.setTitle("A dynamicr approach to predicting bacterial growth in food");
+        ref.setAbstractText("A new member ...");
+        ref.setJournal("International Journal of Food Microbiology");
+        ref.setVolume("23");
+        ref.setIssue("3");
+        ref.setPage(277);
+        ref.setApprovalMode(1);
+        ref.setWebsite("http://www.sciencedirect.com/science/article/pii/0168160594901570");
+        ref.setType(Reference.ReferenceType.Paper);
+        ref.setComment("improvised comment");
 
         Map<String, String> expectedAttributes = new HashMap<>();
-        expectedAttributes.put("AU", ref.author);
-        expectedAttributes.put("PY", Integer.toString(ref.year));
-        expectedAttributes.put("TI", ref.title);
-        expectedAttributes.put("AB", ref.abstractText);
-        expectedAttributes.put("T2", ref.journal);
-        expectedAttributes.put("VL", ref.volume);
-        expectedAttributes.put("IS", ref.issue);
-        expectedAttributes.put("SP", Integer.toString(ref.page));
-        expectedAttributes.put("LB", Integer.toString(ref.approvalMode));
-        expectedAttributes.put("UR", ref.website);
-        expectedAttributes.put("M3", ref.type.name());
-        expectedAttributes.put("N1", ref.comment);
+        expectedAttributes.put("AU", ref.getAuthor());
+        expectedAttributes.put("PY", Integer.toString(ref.getYear()));
+        expectedAttributes.put("TI", ref.getTitle());
+        expectedAttributes.put("AB", ref.getAbstractText());
+        expectedAttributes.put("T2", ref.getJournal());
+        expectedAttributes.put("VL", ref.getVolume());
+        expectedAttributes.put("IS", ref.getIssue());
+        expectedAttributes.put("SP", Integer.toString(ref.getPage()));
+        expectedAttributes.put("LB", Integer.toString(ref.getApprovalMode()));
+        expectedAttributes.put("UR", ref.getWebsite());
+        expectedAttributes.put("M3", ref.getType().name());
+        expectedAttributes.put("N1", ref.getComment());
 
         assertEquals(expectedAttributes, ref.writeXMLAttributes());
     }
@@ -263,9 +267,9 @@ public class ReferenceTest {
     @Test
     public void test2String() {
         Reference ref = new Reference();
-        ref.author = "Baranyi";
-        ref.year = 1994;
-        ref.title = "A dynamic approach...";
+        ref.setAuthor("Baranyi");
+        ref.setYear(1994);
+        ref.setTitle("A dynamic approach...");
 
         String expected = "Baranyi_1994_A dynamic approach...";
         assertEquals(expected, ref.toString());
