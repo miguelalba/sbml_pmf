@@ -5,6 +5,7 @@ import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -139,5 +140,21 @@ public class Correlation extends AbstractSBase {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final Correlation other = (Correlation) object;
+        return Objects.equals(name, other.name) && Objects.equals(value, other.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, value);
     }
 }

@@ -4,6 +4,7 @@ import org.sbml.jsbml.AbstractSBase;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -123,5 +124,23 @@ public class ParameterMetaData extends AbstractSBase {
                 "\" description=\"" + (description == null || description.isEmpty() ? "" : description) +
                 "\" min=\"" + (Double.isNaN(min) ? "" : min) +
                 "\" max=\"" + (Double.isNaN(max) ? "" : max) + "\"]";
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final ParameterMetaData other = (ParameterMetaData) object;
+        return Objects.equals(p, other.p) && Objects.equals(t, other.t) && Objects.equals(error, other.error) &&
+                Objects.equals(description, other.description) && Objects.equals(min, other.min) &&
+                Objects.equals(max, other.max);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(p, t, error, description, min, max);
     }
 }

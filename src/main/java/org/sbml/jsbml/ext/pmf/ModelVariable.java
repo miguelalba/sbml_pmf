@@ -5,6 +5,7 @@ import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -143,5 +144,21 @@ public class ModelVariable extends AbstractSBase {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final ModelVariable other = (ModelVariable) object;
+        return Objects.equals(name, other.name) && Objects.equals(value, other.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, value);
     }
 }

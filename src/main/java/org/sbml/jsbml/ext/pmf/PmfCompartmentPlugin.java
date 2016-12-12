@@ -5,6 +5,7 @@ import org.sbml.jsbml.ext.AbstractSBasePlugin;
 
 import javax.swing.tree.TreeNode;
 import java.text.MessageFormat;
+import java.util.Objects;
 
 /**
  * @author Miguel Alba
@@ -106,5 +107,21 @@ public class PmfCompartmentPlugin extends AbstractSBasePlugin {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final PmfCompartmentPlugin other = (PmfCompartmentPlugin) object;
+        return Objects.equals(metaData, other.metaData);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(metaData);
     }
 }

@@ -4,6 +4,7 @@ import org.sbml.jsbml.AbstractSBase;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -94,4 +95,19 @@ public class CompartmentMetaData extends AbstractSBase {
         return sb;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final CompartmentMetaData other = (CompartmentMetaData) object;
+        return Objects.equals(source, other.source) && Objects.equals(detail, other.detail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(source, detail);
+    }
 }

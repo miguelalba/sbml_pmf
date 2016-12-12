@@ -6,6 +6,7 @@ import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.ext.AbstractSBasePlugin;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 /**
  * @author Miguel Alba
@@ -569,5 +570,23 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final PmfModelPlugin other = (PmfModelPlugin) object;
+        return Objects.equals(listOfModelVariables, other.listOfModelVariables) &&
+                Objects.equals(listOfDataSources, other.listOfDataSources) &&
+                Objects.equals(listOfPrimaryModels, other.listOfPrimaryModels);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(listOfModelVariables, listOfDataSources, listOfPrimaryModels);
     }
 }

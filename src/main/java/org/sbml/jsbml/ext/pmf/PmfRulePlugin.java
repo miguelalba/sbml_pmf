@@ -6,6 +6,7 @@ import org.sbml.jsbml.ext.AbstractSBasePlugin;
 
 import javax.swing.tree.TreeNode;
 import java.text.MessageFormat;
+import java.util.Objects;
 
 /**
  * Created by de on 12.09.2016.
@@ -179,5 +180,21 @@ public class PmfRulePlugin extends AbstractSBasePlugin {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final PmfRulePlugin other = (PmfRulePlugin) object;
+        return Objects.equals(metaData, other.metaData) && Objects.equals(listOfReferences, other.listOfReferences);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(metaData, listOfReferences);
     }
 }

@@ -3,11 +3,13 @@ package org.sbml.jsbml.ext.pmf;
 import org.sbml.jsbml.AbstractSBase;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
  * Example:
  * <code>&lt;speciesMetaData source="007" detail="Salmonella spec." description="description" /&gt;</code>
+ *
  * @author Miguel Alba
  */
 public class SpeciesMetaData extends AbstractSBase {
@@ -77,5 +79,22 @@ public class SpeciesMetaData extends AbstractSBase {
                 " [source=\"" + (source == null || source.isEmpty() ? "" : source) +
                 "\" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) +
                 "\" description=\"" + (description == null || description.isEmpty() ? "" : description) + "\"]";
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final SpeciesMetaData other = (SpeciesMetaData) object;
+        return Objects.equals(source, other.source) && Objects.equals(detail, other.detail) &&
+                Objects.equals(description, other.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(source, detail, description);
     }
 }

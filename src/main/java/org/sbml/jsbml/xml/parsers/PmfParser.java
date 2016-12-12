@@ -6,7 +6,6 @@ import org.sbml.jsbml.*;
 import org.sbml.jsbml.ext.SBasePlugin;
 import org.sbml.jsbml.ext.pmf.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,51 +18,6 @@ public class PmfParser extends AbstractReaderWriter implements PackageParser {
      * A {@link Logger} for this class.
      */
     private static final transient Logger logger = Logger.getLogger(PmfParser.class);
-
-    /*
-     * (non-Javadoc)
-     * @see org.sbml.jsbml.xml.WritingParser#getListOfSBMLElementsToWrite(Object sbase)
-     */
-    @Override
-    public List<Object> getListOfSBMLElementsToWrite(Object sbase) {
-        if (logger.isDebugEnabled()) {
-            logger.debug(
-                    "getListOfSBMLElementsToWrite: " + sbase.getClass().getCanonicalName()
-            );
-        }
-
-        List<Object> listOfElementsToWrite = new ArrayList<Object>();
-
-        if (sbase instanceof Compartment) {
-            SBasePlugin plugin = ((Compartment) sbase).getExtension(getNamespaceURI());
-            if (plugin != null) {
-                listOfElementsToWrite = super.getListOfSBMLElementsToWrite(plugin);
-            }
-        } else if (sbase instanceof Model) {
-            SBasePlugin plugin = ((Model) sbase).getExtension(getNamespaceURI());
-            if (plugin != null) {
-                listOfElementsToWrite = super.getListOfSBMLElementsToWrite(plugin);
-            }
-        } else if (sbase instanceof Parameter) {
-            SBasePlugin plugin = ((Parameter) sbase).getExtension(getNamespaceURI());
-            if (plugin != null) {
-                listOfElementsToWrite = super.getListOfSBMLElementsToWrite(plugin);
-            }
-        } else if (sbase instanceof Rule) {
-            SBasePlugin plugin = ((Rule) sbase).getExtension(getNamespaceURI());
-            if (plugin != null) {
-                listOfElementsToWrite = super.getListOfSBMLElementsToWrite(plugin);
-            }
-        } else if (sbase instanceof Species) {
-            SBasePlugin plugin = ((Species) sbase).getExtension(getNamespaceURI());
-            if (plugin != null) {
-                listOfElementsToWrite = super.getListOfSBMLElementsToWrite(plugin);
-            }
-        } else {
-            listOfElementsToWrite = super.getListOfSBMLElementsToWrite(sbase);
-        }
-        return listOfElementsToWrite;
-    }
 
     /*
      * (non-Javadoc)

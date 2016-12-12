@@ -5,6 +5,7 @@ import org.sbml.jsbml.Species;
 import org.sbml.jsbml.ext.AbstractSBasePlugin;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 /**
  * Created by de on 12.09.2016.
@@ -119,5 +120,21 @@ public class PmfSpeciesPlugin extends AbstractSBasePlugin {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final PmfSpeciesPlugin other = (PmfSpeciesPlugin) object;
+        return Objects.equals(metaData, other.metaData);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(metaData);
     }
 }

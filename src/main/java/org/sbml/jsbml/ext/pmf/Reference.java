@@ -5,6 +5,7 @@ import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -509,5 +510,33 @@ public class Reference extends AbstractSBase {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final Reference other = (Reference) object;
+        return Objects.equals(author, other.author) &&
+                Objects.equals(year, other.year) &&
+                Objects.equals(title, other.title) &&
+                Objects.equals(abstractText, other.abstractText) &&
+                Objects.equals(journal, other.journal) &&
+                Objects.equals(volume, other.volume) &&
+                Objects.equals(issue, other.issue) &&
+                Objects.equals(page, other.page) &&
+                Objects.equals(approvalMode, other.approvalMode) &&
+                Objects.equals(website, other.website) &&
+                Objects.equals(type, other.type) &&
+                Objects.equals(comment, other.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(author, year, title, abstractText, journal, volume, issue, page, approvalMode, website,
+                type, comment);
     }
 }

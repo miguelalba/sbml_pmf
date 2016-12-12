@@ -4,6 +4,7 @@ import org.sbml.jsbml.AbstractSBase;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -174,5 +175,17 @@ public class RuleMetaData extends AbstractSBase {
                 " [formulaName=\"" + (formulaName == null || formulaName.isEmpty() ? "" : formulaName) + "\"" +
                 " ruleClass=\"" + (modelClass == null ? "" : modelClass) + "\"" +
                 " pmmLabID=\"" + (pmmLabId == null ? "" : pmmLabId) + "\"]";
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+
+        final RuleMetaData other = (RuleMetaData) object;
+        return Objects.equals(formulaName, other.formulaName) && Objects.equals(pmmLabId, other.pmmLabId) &&
+                Objects.equals(modelClass, other.modelClass);
     }
 }
