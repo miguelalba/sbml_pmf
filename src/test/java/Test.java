@@ -30,8 +30,8 @@ public class Test {
         PmfCompartmentPlugin compartmentPlugin = (PmfCompartmentPlugin) compartment.createPlugin(PmfConstants
                 .shortLabel);
         CompartmentMetaData compartmentMetaData = new CompartmentMetaData();
-        compartmentMetaData.source = 36;
-        compartmentMetaData.detail = "broth";
+        compartmentMetaData.setSource(36);
+        compartmentMetaData.setDetail("broth");
         compartmentPlugin.setMetaData(compartmentMetaData);
 
         // Test PmfSpeciesPlugin: source, detail and description
@@ -42,9 +42,9 @@ public class Test {
         species.setConstant(false);
         PmfSpeciesPlugin speciesPlugin = (PmfSpeciesPlugin) species.createPlugin(PmfConstants.shortLabel);
         SpeciesMetaData speciesMetaData = new SpeciesMetaData();
-        speciesMetaData.source = "http://identifiers.org/ncim/C0036111";
-        speciesMetaData.detail = "Salmonella spec";
-        speciesMetaData.description = "bacterial population at time t - ln()";
+        speciesMetaData.setSource("http://identifiers.org/ncim/C0036111");
+        speciesMetaData.setDetail("Salmonella spec");
+        speciesMetaData.setDescription("bacterial population at time t - ln()");
         speciesPlugin.setMetaData(speciesMetaData);
 
         // Test PmfParameterPLugin
@@ -54,12 +54,12 @@ public class Test {
         PmfParameterPlugin parameterPlugin = (PmfParameterPlugin) p.createPlugin(PmfConstants.shortLabel);
 
         ParameterMetaData paramMetaData = new ParameterMetaData();
-        paramMetaData.p = 0.1;
-        paramMetaData.t = 0.5;
-        paramMetaData.error = 0.5;
-        paramMetaData.description = "some description";
-        paramMetaData.min = 0.1;
-        paramMetaData.max = 0.9;
+        paramMetaData.setP(0.1);
+        paramMetaData.setT(0.5);
+        paramMetaData.setError(0.5);
+        paramMetaData.setDescription("some description");
+        paramMetaData.setMin(0.1);
+        paramMetaData.setMax(0.9);
         parameterPlugin.setMetaData(paramMetaData);
         parameterPlugin.createCorrelation("a", 1.0);
         parameterPlugin.createCorrelation("b", 2.0);
@@ -71,9 +71,10 @@ public class Test {
         PmfRulePlugin rulePlugin = (PmfRulePlugin) rule.createPlugin(PmfConstants.shortLabel);
 
         RuleMetaData ruleMetaData = new RuleMetaData();
-        ruleMetaData.formulaName = "2 plus 2";
-        ruleMetaData.pmmLabId = 1;
-        ruleMetaData.modelClass = RuleMetaData.ModelClass.GROWTH;
+        ruleMetaData.setFormulaName("2 plus 2");
+        ruleMetaData.setPmmLabId(1);
+        ruleMetaData.setModelClass(RuleMetaData.ModelClass.GROWTH);
+
         rulePlugin.setMetaData(ruleMetaData);
 
         Reference ref = new Reference();

@@ -14,9 +14,9 @@ import java.util.TreeMap;
  */
 public class SpeciesMetaData extends AbstractSBase {
 
-    public String source;
-    public String detail;
-    public String description;
+    private String source;
+    private String detail;
+    private String description;
 
     public SpeciesMetaData() {
         initDefaults();
@@ -96,5 +96,80 @@ public class SpeciesMetaData extends AbstractSBase {
     @Override
     public int hashCode() {
         return Objects.hash(source, detail, description);
+    }
+
+    // --- source attribute ---
+    public String getSource() {
+        return isSetSource() ? source : null;
+    }
+
+    public boolean isSetSource() {
+        return source != null;
+    }
+
+    public void setSource(String source) {
+        String oldSource = this.source;
+        this.source = source;
+        firePropertyChange("source", oldSource, source);
+    }
+
+    public boolean unsetSource() {
+        if (isSetSource()) {
+            String oldSource = source;
+            source = null;
+            firePropertyChange("source", oldSource, source);
+            return true;
+        }
+        return false;
+    }
+
+    // --- detail attribute ---
+    public String getDetail() {
+        return isSetDetail() ? detail : null;
+    }
+
+    public boolean isSetDetail() {
+        return detail != null;
+    }
+
+    public void setDetail(String detail) {
+        String oldDetail = this.detail;
+        this.detail = detail;
+        firePropertyChange("detail", oldDetail, detail);
+    }
+
+    public boolean unsetDetail() {
+        if (isSetDetail()) {
+            String oldDetail = detail;
+            detail = null;
+            firePropertyChange("detail", oldDetail, detail);
+            return true;
+        }
+        return false;
+    }
+
+    // --- description attribute ---
+    public String getDescription() {
+        return isSetDescription() ? description : null;
+    }
+
+    public boolean isSetDescription() {
+        return description != null;
+    }
+
+    public void setDescription(String description) {
+        String oldDescription = this.description;
+        this.description = description;
+        firePropertyChange("description", oldDescription, description);
+    }
+
+    public boolean unsetDescription() {
+        if (isSetDescription()) {
+            String oldDescription = description;
+            description = null;
+            firePropertyChange("description", oldDescription, description);
+            return true;
+        }
+        return false;
     }
 }

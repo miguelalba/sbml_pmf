@@ -1,14 +1,12 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.junit.Test;
-import org.sbml.jsbml.ext.pmf.SpeciesMetaData;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -28,32 +26,32 @@ public class SpeciesMetaDataTest {
         SpeciesMetaData metaData = new SpeciesMetaData();
 
         // Empty constructor initialize source, detail and description with null
-        assertNull(metaData.source);
-        assertNull(metaData.detail);
-        assertNull(metaData.description);
+        assertFalse(metaData.isSetSource());
+        assertFalse(metaData.isSetDetail());
+        assertFalse(metaData.isSetDescription());
 
         // Copy constructor
-        metaData.source = "007";
-        metaData.detail = "Salmonella spec.";
-        metaData.description = "description";
+        metaData.setSource("007");
+        metaData.setDetail("Salmonella spec.");
+        metaData.setDescription("description");
         metaData = new SpeciesMetaData(metaData);
 
-        assertEquals("007", metaData.source);
-        assertEquals("Salmonella spec.", metaData.detail);
-        assertEquals("description", metaData.description);
+        assertEquals("007", metaData.getSource());
+        assertEquals("Salmonella spec.", metaData.getDetail());
+        assertEquals("description", metaData.getDescription());
     }
 
     @Test
     public void testClone() {
         SpeciesMetaData metaData = new SpeciesMetaData();
-        metaData.source = "007";
-        metaData.detail = "Salmonella spec.";
-        metaData.description = "description";
+        metaData.setSource("007");
+        metaData.setDetail("Salmonella spec.");
+        metaData.setDescription("description");
         metaData = metaData.clone();
 
-        assertEquals("007", metaData.source);
-        assertEquals("Salmonella spec.", metaData.detail);
-        assertEquals("description", metaData.description);
+        assertEquals("007", metaData.getSource());
+        assertEquals("Salmonella spec.", metaData.getDetail());
+        assertEquals("description", metaData.getDescription());
     }
 
     @Test
@@ -68,9 +66,9 @@ public class SpeciesMetaDataTest {
         expectedAttributes.put("description", "description");
 
         SpeciesMetaData metaData = new SpeciesMetaData();
-        metaData.source = "007";
-        metaData.detail = "Salmonella spec.";
-        metaData.description = "description";
+        metaData.setSource("007");
+        metaData.setDetail("Salmonella spec.");
+        metaData.setDescription("description");
         assertEquals(expectedAttributes, metaData.writeXMLAttributes());
     }
 
@@ -80,15 +78,15 @@ public class SpeciesMetaDataTest {
 
         // Parsing an string as the source attribute should return true and set it as source
         assertTrue(metadata.readAttribute("source", "pmf", "007"));
-        assertEquals("007", metadata.source);
+        assertEquals("007", metadata.getSource());
 
         // Parsing an string as the detail attribute should return true and set it as detail
         assertTrue(metadata.readAttribute("detail", "pmf", "Salmonella spec."));
-        assertEquals("Salmonella spec.", metadata.detail);
+        assertEquals("Salmonella spec.", metadata.getDetail());
 
         // Parsing an string as the description attribute should return true and set it as description
         assertTrue(metadata.readAttribute("description", "pmf", "description"));
-        assertEquals("description", metadata.description);
+        assertEquals("description", metadata.getDescription());
 
         // Parsing an attribute other than name and value should return false
         assertFalse(metadata.readAttribute("nonExistentAttribute", "pmf", "asdf"));
@@ -105,9 +103,9 @@ public class SpeciesMetaDataTest {
         assertEquals("speciesMetaData [source=\"\" detail=\"\" description=\"\"]", metaData
                 .toString());
 
-        metaData.source = "007";
-        metaData.detail = "Salmonella spec.";
-        metaData.description = "description";
+        metaData.setSource("007");
+        metaData.setDetail("Salmonella spec.");
+        metaData.setDescription("description");
         assertEquals("speciesMetaData [source=\"007\" detail=\"Salmonella spec.\" description=\"description\"]",
                 metaData.toString());
     }

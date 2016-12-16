@@ -3,6 +3,7 @@ package org.sbml.jsbml.ext.pmf;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
@@ -29,22 +30,22 @@ public class CompartmentMetaDataTest {
     public void testConstructors() {
         // Empty constructor initializes source and detail to null
         CompartmentMetaData metaData = new CompartmentMetaData();
-        assertNull(metaData.source);
-        assertNull(metaData.detail);
+        assertFalse(metaData.isSetSource());
+        assertFalse(metaData.isSetDetail());
 
         // Test constructor with level and version
         metaData = new CompartmentMetaData(3, 1);
-        assertNull(metaData.source);
-        assertNull(metaData.detail);
         assertTrue(3 == metaData.getLevel());
         assertTrue(1 == metaData.getVersion());
+        assertFalse(metaData.isSetSource());
+        assertFalse(metaData.isSetDetail());
 
         // Test copy constructor
-        metaData.source = 7;
-        metaData.detail = "some details";
+        metaData.setSource(7);
+        metaData.setDetail("some details");
         CompartmentMetaData copy = new CompartmentMetaData(metaData);
-        assertTrue(7 == copy.source);
-        assertEquals("some details", copy.detail);
+        assertTrue(7 == copy.getSource());
+        assertEquals("some details", copy.getDetail());
     }
 
     /**
@@ -53,11 +54,11 @@ public class CompartmentMetaDataTest {
     @Test
     public void testClone() {
         CompartmentMetaData metaData = new CompartmentMetaData();
-        metaData.source = 7;
-        metaData.detail = "some details";
+        metaData.setSource(7);
+        metaData.setDetail("some details");
         CompartmentMetaData clone = metaData.clone();
-        assertTrue(7 == clone.source);
-        assertEquals("some details", clone.detail);
+        assertTrue(7 == clone.getSource());
+        assertEquals("some details", clone.getDetail());
     }
 
     /**
@@ -72,8 +73,8 @@ public class CompartmentMetaDataTest {
         assertTrue(metaData.writeXMLAttributes().isEmpty());
 
         // Test attribute with filled meta data
-        metaData.source = 7;
-        metaData.detail = "some details";
+        metaData.setSource(7);
+        metaData.setDetail("some details");
 
         Map<String, String> expectedAttributes = new HashMap<String, String>(2);
         expectedAttributes.put("source", "7");
@@ -95,20 +96,56 @@ public class CompartmentMetaDataTest {
 
         // Parsing an integer as the source attribute should return true and set this integer as source
         assertTrue(metaData.readAttribute("source", "pmf", "7"));
-        assertTrue(7 == metaData.source);
+        assertTrue(7 == metaData.getSource());
 
         // Parsing a non-integer as the source attribute should return true and set 0 as source
         assertTrue(metaData.readAttribute("source", "pmf", "not-an-integer"));
-        assertTrue(0 == metaData.source);
+        assertTrue(0 == metaData.getSource());
 
         // Parsing an string as the detail attribute should return true and set it as detail
         assertTrue(metaData.readAttribute("detail", "pmf", "some details"));
-        assertEquals("some details", metaData.detail);
+        assertEquals("some details", metaData.getDetail());
 
         // Parsing an attribute other than source and detail should return false
         assertFalse(metaData.readAttribute("someNonExistentAttribute", "pmf", "asdf"));
 
         logger.setLevel(defaultLevel);
+    }
+
+    @Test
+    public void testSource() {
+        CompartmentMetaData metaData = new CompartmentMetaData();
+
+        // Test without source
+        assertFalse(metaData.isSetSource());
+        try {
+            metaData.getSource();
+            fail();
+        } catch (PropertyUndefinedError e) { }
+        assertFalse(metaData.unsetSource());
+
+        // Test with source
+        metaData.setSource(7);
+
+        assertTrue(metaData.isSetSource());
+        assertTrue(7 == metaData.getSource());
+        assertTrue(metaData.unsetSource());
+    }
+
+    @Test
+    public void testDetail() {
+        CompartmentMetaData metaData = new CompartmentMetaData();
+
+        // Test without detail
+        assertFalse(metaData.isSetDetail());
+        assertNull(metaData.getDetail());
+        assertFalse(metaData.unsetDetail());
+
+        // Test with detail
+        metaData.setDetail("some details");
+        assertTrue(metaData.isSetDetail());
+        assertEquals("some details", metaData.getDetail());
+        assertTrue(metaData.unsetDetail());
     }
 
     /**
@@ -121,8 +158,8 @@ public class CompartmentMetaDataTest {
         String expected = "compartmentMetaData [source=\"\" detail=\"\"]";
         assertEquals(expected, metaData.toString());
 
-        metaData.source = 7;
-        metaData.detail = "some details";
+        metaData.setSource(7);
+        metaData.setDetail("some details");
         expected = "compartmentMetaData [source=\"7\" detail=\"some details\"]";
         assertEquals(expected, metaData.toString());
     }

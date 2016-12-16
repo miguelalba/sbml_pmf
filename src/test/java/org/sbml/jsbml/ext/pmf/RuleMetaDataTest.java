@@ -65,27 +65,27 @@ public class RuleMetaDataTest {
     public void testConstructors() {
         // Empty constructor initializes formulaName and pmmLabId to null and ModelClass to UNKNOWN
         RuleMetaData metaData = new RuleMetaData();
-        assertNull(metaData.formulaName);
-        assertNull(metaData.pmmLabId);
-        assertEquals(RuleMetaData.ModelClass.UNKNOWN, metaData.modelClass);
+        assertFalse(metaData.isSetFormulaName());
+        assertFalse(metaData.isSetPmmLabId());
+        assertEquals(RuleMetaData.ModelClass.UNKNOWN, metaData.getModelClass());
 
         // Constructor with level and version
         metaData = new RuleMetaData(3, 1);
-        assertNull(metaData.formulaName);
-        assertNull(metaData.pmmLabId);
-        assertEquals(RuleMetaData.ModelClass.UNKNOWN, metaData.modelClass);
+        assertFalse(metaData.isSetFormulaName());
+        assertFalse(metaData.isSetPmmLabId());
+        assertEquals(RuleMetaData.ModelClass.UNKNOWN, metaData.getModelClass());
         assertTrue(3 == metaData.getLevel());
         assertTrue(1 == metaData.getVersion());
 
         // Test copy constructor
-        metaData.formulaName = "a formula";
-        metaData.pmmLabId = 151;
-        metaData.modelClass = RuleMetaData.ModelClass.GROWTH;
+        metaData.setFormulaName("a formula");
+        metaData.setPmmLabId(151);
+        metaData.setModelClass(RuleMetaData.ModelClass.GROWTH);
         metaData = new RuleMetaData(metaData);
 
-        assertEquals("a formula", metaData.formulaName);
-        assertTrue(151 == metaData.pmmLabId);
-        assertEquals(RuleMetaData.ModelClass.GROWTH, metaData.modelClass);
+        assertEquals("a formula", metaData.getFormulaName());
+        assertTrue(151 == metaData.getPmmLabId());
+        assertEquals(RuleMetaData.ModelClass.GROWTH, metaData.getModelClass());
     }
 
     /**
@@ -94,14 +94,14 @@ public class RuleMetaDataTest {
     @Test
     public void testClone() {
         RuleMetaData metaData = new RuleMetaData();
-        metaData.formulaName = "a formula";
-        metaData.pmmLabId = 151;
-        metaData.modelClass = RuleMetaData.ModelClass.GROWTH;
+        metaData.setFormulaName("a formula");
+        metaData.setPmmLabId(151);
+        metaData.setModelClass(RuleMetaData.ModelClass.GROWTH);
         metaData = metaData.clone();
 
-        assertEquals("a formula", metaData.formulaName);
-        assertTrue(151 == metaData.pmmLabId);
-        assertEquals(RuleMetaData.ModelClass.GROWTH, metaData.modelClass);
+        assertEquals("a formula", metaData.getFormulaName());
+        assertTrue(151 == metaData.getPmmLabId());
+        assertEquals(RuleMetaData.ModelClass.GROWTH, metaData.getModelClass());
     }
 
     @Test
@@ -117,9 +117,9 @@ public class RuleMetaDataTest {
         expectedAttributes.put("pmmLabID", "1");
 
         RuleMetaData metadata = new RuleMetaData();
-        metadata.formulaName = "2 plus 2";
-        metadata.modelClass = RuleMetaData.ModelClass.GROWTH;
-        metadata.pmmLabId = 1;
+        metadata.setFormulaName("2 plus 2");
+        metadata.setModelClass(RuleMetaData.ModelClass.GROWTH);
+        metadata.setPmmLabId(1);
 
         assertEquals(expectedAttributes, metadata.writeXMLAttributes());
     }
@@ -129,13 +129,13 @@ public class RuleMetaDataTest {
         RuleMetaData metadata = new RuleMetaData();
 
         assertTrue(metadata.readAttribute("formulaName", "pmf", "2 plus 2"));
-        assertEquals("2 plus 2", metadata.formulaName);
+        assertEquals("2 plus 2", metadata.getFormulaName());
 
         assertTrue(metadata.readAttribute("ruleClass", "pmf", RuleMetaData.ModelClass.GROWTH.name()));
-        assertEquals(RuleMetaData.ModelClass.GROWTH, metadata.modelClass);
+        assertEquals(RuleMetaData.ModelClass.GROWTH, metadata.getModelClass());
 
         assertTrue(metadata.readAttribute("pmmLabID", "pmf", "1"));
-        assertTrue(1 == metadata.pmmLabId);
+        assertTrue(1 == metadata.getPmmLabId());
 
         assertFalse(metadata.readAttribute("nonExistentAttribute", "pmf", "asdf"));
     }
@@ -151,9 +151,9 @@ public class RuleMetaDataTest {
         assertEquals("ruleMetaData [formulaName=\"\" ruleClass=\"unknown\" pmmLabID=\"\"]", metaData.toString());
 
         // Test with filled RuleMetaData
-        metaData.formulaName = "2 plus 2";
-        metaData.modelClass = RuleMetaData.ModelClass.GROWTH;
-        metaData.pmmLabId = 1;
+        metaData.setFormulaName("2 plus 2");
+        metaData.setModelClass(RuleMetaData.ModelClass.GROWTH);
+        metaData.setPmmLabId(1);
         assertEquals("ruleMetaData [formulaName=\"2 plus 2\" ruleClass=\"growth\" pmmLabID=\"1\"]", metaData.toString());
     }
 }

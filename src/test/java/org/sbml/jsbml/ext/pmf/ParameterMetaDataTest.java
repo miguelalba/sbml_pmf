@@ -29,35 +29,35 @@ public class ParameterMetaDataTest {
     public void testConstructors() {
         // Empty constructor initializes p, t, error, min and max to Double.NaN and description to null.
         ParameterMetaData metaData = new ParameterMetaData();
-        assertTrue(Double.isNaN(metaData.p));
-        assertTrue(Double.isNaN(metaData.t));
-        assertTrue(Double.isNaN(metaData.error));
-        assertNull(metaData.description);
+        assertFalse(metaData.isSetP());
+        assertFalse(metaData.isSetT());
+        assertFalse(metaData.isSetError());
+        assertFalse(metaData.isSetDescription());
 
         // Constructor with level and version
         metaData = new ParameterMetaData(3, 1);
-        assertTrue(Double.isNaN(metaData.p));
-        assertTrue(Double.isNaN(metaData.t));
-        assertTrue(Double.isNaN(metaData.error));
-        assertNull(metaData.description);
         assertTrue(3 == metaData.getLevel());
         assertTrue(1 == metaData.getVersion());
+        assertFalse(metaData.isSetP());
+        assertFalse(metaData.isSetT());
+        assertFalse(metaData.isSetError());
+        assertFalse(metaData.isSetDescription());
 
         // Test copy constructor
-        metaData.p = 0.006;
-        metaData.error = 0.471;
-        metaData.t = 3.101;
-        metaData.min = 3.0;
-        metaData.max = 10.0;
-        metaData.description = "physiological state of the microorganism";
+        metaData.setP(0.006);
+        metaData.setError(0.471);
+        metaData.setT(3.101);
+        metaData.setDescription("physiological state of the microorganism");
+        metaData.setMin(3.0);
+        metaData.setMax(10.0);
 
         metaData = new ParameterMetaData(metaData);
-        assertEquals(0.006, metaData.p, 0.0);
-        assertEquals(0.471, metaData.error, 0.0);
-        assertEquals(3.101, metaData.t, 0.0);
-        assertEquals(3.0, metaData.min, 0.0);
-        assertEquals(10.0, metaData.max, 0.0);
-        assertEquals("physiological state of the microorganism", metaData.description);
+        assertEquals(0.006, metaData.getP(), 0.0);
+        assertEquals(0.471, metaData.getError(), 0.0);
+        assertEquals(3.101, metaData.getT(), 0.0);
+        assertEquals(3.0, metaData.getMin(), 0.0);
+        assertEquals(10.0, metaData.getMax(), 0.0);
+        assertEquals("physiological state of the microorganism", metaData.getDescription());
     }
 
     /**
@@ -66,20 +66,20 @@ public class ParameterMetaDataTest {
     @Test
     public void testClone() {
         ParameterMetaData metaData = new ParameterMetaData();
-        metaData.p = 0.006;
-        metaData.error = 0.471;
-        metaData.t = 3.101;
-        metaData.min = 3.0;
-        metaData.max = 10.0;
-        metaData.description = "physiological state of the microorganism";
+        metaData.setP(0.006);
+        metaData.setError(0.471);
+        metaData.setT(3.101);
+        metaData.setMin(3.0);
+        metaData.setMax(10.0);
+        metaData.setDescription("physiological state of the microorganism");
 
         metaData = metaData.clone();
-        assertEquals(0.006, metaData.p, 0.0);
-        assertEquals(0.471, metaData.error, 0.0);
-        assertEquals(3.101, metaData.t, 0.0);
-        assertEquals(3.0, metaData.min, 0.0);
-        assertEquals(10.0, metaData.max, 0.0);
-        assertEquals("physiological state of the microorganism", metaData.description);
+        assertEquals(0.006, metaData.getP(), 0.0);
+        assertEquals(0.471, metaData.getError(), 0.0);
+        assertEquals(3.101, metaData.getT(), 0.0);
+        assertEquals(3.0, metaData.getMin(), 0.0);
+        assertEquals(10.0, metaData.getMax(), 0.0);
+        assertEquals("physiological state of the microorganism", metaData.getDescription());
     }
 
     /**
@@ -102,12 +102,12 @@ public class ParameterMetaDataTest {
         expectedAttributes.put("min", "3.0");
         expectedAttributes.put("max", "10.0");
 
-        metaData.p = 2.22;
-        metaData.t = 34.394;
-        metaData.error = 9.922;
-        metaData.description = "max conc";
-        metaData.min = 3.0;
-        metaData.max = 10.0;
+        metaData.setP(2.22);
+        metaData.setT(34.394);
+        metaData.setError(9.922);
+        metaData.setDescription("max conc");
+        metaData.setMin(3.0);
+        metaData.setMax(10.0);
         assertEquals(expectedAttributes, metaData.writeXMLAttributes());
     }
 
@@ -119,49 +119,49 @@ public class ParameterMetaDataTest {
 
         ParameterMetaData metaData = new ParameterMetaData();
 
-        // Parsing a non-double as the p attribute should return true and set Double.NaN as p
-        assertTrue(metaData.readAttribute("p", "pmf", "not a double"));
-        assertTrue(Double.isNaN(metaData.p));
+        // Parsing a non-double as the p attribute should return false
+        assertFalse(metaData.readAttribute("p", "pmf", "not a double"));
+        assertFalse(metaData.isSetP());
 
         // Parsing a double as the p attribute should return true and set it as p
         assertTrue(metaData.readAttribute("p", "pmf", "2.220"));
-        assertEquals(2.220, metaData.p, 0.0);
+        assertEquals(2.220, metaData.getP(), 0.0);
 
-        // Parsing a non-double as the t attribute should return true and set Double.NaN as t
-        assertTrue(metaData.readAttribute("t", "pmf", "not a double"));
-        assertTrue(Double.isNaN(metaData.t));
+        // Parsing a non-double as the t attribute should return false
+        assertFalse(metaData.readAttribute("t", "pmf", "not a double"));
+        assertFalse(metaData.isSetT());
 
         // Parsing a double as the t attribute should return true and set it as t
         assertTrue(metaData.readAttribute("t", "pmf", "34.394"));
-        assertEquals(34.394, metaData.t, 0.0);
+        assertEquals(34.394, metaData.getT(), 0.0);
 
-        // Parsing a non-double as the error attribute should return true and set Double.NaN as error
-        assertTrue(metaData.readAttribute("error", "pmf", "not a double"));
-        assertTrue(Double.isNaN(metaData.error));
+        // Parsing a non-double as the error attribute should return false
+        assertFalse(metaData.readAttribute("error", "pmf", "not a double"));
+        assertFalse(metaData.isSetError());
 
         // Parsing a double as the error attribute should return true and set it as error
         assertTrue(metaData.readAttribute("error", "pmf", "9.922"));
-        assertEquals(9.922, metaData.error, 0.0);
+        assertEquals(9.922, metaData.getError(), 0.0);
 
         // Parsing an string as the description attribute should return true and set it as description
         assertTrue(metaData.readAttribute("description", "pmf", "max conc"));
-        assertEquals("max conc", metaData.description);
+        assertEquals("max conc", metaData.getDescription());
 
-        // Parsing a non-double as the min attribute should return true and set it as min
-        assertTrue(metaData.readAttribute("min", "pmf", "not a double"));
-        assertTrue(Double.isNaN(metaData.min));
+        // Parsing a non-double as the min attribute should return false
+        assertFalse(metaData.readAttribute("min", "pmf", "not a double"));
+        assertFalse(metaData.isSetMin());
 
         // Parsing a double as the min attribute should return true and set it as min
         assertTrue(metaData.readAttribute("min", "pmf", "3.0"));
-        assertEquals(3.0, metaData.min, 0.0);
+        assertEquals(3.0, metaData.getMin(), 0.0);
 
-        // Parsing a non-double as the max attribute should return true and set it as max
-        assertTrue(metaData.readAttribute("max", "pmf", "not a double"));
-        assertTrue(Double.isNaN(metaData.max));
+        // Parsing a non-double as the max attribute should return false
+        assertFalse(metaData.readAttribute("max", "pmf", "not a double"));
+        assertFalse(metaData.isSetMax());
 
         // Parsing a double as the max attribute should return true and set it as max
         assertTrue(metaData.readAttribute("max", "pmf", "10.0"));
-        assertEquals(10.0, metaData.max, 0.0);
+        assertEquals(10.0, metaData.getMax(), 0.0);
 
         // Parsing an attribute other than p, t, error, description, min or max should return false
         assertFalse(metaData.readAttribute("nonExistentAttribute", "pmf", "asdf"));
@@ -181,12 +181,12 @@ public class ParameterMetaDataTest {
         assertEquals(expected, metaData.toString());
 
         // Test with filled ParameterMetadata
-        metaData.p = 2.22;
-        metaData.t = 34.394;
-        metaData.error = 9.922;
-        metaData.description = "max conc";
-        metaData.min = 3.0;
-        metaData.max = 10.0;
+        metaData.setP(2.22);
+        metaData.setT(34.394);
+        metaData.setError(9.922);
+        metaData.setDescription("max conc");
+        metaData.setMin(3.0);
+        metaData.setMax(10.0);
         expected = "parameterMetaData [p=\"2.22\" t=\"34.394\" error=\"9.922\" description=\"max conc\" min=\"3.0\" " +
                 "max=\"10.0\"]";
         assertEquals(expected, metaData.toString());

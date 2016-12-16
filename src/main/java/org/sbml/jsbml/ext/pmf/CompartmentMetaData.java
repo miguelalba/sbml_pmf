@@ -1,6 +1,7 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.AbstractSBase;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
@@ -18,14 +19,14 @@ import java.util.TreeMap;
 public class CompartmentMetaData extends AbstractSBase {
 
     /**
-     * Integer code from the PMF matrix vocabulary. Null if not set.
+     * Integer code from the PMF matrix vocabulary.
      */
-    public Integer source = null;
+    private Integer source;
 
     /**
-     * Description of the compartment. Null or empty string if not set.
+     * Description of the compartment.
      */
-    public String detail = null;
+    private String detail;
 
     /**
      * Creates a CompartmentMetaData instance.
@@ -93,6 +94,58 @@ public class CompartmentMetaData extends AbstractSBase {
         sb += " detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) + "\"]";
 
         return sb;
+    }
+
+    // --- source attribute ---
+    public int getSource() {
+        if (isSetSource())
+            return source;
+        throw new PropertyUndefinedError("source", this);
+    }
+
+    public boolean isSetSource() {
+        return source != null;
+    }
+
+    public void setSource(int source) {
+        Integer oldSource = this.source;
+        this.source = source;
+        firePropertyChange("source", oldSource, this.source);
+    }
+
+    public boolean unsetSource() {
+        if (isSetSource()) {
+            Integer oldSource = this.source;
+            this.source = null;
+            firePropertyChange("source", oldSource, this.source);
+            return true;
+        }
+        return false;
+    }
+
+    // --- detail attribute ---
+    public String getDetail() {
+        return isSetDetail() ? detail : null;
+    }
+
+    public boolean isSetDetail() {
+        return detail != null;
+    }
+
+    public void setDetail(String detail) {
+        String oldDetail = this.detail;
+        this.detail = detail;
+        firePropertyChange("detail", oldDetail, this.detail);
+    }
+
+    public boolean unsetDetail() {
+        if (isSetDetail()) {
+            String oldDetail = this.detail;
+            this.detail = null;
+            firePropertyChange("detail", oldDetail, this.detail);
+            return true;
+        }
+        return false;
     }
 
     @Override

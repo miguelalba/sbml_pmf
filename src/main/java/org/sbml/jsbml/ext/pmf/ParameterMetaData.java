@@ -1,6 +1,7 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.AbstractSBase;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
@@ -18,20 +19,26 @@ import java.util.TreeMap;
  */
 public class ParameterMetaData extends AbstractSBase {
 
-    public double p = Double.NaN;
-    public double t = Double.NaN;
-    public double error = Double.NaN;
-    public String description;
+    /** Null if not set. */
+    private Double p;
+
+    /** Null if not set. */
+    private Double t;
+
+    /** Null if not set. */
+    private Double error;
+
+    private String description;
 
     /**
-     * Minimum value. Double.NaN if not set.
+     * Minimum value. Null if not set.
      */
-    public double min = Double.NaN;
+    private Double min;
 
     /**
-     * Maximum value. Double.NaN if not set.
+     * Maximum value. Null if not set.
      */
-    public double max = Double.NaN;
+    private Double max;
 
     /**
      * Creates a ParameterMetaData instance.
@@ -71,17 +78,17 @@ public class ParameterMetaData extends AbstractSBase {
     @Override
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
-        if (!Double.isNaN(p))
+        if (isSetP())
             attributes.put("p", Double.toString(p));
-        if (!Double.isNaN(t))
+        if (isSetT())
             attributes.put("t", Double.toString(t));
-        if (!Double.isNaN(error))
+        if (isSetError())
             attributes.put("error", Double.toString(error));
-        if (description != null && !description.isEmpty())
+        if (isSetDescription())
             attributes.put("description", description);
-        if (!Double.isNaN(min))
+        if (isSetMin())
             attributes.put("min", Double.toString(min));
-        if (!Double.isNaN(max))
+        if (isSetMax())
             attributes.put("max", Double.toString(max));
         return attributes;
     }
@@ -91,23 +98,23 @@ public class ParameterMetaData extends AbstractSBase {
         boolean isAttributeRead;
 
         if (attributeName.equals("p")) {
-            p = StringTools.parseSBMLDouble(value);
-            isAttributeRead = true;
+            p = parseDouble(value);
+            isAttributeRead = p != null;
         } else if (attributeName.equals("t")) {
-            t = StringTools.parseSBMLDouble(value);
-            isAttributeRead = true;
+            t = parseDouble(value);
+            isAttributeRead = t != null;
         } else if (attributeName.equals("error")) {
-            error = StringTools.parseSBMLDouble(value);
-            isAttributeRead = true;
+            error = parseDouble(value);
+            isAttributeRead = error != null;
         } else if (attributeName.equals("description")) {
             description = value;
             isAttributeRead = true;
         } else if (attributeName.equals("min")) {
-            min = StringTools.parseSBMLDouble(value);
-            isAttributeRead = true;
+            min = parseDouble(value);
+            isAttributeRead = min != null;
         } else if (attributeName.equals("max")) {
-            max = StringTools.parseSBMLDouble(value);
-            isAttributeRead = true;
+            max = parseDouble(value);
+            isAttributeRead = max != null;
         } else {
             isAttributeRead = false;
         }
@@ -115,15 +122,20 @@ public class ParameterMetaData extends AbstractSBase {
         return isAttributeRead;
     }
 
+    private Double parseDouble(String strValue) {
+        double parsedValue = StringTools.parseSBMLDouble(strValue);
+        return Double.isNaN(parsedValue) ? null : parsedValue;
+    }
+
     @Override
     public String toString() {
         return PmfConstants.parameterMetaData +
-                " [p=\"" + (Double.isNaN(p) ? "" : p) +
-                "\" t=\"" + (Double.isNaN(t) ? "" : t) +
-                "\" error=\"" + (Double.isNaN(error) ? "" : error) +
-                "\" description=\"" + (description == null || description.isEmpty() ? "" : description) +
-                "\" min=\"" + (Double.isNaN(min) ? "" : min) +
-                "\" max=\"" + (Double.isNaN(max) ? "" : max) + "\"]";
+                " [p=\"" + (isSetP() ? p : "") +
+                "\" t=\"" + (isSetT() ? t : "") +
+                "\" error=\"" + (isSetError() ? error : "") +
+                "\" description=\"" + (isSetDescription() ? description : "") +
+                "\" min=\"" + (isSetMin() ? min : "") +
+                "\" max=\"" + (isSetMax() ? max : "") + "\"]";
     }
 
     @Override
@@ -142,5 +154,166 @@ public class ParameterMetaData extends AbstractSBase {
     @Override
     public int hashCode() {
         return Objects.hash(p, t, error, description, min, max);
+    }
+
+    // --- p attribute ---
+    public double getP() {
+        if (isSetP())
+            return p;
+        throw new PropertyUndefinedError("p", this);
+    }
+
+    public boolean isSetP() {
+        return p != null;
+    }
+
+    public void setP(double p) {
+        Double oldP = this.p;
+        this.p = p;
+        firePropertyChange("p", oldP, p);
+    }
+
+    public boolean unsetP() {
+        if (isSetP()) {
+            Double oldP = this.p;
+            this.p = null;
+            firePropertyChange("p", oldP, p);
+            return true;
+        }
+        return false;
+    }
+
+    // --- t attribute ---
+    public double getT() {
+        if (isSetT())
+            return t;
+        throw new PropertyUndefinedError("t", this);
+    }
+
+    public boolean isSetT() {
+        return t != null;
+    }
+
+    public void setT(double t) {
+        Double oldT = this.t;
+        this.t = t;
+        firePropertyChange("t", oldT, t);
+    }
+
+    public boolean unsetT() {
+        if (isSetT()) {
+            Double oldT = this.t;
+            this.t = null;
+            firePropertyChange("t", oldT, t);
+            return true;
+        }
+        return false;
+    }
+
+    // --- error attribute ---
+    public double getError() {
+        if (isSetError())
+            return error;
+        throw new PropertyUndefinedError("error", this);
+    }
+
+    public boolean isSetError() {
+        return error != null;
+    }
+
+    public void setError(double error) {
+        Double oldError = this.error;
+        this.error = error;
+        firePropertyChange("error", oldError, error);
+    }
+
+    public boolean unsetError() {
+        if (isSetError()) {
+            Double oldError = this.error;
+            this.error = null;
+            firePropertyChange("error", oldError, error);
+            return true;
+        }
+        return false;
+    }
+
+    // --- description attribute ---
+    public String getDescription() {
+        return isSetDescription() ? description : null;
+    }
+
+    public boolean isSetDescription() {
+        return description != null;
+    }
+
+    public void setDescription(String description) {
+        String oldDescription = this.description;
+        this.description = description;
+        firePropertyChange("description", oldDescription, description);
+    }
+
+    public boolean unsetDescription() {
+        if (isSetDescription()) {
+            String oldDescription = this.description;
+            this.description = null;
+            firePropertyChange("description", oldDescription, description);
+            return false;
+        }
+        return true;
+    }
+
+    // --- min attribute ---
+    public double getMin() {
+        if (isSetMin())
+            return min;
+        throw new PropertyUndefinedError("min", this);
+    }
+
+    public boolean isSetMin() {
+        return min != null;
+    }
+
+    public void setMin(double min) {
+        Double oldMin = this.min;
+        this.min = min;
+        firePropertyChange("min", oldMin, min);
+    }
+
+    public boolean unsetMin() {
+        if (isSetMin()) {
+            Double oldMin = min;
+            min = null;
+            firePropertyChange("min", oldMin, min);
+            return true;
+        }
+        return false;
+    }
+
+
+    // --- max attribute ---
+    public double getMax() {
+        if (isSetMax())
+            return max;
+        throw new PropertyUndefinedError("max", this);
+    }
+
+    public boolean isSetMax() {
+        return max != null;
+    }
+
+    public void setMax(double max) {
+        Double oldMax = this.max;
+        this.max = max;
+        firePropertyChange("max", oldMax, max);
+    }
+
+    public boolean unsetMax() {
+        if (isSetMax()) {
+            Double oldMax = max;
+            max = null;
+            firePropertyChange("max", oldMax, max);
+            return true;
+        }
+        return false;
     }
 }

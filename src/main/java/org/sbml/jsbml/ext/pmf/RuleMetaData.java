@@ -1,6 +1,7 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.AbstractSBase;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.Map;
@@ -99,9 +100,9 @@ public class RuleMetaData extends AbstractSBase {
         }
     }
 
-    public String formulaName;
-    public Integer pmmLabId;
-    public ModelClass modelClass;
+    private String formulaName;
+    private Integer pmmLabId;
+    private ModelClass modelClass;
 
     /**
      * Creates a RuleMetaData instance.
@@ -187,5 +188,80 @@ public class RuleMetaData extends AbstractSBase {
         final RuleMetaData other = (RuleMetaData) object;
         return Objects.equals(formulaName, other.formulaName) && Objects.equals(pmmLabId, other.pmmLabId) &&
                 Objects.equals(modelClass, other.modelClass);
+    }
+
+    // --- formulaName attribute ---
+    public String getFormulaName() {
+        return isSetFormulaName() ? formulaName : null;
+    }
+
+    public boolean isSetFormulaName() {
+        return formulaName != null;
+    }
+
+    public void setFormulaName(String formulaName) {
+        String oldFormulaName = this.formulaName;
+        this.formulaName = formulaName;
+        firePropertyChange("formulaName", oldFormulaName, formulaName);
+    }
+
+    public boolean unsetFormulaName() {
+        if (isSetFormulaName()) {
+            String oldFormulaName = formulaName;
+            formulaName = null;
+            firePropertyChange("formulaName", oldFormulaName, formulaName);
+            return true;
+        }
+        return false;
+    }
+
+    // --- pmmLabId attribute ---
+    public int getPmmLabId() {
+        if (isSetPmmLabId())
+            return pmmLabId;
+        throw new PropertyUndefinedError("pmmLabId", this);
+    }
+
+    public boolean isSetPmmLabId() {
+        return pmmLabId != null;
+    }
+
+    public void setPmmLabId(int pmmLabId) {
+        Integer oldPmmLabId = this.pmmLabId;
+        this.pmmLabId = pmmLabId;
+        firePropertyChange("pmmLabId", oldPmmLabId, pmmLabId);
+    }
+
+    public boolean unsetPmmLabId() {
+        if (isSetPmmLabId()) {
+            Integer oldPmmLabId = this.pmmLabId;
+            this.pmmLabId = pmmLabId;
+            firePropertyChange("pmmLabId", oldPmmLabId, pmmLabId);
+            return true;
+        }
+        return false;
+    }
+
+    // --- modelClass attribute ---
+    public ModelClass getModelClass() {
+        return isSetModelClass() ? modelClass : null;
+    }
+
+    public boolean isSetModelClass() { return modelClass != null; }
+
+    public void setModelClass(ModelClass modelClass) {
+        ModelClass oldModelClass = this.modelClass;
+        this.modelClass = modelClass;
+        firePropertyChange("modelClass", oldModelClass, modelClass);
+    }
+
+    public boolean unsetModelClass() {
+        if (isSetModelClass()) {
+            ModelClass oldModelClass = modelClass;
+            modelClass = null;
+            firePropertyChange("modelClass", oldModelClass, modelClass);
+            return true;
+        }
+        return false;
     }
 }
