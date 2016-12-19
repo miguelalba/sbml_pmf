@@ -90,4 +90,20 @@ public class PrimaryModelTest {
         pm.setSrc("model1.sbml");
         assertEquals("primaryModel [src=\"model1.sbml\"]", pm.toString());
     }
+
+    @Test
+    public void testSrc() {
+        PrimaryModel pm = new PrimaryModel();
+
+        // Test without src
+        assertFalse(pm.isSetSrc());
+        assertNull(pm.getSrc());
+        assertFalse(pm.unsetSrc());
+
+        // Test with src
+        pm.setSrc("model.sbml");
+        assertTrue(pm.isSetSrc());
+        assertEquals("model.sbml", pm.getSrc());
+        assertTrue(pm.unsetSrc());
+    }
 }

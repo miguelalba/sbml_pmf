@@ -3,6 +3,7 @@ package org.sbml.jsbml.ext.pmf;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
@@ -236,7 +237,7 @@ public class ReferenceTest {
         // test attributes with filled Reference
         ref.setAuthor("Baranyi, J.");
         ref.setYear(1994);
-        ref.setTitle("A dynamicr approach to predicting bacterial growth in food");
+        ref.setTitle("A dynamic approach to predicting bacterial growth in food");
         ref.setAbstractText("A new member ...");
         ref.setJournal("International Journal of Food Microbiology");
         ref.setVolume("23");
@@ -273,5 +274,209 @@ public class ReferenceTest {
 
         String expected = "Baranyi_1994_A dynamic approach...";
         assertEquals(expected, ref.toString());
+    }
+
+    @Test
+    public void testAuthor() {
+        Reference ref = new Reference();
+
+        // Test without author
+        assertFalse(ref.isSetAuthor());
+        assertNull(ref.getAuthor());
+        assertFalse(ref.unsetAuthor());
+
+        // Test with author
+        ref.setAuthor("Baranyi");
+        assertTrue(ref.isSetAuthor());
+        assertEquals("Baranyi", ref.getAuthor());
+        assertTrue(ref.unsetAuthor());
+    }
+
+    @Test
+    public void testYear() {
+        Reference ref = new Reference();
+
+        // Test without year
+        assertFalse(ref.isSetYear());
+        try {
+            ref.getYear();
+            fail();
+        } catch (PropertyUndefinedError e) {
+        }
+        assertFalse(ref.unsetYear());
+
+        // Test with year
+        ref.setYear(1994);
+        assertTrue(ref.isSetYear());
+        assertTrue(1994 == ref.getYear());
+        assertTrue(ref.unsetYear());
+    }
+
+    @Test
+    public void testTitle() {
+        Reference ref = new Reference();
+
+        // Test without title
+        assertFalse(ref.isSetTitle());
+        assertNull(ref.getTitle());
+        assertFalse(ref.unsetTitle());
+
+        // Test with title
+        ref.setTitle("A dynamic approach to predicting bacterial growth in food");
+        assertTrue(ref.isSetTitle());
+        assertEquals("A dynamic approach to predicting bacterial growth in food", ref.getTitle());
+        assertTrue(ref.unsetTitle());
+    }
+
+    @Test
+    public void testAbstractText() {
+        Reference ref = new Reference();
+
+        // Test without abstract text
+        assertFalse(ref.isSetAbstractText());
+        assertNull(ref.getAbstractText());
+        assertFalse(ref.unsetAbstractText());
+
+        // Test with abstract text
+        ref.setAbstractText("A new member ...");
+        assertTrue(ref.isSetAbstractText());
+        assertEquals("A new member ...", ref.getAbstractText());
+        assertTrue(ref.unsetAbstractText());
+    }
+
+    @Test
+    public void testJournal() {
+        Reference ref = new Reference();
+
+        // Test without journal
+        assertFalse(ref.isSetJournal());
+        assertNull(ref.getJournal());
+        assertFalse(ref.unsetJournal());
+
+        // Test with journal
+        ref.setJournal("International Journal of Food Microbiology");
+        assertTrue(ref.isSetJournal());
+        assertEquals("International Journal of Food Microbiology", ref.getJournal());
+        assertTrue(ref.unsetJournal());
+    }
+
+    @Test
+    public void testVolume() {
+        Reference ref = new Reference();
+
+        // Test without volume
+        assertFalse(ref.isSetVolume());
+        assertNull(ref.getVolume());
+        assertFalse(ref.unsetVolume());
+
+        // Test with volume
+        ref.setVolume("23");
+        assertTrue(ref.isSetVolume());
+        assertEquals("23", ref.getVolume());
+        assertTrue(ref.unsetVolume());
+    }
+
+    @Test
+    public void testIssue() {
+        Reference ref = new Reference();
+
+        // Test without issue
+        assertFalse(ref.isSetIssue());
+        assertNull(ref.getIssue());
+        assertFalse(ref.unsetIssue());
+
+        // Test with issue
+        ref.setIssue("3");
+        assertTrue(ref.isSetIssue());
+        assertEquals("3", ref.getIssue());
+        assertTrue(ref.unsetIssue());
+    }
+
+    @Test
+    public void testPage() {
+        Reference ref = new Reference();
+
+        // Test without page
+        assertFalse(ref.isSetPage());
+        try {
+            ref.getPage();
+            fail();
+        } catch (PropertyUndefinedError e) {
+        }
+        assertFalse(ref.unsetPage());
+
+        // Test with page
+        ref.setPage(277);
+        assertTrue(ref.isSetPage());
+        assertTrue(277 == ref.getPage());
+        assertTrue(ref.unsetPage());
+    }
+
+    @Test
+    public void testApprovalMode() {
+        Reference ref = new Reference();
+
+        // Test without approval mode
+        assertFalse(ref.isSetApprovalMode());
+        try {
+            ref.getApprovalMode();
+            fail();
+        } catch (PropertyUndefinedError e) {
+        }
+        assertFalse(ref.unsetApprovalMode());
+
+        // Test with approval mode
+        ref.setApprovalMode(1);
+        assertTrue(ref.isSetApprovalMode());
+        assertTrue(1 == ref.getApprovalMode());
+        assertTrue(ref.unsetApprovalMode());
+    }
+
+    @Test
+    public void testWebsite() {
+        Reference ref = new Reference();
+
+        // Test without website
+        assertFalse(ref.isSetWebsite());
+        assertNull(ref.getWebsite());
+        assertFalse(ref.unsetWebsite());
+
+        // Test with website
+        ref.setWebsite("http://www.sciencedirect.com/science/article/pii/0168160594901570");
+        assertTrue(ref.isSetWebsite());
+        assertEquals("http://www.sciencedirect.com/science/article/pii/0168160594901570", ref.getWebsite());
+        assertTrue(ref.unsetWebsite());
+    }
+
+    @Test
+    public void testType() {
+        Reference ref = new Reference();
+
+        // Test without type
+        assertFalse(ref.isSetType());
+        assertNull(ref.getType());
+        assertFalse(ref.unsetType());
+
+        // Test with type
+        ref.setType(Reference.ReferenceType.Buch);
+        assertTrue(ref.isSetType());
+        assertEquals(Reference.ReferenceType.Buch, ref.getType());
+        assertTrue(ref.unsetType());
+    }
+
+    @Test
+    public void testComment() {
+        Reference ref = new Reference();
+
+        // Test without comment
+        assertFalse(ref.isSetComment());
+        assertNull(ref.getComment());
+        assertFalse(ref.unsetComment());
+
+        // Test with comment
+        ref.setComment("improvised comment");
+        assertTrue(ref.isSetComment());
+        assertEquals("improvised comment", ref.getComment());
+        assertTrue(ref.unsetComment());
     }
 }

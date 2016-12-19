@@ -3,6 +3,7 @@ package org.sbml.jsbml.ext.pmf;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
@@ -122,5 +123,40 @@ public class CorrelationTest {
         correlation.setValue(7.0);
         expected = "correlation [name=\"h0\" value=\"7.0\"]";
         assertEquals(expected, correlation.toString());
+    }
+
+    @Test
+    public void testName() {
+        Correlation corr = new Correlation();
+
+        // test without name
+        assertFalse(corr.isSetName());
+        assertNull(corr.getName());
+        assertFalse(corr.unsetName());
+
+        // test with name
+        corr.setName("h0");
+        assertTrue(corr.isSetName());
+        assertEquals("h0", corr.getName());
+        assertTrue(corr.unsetName());
+    }
+
+    @Test
+    public void testValue() {
+        Correlation corr = new Correlation();
+
+        // test without value
+        assertFalse(corr.isSetValue());
+        try {
+            corr.getValue();
+            fail();
+        } catch (PropertyUndefinedError e) {}
+        assertFalse(corr.unsetValue());
+
+        // test with value
+        corr.setValue(7.0);
+        assertTrue(corr.isSetValue());
+        assertEquals(7.0, corr.getValue(), .0);
+        assertTrue(corr.unsetValue());
     }
 }

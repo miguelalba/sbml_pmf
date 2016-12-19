@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link SpeciesMetaData} class. Checks:
@@ -108,5 +107,53 @@ public class SpeciesMetaDataTest {
         metaData.setDescription("description");
         assertEquals("speciesMetaData [source=\"007\" detail=\"Salmonella spec.\" description=\"description\"]",
                 metaData.toString());
+    }
+
+    @Test
+    public void testSource() {
+        SpeciesMetaData metaData = new SpeciesMetaData();
+
+        // test without source
+        assertFalse(metaData.isSetSource());
+        assertNull(metaData.getSource());
+        assertFalse(metaData.unsetSource());
+
+        // test with source
+        metaData.setSource("007");
+        assertTrue(metaData.isSetSource());
+        assertEquals("007", metaData.getSource());
+        assertTrue(metaData.unsetSource());
+    }
+
+    @Test
+    public void testDetail() {
+        SpeciesMetaData metaData = new SpeciesMetaData();
+
+        // test without detail
+        assertFalse(metaData.isSetDetail());
+        assertNull(metaData.getDetail());
+        assertFalse(metaData.unsetDetail());
+
+        // test with detail
+        metaData.setDetail("Salmonella spec.");
+        assertTrue(metaData.isSetDetail());
+        assertEquals("Salmonella spec.", metaData.getDetail());
+        assertTrue(metaData.unsetDetail());
+    }
+
+    @Test
+    public void testDescription() {
+        SpeciesMetaData metaData = new SpeciesMetaData();
+
+        // test without description
+        assertFalse(metaData.isSetDescription());
+        assertNull(metaData.getDescription());
+        assertFalse(metaData.unsetDescription());
+
+        // test with description
+        metaData.setDescription("description");
+        assertTrue(metaData.isSetDescription());
+        assertEquals("description", metaData.getDescription());
+        assertTrue(metaData.unsetDescription());
     }
 }

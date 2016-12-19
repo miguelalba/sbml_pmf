@@ -257,9 +257,9 @@ public class ParameterMetaData extends AbstractSBase {
             String oldDescription = this.description;
             this.description = null;
             firePropertyChange("description", oldDescription, description);
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     // --- min attribute ---

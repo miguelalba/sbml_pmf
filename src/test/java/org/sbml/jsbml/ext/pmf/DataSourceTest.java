@@ -98,4 +98,20 @@ public class DataSourceTest {
         ds.setSrc("data.numl");
         assertEquals("dataSource [src=\"data.numl\"]", ds.toString());
     }
+
+    @Test
+    public void testSource() {
+        DataSource ds = new DataSource();
+
+        // Test without src
+        assertFalse(ds.isSetSrc());
+        assertNull(ds.getSrc());
+        assertFalse(ds.unsetSrc());
+
+        // Test with src
+        ds.setSrc("data.numl");
+        assertTrue(ds.isSetSrc());
+        assertEquals("data.numl", ds.getSrc());
+        assertTrue(ds.unsetSrc());
+    }
 }

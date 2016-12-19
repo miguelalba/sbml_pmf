@@ -3,6 +3,7 @@ package org.sbml.jsbml.ext.pmf;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
@@ -122,5 +123,40 @@ public class ModelVariableTest {
         mv.setName("h0");
         mv.setValue(7.0);
         assertEquals("modelVariable [name=\"h0\" value=\"7.0\"]", mv.toString());
+    }
+
+    @Test
+    public void testName() {
+        ModelVariable mv = new ModelVariable();
+
+        // test without name
+        assertFalse(mv.isSetName());
+        assertNull(mv.getName());
+        assertFalse(mv.unsetName());
+
+        // test with name
+        mv.setName("h0");
+        assertTrue(mv.isSetName());
+        assertEquals("h0", mv.getName());
+        assertTrue(mv.unsetName());
+    }
+
+    @Test
+    public void testValue() {
+        ModelVariable mv = new ModelVariable();
+
+        // test without value
+        assertFalse(mv.isSetValue());
+        try {
+            mv.getValue();
+            fail();
+        } catch (PropertyUndefinedError e) {}
+        assertFalse(mv.unsetValue());
+
+        // test with value
+        mv.setValue(7.0);
+        assertTrue(mv.isSetValue());
+        assertEquals(7.0, mv.getValue(), .0);
+        assertTrue(mv.unsetValue());
     }
 }

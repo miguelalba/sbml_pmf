@@ -3,6 +3,7 @@ package org.sbml.jsbml.ext.pmf;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
 import java.util.HashMap;
@@ -167,6 +168,120 @@ public class ParameterMetaDataTest {
         assertFalse(metaData.readAttribute("nonExistentAttribute", "pmf", "asdf"));
 
         logger.setLevel(defaultLevel);
+    }
+
+    @Test
+    public void testP() {
+        ParameterMetaData metaData = new ParameterMetaData();
+
+        // Test without P
+        assertFalse(metaData.isSetP());
+        try {
+            metaData.getP();
+            fail();
+        } catch (PropertyUndefinedError e) {}
+        assertFalse(metaData.unsetP());
+
+        // Test with P
+        metaData.setP(2.22);
+        assertTrue(metaData.isSetP());
+        assertEquals(2.22, metaData.getP(), .0);
+        assertTrue(metaData.unsetP());
+    }
+
+    @Test
+    public void testT() {
+        ParameterMetaData metaData = new ParameterMetaData();
+
+        // Test without T
+        assertFalse(metaData.isSetT());
+        try {
+            metaData.getT();
+            fail();
+        } catch (PropertyUndefinedError e) {
+        }
+        assertFalse(metaData.unsetT());
+
+        // Test with T
+        metaData.setT(34.394);
+        assertTrue(metaData.isSetT());
+        assertEquals(34.394, metaData.getT(), .0);
+        assertTrue(metaData.unsetT());
+    }
+
+    @Test
+    public void testError() {
+        ParameterMetaData metaData = new ParameterMetaData();
+
+        // Test without error
+        assertFalse(metaData.isSetError());
+        try {
+            metaData.getError();
+            fail();
+        } catch (PropertyUndefinedError e) {}
+        assertFalse(metaData.unsetError());
+
+        // Test with error
+        metaData.setError(9.922);
+        assertTrue(metaData.isSetError());
+        assertEquals(9.922, metaData.getError(), .0);
+        assertTrue(metaData.unsetError());
+    }
+
+    @Test
+    public void testDescription() {
+        ParameterMetaData metaData = new ParameterMetaData();
+
+        // Test without description
+        assertFalse(metaData.isSetDescription());
+        assertNull(metaData.getDescription());
+        assertFalse(metaData.unsetDescription());
+
+        // Test with description
+        metaData.setDescription("max conc");
+        assertTrue(metaData.isSetDescription());
+        assertEquals("max conc", metaData.getDescription());
+        assertTrue(metaData.unsetDescription());
+    }
+
+    @Test
+    public void testMin() {
+        ParameterMetaData metaData = new ParameterMetaData();
+
+        // Test without min
+        assertFalse(metaData.isSetMin());
+        try {
+            metaData.getMin();
+            fail();
+        } catch (PropertyUndefinedError e) {}
+        assertFalse(metaData.unsetMin());
+
+        // Test with min
+        metaData.setMin(3.0);
+        assertTrue(metaData.isSetMin());
+        assertEquals(3.0, metaData.getMin(), .0);
+        assertTrue(metaData.unsetMin());
+    }
+
+    // 10.0
+    @Test
+    public void testMax() {
+        ParameterMetaData metaData = new ParameterMetaData();
+
+        // Test without max
+        assertFalse(metaData.isSetMax());
+        try {
+            metaData.getMax();
+            fail();
+        } catch (PropertyUndefinedError e) {
+        }
+        assertFalse(metaData.unsetMax());
+
+        // Test with max
+        metaData.setMax(10.0);
+        assertTrue(metaData.isSetMax());
+        assertEquals(10.0, metaData.getMax(), .0);
+        assertTrue(metaData.unsetMax());
     }
 
     /**

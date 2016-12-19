@@ -1,6 +1,7 @@
 package org.sbml.jsbml.ext.pmf;
 
 import org.junit.Test;
+import org.sbml.jsbml.PropertyUndefinedError;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ import static org.junit.Assert.*;
 public class RuleMetaDataTest {
 
     @Test
-    public void testModelClass() {
+    public void testModelClassEnum() {
 
         // Test toString
         assertEquals("unknown", RuleMetaData.ModelClass.UNKNOWN.toString());
@@ -155,5 +156,55 @@ public class RuleMetaDataTest {
         metaData.setModelClass(RuleMetaData.ModelClass.GROWTH);
         metaData.setPmmLabId(1);
         assertEquals("ruleMetaData [formulaName=\"2 plus 2\" ruleClass=\"growth\" pmmLabID=\"1\"]", metaData.toString());
+    }
+
+    @Test
+    public void testFormulaName() {
+        RuleMetaData metaData = new RuleMetaData();
+
+        // test without formula name
+        assertFalse(metaData.isSetFormulaName());
+        assertNull(metaData.getFormulaName());
+        assertFalse(metaData.unsetFormulaName());
+
+        // test with formula name
+        metaData.setFormulaName("2 plus 2");
+        assertTrue(metaData.isSetFormulaName());
+        assertEquals("2 plus 2", metaData.getFormulaName());
+        assertTrue(metaData.unsetFormulaName());
+    }
+
+    @Test
+    public void testModelClass() {
+        RuleMetaData metaData = new RuleMetaData();
+
+        // Test without ModelClass
+        assertTrue(metaData.isSetModelClass());
+        assertEquals(RuleMetaData.ModelClass.UNKNOWN, metaData.getModelClass());
+
+        // Test with ModelClass
+        metaData.setModelClass(RuleMetaData.ModelClass.AW);
+        assertTrue(metaData.isSetModelClass());
+        assertEquals(RuleMetaData.ModelClass.AW, metaData.getModelClass());
+        assertTrue(metaData.unsetModelClass());
+    }
+
+    @Test
+    public void testPmmLabId() {
+        RuleMetaData metaData = new RuleMetaData();
+
+        // test without PmmLabId
+        assertFalse(metaData.isSetPmmLabId());
+        try {
+            metaData.getPmmLabId();
+            fail();
+        } catch (PropertyUndefinedError e) {}
+        assertFalse(metaData.unsetPmmLabId());
+
+        // test with PmmLabId
+        metaData.setPmmLabId(1);
+        assertTrue(metaData.isSetPmmLabId());
+        assertTrue(1 == metaData.getPmmLabId());
+        assertTrue(metaData.unsetPmmLabId());
     }
 }
