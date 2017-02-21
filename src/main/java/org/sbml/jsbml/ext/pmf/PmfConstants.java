@@ -54,6 +54,12 @@ public class PmfConstants {
     // Attributes
     public static final String name = "name";
     public static final String value = "value";
+    public static final String r2 = "r2";
+    public static final String rms = "rms";
+    public static final String sse = "sse";
+    public static final String aic = "aic";
+    public static final String bic = "bic";
+    public static final String dof = "dof";
 
     public static final String src = "src";
 }
