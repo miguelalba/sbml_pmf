@@ -105,31 +105,26 @@ public class ParameterMetaData extends AbstractSBase {
     public boolean readAttribute(String attributeName, String prefix, String value) {
         switch (attributeName) {
             case PmfConstants.parameter_p:
-                p = parseDouble(value);
-                return p != null;
+                p = StringTools.parseSBMLDouble(value);
+                return true;
             case PmfConstants.parameter_t:
-                t = parseDouble(value);
-                return t != null;
+                t = StringTools.parseSBMLDouble(value);
+                return true;
             case PmfConstants.parameter_error:
-                error = parseDouble(value);
-                return error != null;
+                error = StringTools.parseSBMLDouble(value);
+                return true;
             case PmfConstants.parameter_description:
                 description = value;
                 return true;
             case PmfConstants.parameter_min:
-                min = parseDouble(value);
-                return min != null;
+                min = StringTools.parseSBMLDouble(value);
+                return true;
             case PmfConstants.parameter_max:
-                max = parseDouble(value);
-                return max != null;
+                max = StringTools.parseSBMLDouble(value);
+                return true;
             default:
                 return false;
         }
-    }
-
-    private Double parseDouble(String strValue) {
-        double parsedValue = StringTools.parseSBMLDouble(strValue);
-        return Double.isNaN(parsedValue) ? null : parsedValue;
     }
 
     @Override
