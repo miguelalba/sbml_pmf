@@ -86,9 +86,8 @@ public class CompartmentMetaData extends AbstractSBase {
     @Override
     public String toString() {
         String sb = PmfConstants.compartmentMetaData + " [";
-        sb += PmfConstants.compartment_source + "=\"" + (source == null ? "" : source) + "\"";
-        sb += " " + PmfConstants.compartment_detail + "=\"" + (detail == null || detail.isEmpty() ? "" : detail) +
-                "\"]";
+        sb += PmfConstants.compartment_source + "=\"" + (isSetSource() ? source : "") + "\" ";
+        sb += PmfConstants.compartment_detail + "=\"" + (isSetDetail() ? detail : "") + "\"]";
 
         return sb;
     }

@@ -71,8 +71,7 @@ public class DataSource extends AbstractSBase {
 
     @Override
     public String toString() {
-        return PmfConstants.dataSource +
-                " [" + PmfConstants.dataSource_src + "=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
+        return PmfConstants.dataSource + " [" + PmfConstants.dataSource_src + "=\"" + (isSetSrc() ? src : "") + "\"]";
     }
 
     // --- src attribute ---

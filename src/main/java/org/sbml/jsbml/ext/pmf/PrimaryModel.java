@@ -60,7 +60,7 @@ public class PrimaryModel extends AbstractSBase {
 
     @Override
     public String toString() {
-        return "primaryModel [src=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
+        return "primaryModel [src=\"" + (isSetSrc() ? src : "") + "\"]";
     }
 
     // --- src attribute ---
