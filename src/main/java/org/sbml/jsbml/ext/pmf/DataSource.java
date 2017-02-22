@@ -52,8 +52,7 @@ public class DataSource extends AbstractSBase {
 
     @Override
     public Map<String, String> writeXMLAttributes() {
-        return (src == null || src.isEmpty()) ? Collections.emptyMap() : Collections.singletonMap(PmfConstants
-                .dataSource_src, src);
+        return isSetSrc() ? Collections.singletonMap(PmfConstants.dataSource_src, src) : Collections.emptyMap();
     }
 
     @Override

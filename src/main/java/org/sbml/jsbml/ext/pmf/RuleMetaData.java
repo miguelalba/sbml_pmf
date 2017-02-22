@@ -158,11 +158,11 @@ public class RuleMetaData extends AbstractSBase {
     @Override
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
-        if (formulaName != null && !formulaName.isEmpty())
+        if (isSetFormulaName())
             attributes.put(PmfConstants.rule_formulaName, formulaName);
-        if (pmmLabId != null)
+        if (isSetPmmLabId())
             attributes.put(PmfConstants.rule_pmmLabID, pmmLabId.toString());
-        if (modelClass != null)
+        if (isSetModelClass())
             attributes.put(PmfConstants.rule_class, modelClass.toString());
 
         return attributes;

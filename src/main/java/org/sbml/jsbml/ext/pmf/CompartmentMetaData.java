@@ -60,10 +60,10 @@ public class CompartmentMetaData extends AbstractSBase {
     @Override
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
-        if (source != null) {
+        if (isSetSource()) {
             attributes.put(PmfConstants.compartment_source, source.toString());
         }
-        if (detail != null && !detail.isEmpty()) {
+        if (isSetDetail()) {
             attributes.put(PmfConstants.compartment_detail, detail);
         }
         return attributes;

@@ -55,8 +55,7 @@ public class PrimaryModel extends AbstractSBase {
 
     @Override
     public Map<String, String> writeXMLAttributes() {
-        return (src == null || src.isEmpty()) ? Collections.emptyMap() : Collections.singletonMap(PmfConstants.primaryModel_src,
-                src);
+        return isSetSrc() ? Collections.singletonMap(PmfConstants.primaryModel_src, src) : Collections.emptyMap();
     }
 
     @Override
