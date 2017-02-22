@@ -41,12 +41,12 @@ public class SpeciesMetaData extends AbstractSBase {
     @Override
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
-        if (source != null && !source.isEmpty())
-            attributes.put("source", source);
-        if (detail != null && !detail.isEmpty())
-            attributes.put("detail", detail);
-        if (description != null && !description.isEmpty())
-            attributes.put("description", description);
+        if (isSetSource())
+            attributes.put(PmfConstants.species_source, source);
+        if (isSetDetail())
+            attributes.put(PmfConstants.species_detail, detail);
+        if (isSetDescription())
+            attributes.put(PmfConstants.species_description, description);
 
         return attributes;
     }
@@ -54,31 +54,27 @@ public class SpeciesMetaData extends AbstractSBase {
     @Override
     public boolean readAttribute(String attributeName, String prefix,
                                  String value) {
-
-        boolean isAttributeRead;
-
-        if (attributeName.equals("source")) {
-            source = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals("detail")) {
-            detail = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals("description")) {
-            description = value;
-            isAttributeRead = true;
-        } else {
-            isAttributeRead = false;
+        switch (attributeName) {
+            case PmfConstants.species_source:
+                source = value;
+                return true;
+            case PmfConstants.species_detail:
+                detail = value;
+                return true;
+            case PmfConstants.species_description:
+                description = value;
+                return true;
+            default:
+                return false;
         }
-
-        return isAttributeRead;
     }
 
     @Override
     public String toString() {
-        return PmfConstants.speciesMetaData +
-                " [source=\"" + (source == null || source.isEmpty() ? "" : source) +
-                "\" detail=\"" + (detail == null || detail.isEmpty() ? "" : detail) +
-                "\" description=\"" + (description == null || description.isEmpty() ? "" : description) + "\"]";
+        return PmfConstants.speciesMetaData + " ["
+                + PmfConstants.species_source + "=\"" + (isSetSource() ? source : "") + "\" " +
+                PmfConstants.species_detail + "=\"" + (isSetDetail() ? detail : "") + "\" " +
+                PmfConstants.species_description + "=\"" + (isSetDescription() ? description : "") + "\"]";
     }
 
     @Override
@@ -108,14 +104,14 @@ public class SpeciesMetaData extends AbstractSBase {
     public void setSource(String source) {
         String oldSource = this.source;
         this.source = source;
-        firePropertyChange("source", oldSource, source);
+        firePropertyChange(PmfConstants.species_source, oldSource, source);
     }
 
     public boolean unsetSource() {
         if (isSetSource()) {
             String oldSource = source;
             source = null;
-            firePropertyChange("source", oldSource, source);
+            firePropertyChange(PmfConstants.species_source, oldSource, source);
             return true;
         }
         return false;
@@ -133,14 +129,14 @@ public class SpeciesMetaData extends AbstractSBase {
     public void setDetail(String detail) {
         String oldDetail = this.detail;
         this.detail = detail;
-        firePropertyChange("detail", oldDetail, detail);
+        firePropertyChange(PmfConstants.species_detail, oldDetail, detail);
     }
 
     public boolean unsetDetail() {
         if (isSetDetail()) {
             String oldDetail = detail;
             detail = null;
-            firePropertyChange("detail", oldDetail, detail);
+            firePropertyChange(PmfConstants.species_detail, oldDetail, detail);
             return true;
         }
         return false;
@@ -158,14 +154,14 @@ public class SpeciesMetaData extends AbstractSBase {
     public void setDescription(String description) {
         String oldDescription = this.description;
         this.description = description;
-        firePropertyChange("description", oldDescription, description);
+        firePropertyChange(PmfConstants.species_description, oldDescription, description);
     }
 
     public boolean unsetDescription() {
         if (isSetDescription()) {
             String oldDescription = description;
             description = null;
-            firePropertyChange("description", oldDescription, description);
+            firePropertyChange(PmfConstants.species_description, oldDescription, description);
             return true;
         }
         return false;

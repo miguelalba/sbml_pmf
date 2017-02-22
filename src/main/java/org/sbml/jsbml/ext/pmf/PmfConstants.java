@@ -64,6 +64,32 @@ public class PmfConstants {
     public static final String bayesianInformationCriterion = "bayesianInformationCriterion";
     public static final String degreesOfFreedom = "degreesOfFreedom";
 
+    // Compartment
+    public static final String compartment_source = "source";
+    public static final String compartment_detail = "detail";
+
+    // Correlation
+    public static final String correlation_name = "name";
+    public static final String correlation_value = "value";
+
+    // DataSource
+    public static final String dataSource_src = "src";
+
+    // ModelVariable
+    public static final String modelVariable_name = "name";
+    public static final String modelVariable_value = "value";
+
+    // ParameterMetaData
+    public static final String parameter_p = "p";
+    public static final String parameter_t = "t";
+    public static final String parameter_error = "error";
+    public static final String parameter_description = "description";
+    public static final String parameter_min = "min";
+    public static final String parameter_max = "max";
+
+    // PrimaryModel
+    public static final String primaryModel_src = "src";
+
     // References
     public static final String ref_author = "AU";
     public static final String ref_year = "PY";
@@ -77,6 +103,16 @@ public class PmfConstants {
     public static final String ref_website = "UR";
     public static final String ref_type = "M3";
     public static final String ref_comment = "N1";
+
+    // RuleMetaData
+    public static final String rule_formulaName = "formulaName";
+    public static final String rule_pmmLabID = "pmmLabID";
+    public static final String rule_class = "ruleClass";
+
+    // SpeciesMetaData
+    public static final String species_source = "source";
+    public static final String species_detail = "detail";
+    public static final String species_description = "description";
 
     public static final String src = "src";
 }

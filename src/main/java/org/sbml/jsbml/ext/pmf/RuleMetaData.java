@@ -140,32 +140,30 @@ public class RuleMetaData extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        boolean isAttributeRead;
-        if (attributeName.equals("formulaName")) {
-            formulaName = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals("pmmLabID")) {
-            pmmLabId = StringTools.parseSBMLInt(value);
-            isAttributeRead = true;
-        } else if (attributeName.equals("ruleClass")) {
-            modelClass = ModelClass.fromName(value);
-            isAttributeRead = true;
-        } else {
-            isAttributeRead = false;
+        switch (attributeName) {
+            case PmfConstants.rule_formulaName:
+                formulaName = value;
+                return true;
+            case PmfConstants.rule_pmmLabID:
+                pmmLabId = StringTools.parseSBMLInt(value);
+                return true;
+            case PmfConstants.rule_class:
+                modelClass = ModelClass.fromName(value);
+                return true;
+            default:
+                return false;
         }
-
-        return isAttributeRead;
     }
 
     @Override
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (formulaName != null && !formulaName.isEmpty())
-            attributes.put("formulaName", formulaName);
+            attributes.put(PmfConstants.rule_formulaName, formulaName);
         if (pmmLabId != null)
-            attributes.put("pmmLabID", pmmLabId.toString());
+            attributes.put(PmfConstants.rule_pmmLabID, pmmLabId.toString());
         if (modelClass != null)
-            attributes.put("ruleClass", modelClass.toString());
+            attributes.put(PmfConstants.rule_class, modelClass.toString());
 
         return attributes;
     }
@@ -173,9 +171,9 @@ public class RuleMetaData extends AbstractSBase {
     @Override
     public String toString() {
         return PmfConstants.ruleMetaData +
-                " [formulaName=\"" + (formulaName == null || formulaName.isEmpty() ? "" : formulaName) + "\"" +
-                " ruleClass=\"" + (modelClass == null ? "" : modelClass) + "\"" +
-                " pmmLabID=\"" + (pmmLabId == null ? "" : pmmLabId) + "\"]";
+                " [" + PmfConstants.rule_formulaName + "=\"" + (isSetFormulaName() ? formulaName : "") + "\"" +
+                " " + PmfConstants.rule_class + "=\"" + (isSetModelClass() ? modelClass : "") + "\"" +
+                " " + PmfConstants.rule_pmmLabID + "=\"" + (isSetPmmLabId() ? pmmLabId : "") + "\"]";
     }
 
     @Override
@@ -200,14 +198,14 @@ public class RuleMetaData extends AbstractSBase {
     public void setFormulaName(String formulaName) {
         String oldFormulaName = this.formulaName;
         this.formulaName = formulaName;
-        firePropertyChange("formulaName", oldFormulaName, formulaName);
+        firePropertyChange(PmfConstants.rule_formulaName, oldFormulaName, formulaName);
     }
 
     public boolean unsetFormulaName() {
         if (isSetFormulaName()) {
             String oldFormulaName = formulaName;
             formulaName = null;
-            firePropertyChange("formulaName", oldFormulaName, formulaName);
+            firePropertyChange(PmfConstants.rule_formulaName, oldFormulaName, formulaName);
             return true;
         }
         return false;
@@ -217,7 +215,7 @@ public class RuleMetaData extends AbstractSBase {
     public int getPmmLabId() {
         if (isSetPmmLabId())
             return pmmLabId;
-        throw new PropertyUndefinedError("pmmLabId", this);
+        throw new PropertyUndefinedError(PmfConstants.rule_pmmLabID, this);
     }
 
     public boolean isSetPmmLabId() {
@@ -227,14 +225,14 @@ public class RuleMetaData extends AbstractSBase {
     public void setPmmLabId(int pmmLabId) {
         Integer oldPmmLabId = this.pmmLabId;
         this.pmmLabId = pmmLabId;
-        firePropertyChange("pmmLabId", oldPmmLabId, pmmLabId);
+        firePropertyChange(PmfConstants.rule_pmmLabID, oldPmmLabId, pmmLabId);
     }
 
     public boolean unsetPmmLabId() {
         if (isSetPmmLabId()) {
             Integer oldPmmLabId = this.pmmLabId;
             this.pmmLabId = pmmLabId;
-            firePropertyChange("pmmLabId", oldPmmLabId, pmmLabId);
+            firePropertyChange(PmfConstants.rule_pmmLabID, oldPmmLabId, pmmLabId);
             return true;
         }
         return false;
@@ -250,14 +248,14 @@ public class RuleMetaData extends AbstractSBase {
     public void setModelClass(ModelClass modelClass) {
         ModelClass oldModelClass = this.modelClass;
         this.modelClass = modelClass;
-        firePropertyChange("modelClass", oldModelClass, modelClass);
+        firePropertyChange(PmfConstants.rule_class, oldModelClass, modelClass);
     }
 
     public boolean unsetModelClass() {
         if (isSetModelClass()) {
             ModelClass oldModelClass = modelClass;
             modelClass = null;
-            firePropertyChange("modelClass", oldModelClass, modelClass);
+            firePropertyChange(PmfConstants.rule_class, oldModelClass, modelClass);
             return true;
         }
         return false;

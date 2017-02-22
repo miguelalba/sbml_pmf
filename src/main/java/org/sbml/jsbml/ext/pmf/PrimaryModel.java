@@ -46,7 +46,7 @@ public class PrimaryModel extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals("src")) {
+        if (attributeName.equals(PmfConstants.primaryModel_src)) {
             src = value;
             return true;
         }
@@ -55,7 +55,8 @@ public class PrimaryModel extends AbstractSBase {
 
     @Override
     public Map<String, String> writeXMLAttributes() {
-        return (src == null || src.isEmpty()) ? Collections.emptyMap() : Collections.singletonMap("src", src);
+        return (src == null || src.isEmpty()) ? Collections.emptyMap() : Collections.singletonMap(PmfConstants.primaryModel_src,
+                src);
     }
 
     @Override

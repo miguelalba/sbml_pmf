@@ -55,37 +55,35 @@ public class Correlation extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        boolean attributeIsRead;
-
-        if (attributeName.equals("name")) {
-            name = value;
-            attributeIsRead = true;
-        } else if (attributeName.equals("value")) {
-            this.value = StringTools.parseSBMLDouble(value);
-            attributeIsRead = true;
-        } else {
-            attributeIsRead = false;
+        switch (attributeName) {
+            case PmfConstants.correlation_name:
+                name = value;
+                return true;
+            case PmfConstants.correlation_value:
+                this.value = StringTools.parseSBMLDouble(value);
+                return true;
+            default:
+                return false;
         }
-
-        return attributeIsRead;
     }
 
     @Override
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (isSetName()) {
-            attributes.put("name", name);
+            attributes.put(PmfConstants.correlation_name, name);
         }
         if (isSetValue()) {
-            attributes.put("value", StringTools.toString(value));
+            attributes.put(PmfConstants.correlation_value, StringTools.toString(value));
         }
         return attributes;
     }
 
     @Override
     public String toString() {
-        return PmfConstants.correlation + " [name=\"" + (isSetName() ? name : "") + "\" value=\"" +
-                (isSetValue() ? value : "") + "\"]";
+        return PmfConstants.correlation + " [" +
+                PmfConstants.correlation_name + "=\"" + (isSetName() ? name : "") + "\" " +
+                PmfConstants.correlation_value + "=\"" + (isSetValue() ? value : "") + "\"]";
     }
 
     // --- name attribute ---

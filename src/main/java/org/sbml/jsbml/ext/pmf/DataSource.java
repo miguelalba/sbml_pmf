@@ -52,7 +52,8 @@ public class DataSource extends AbstractSBase {
 
     @Override
     public Map<String, String> writeXMLAttributes() {
-        return (src == null || src.isEmpty()) ? Collections.emptyMap() : Collections.singletonMap("src", src);
+        return (src == null || src.isEmpty()) ? Collections.emptyMap() : Collections.singletonMap(PmfConstants
+                .dataSource_src, src);
     }
 
     @Override
@@ -71,7 +72,8 @@ public class DataSource extends AbstractSBase {
 
     @Override
     public String toString() {
-        return PmfConstants.dataSource + " [src=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
+        return PmfConstants.dataSource +
+                " [" + PmfConstants.dataSource_src + "=\"" + (src == null || src.isEmpty() ? "" : src) + "\"]";
     }
 
     // --- src attribute ---

@@ -62,9 +62,9 @@ public class ModelVariable extends AbstractSBase {
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
         if (isSetName())
-            attributes.put("name", name);
+            attributes.put(PmfConstants.modelVariable_name, name);
         if (isSetValue())
-            attributes.put("value", StringTools.toString(value));
+            attributes.put(PmfConstants.modelVariable_value, StringTools.toString(value));
         return attributes;
     }
 
@@ -73,10 +73,10 @@ public class ModelVariable extends AbstractSBase {
 
         boolean attributeIsRead;
 
-        if (attributeName.equals("name")) {
+        if (attributeName.equals(PmfConstants.modelVariable_name)) {
             name = value;
             attributeIsRead = true;
-        } else if (attributeName.equals("value")) {
+        } else if (attributeName.equals(PmfConstants.modelVariable_value)) {
             this.value = StringTools.parseSBMLDouble(value);
             attributeIsRead = true;
         } else {
@@ -88,8 +88,9 @@ public class ModelVariable extends AbstractSBase {
 
     @Override
     public String toString() {
-        return PmfConstants.modelVariable + " [name=\"" + (isSetName() ? name : "") +
-                "\" value=\"" + (isSetValue() ? value : "") + "\"]";
+        return PmfConstants.modelVariable +
+                " [" + PmfConstants.modelVariable_name + "=\"" + (isSetName() ? name : "") +
+                "\" " + PmfConstants.modelVariable_value + "=\"" + (isSetValue() ? value : "") + "\"]";
     }
 
     // --- name attribute ---

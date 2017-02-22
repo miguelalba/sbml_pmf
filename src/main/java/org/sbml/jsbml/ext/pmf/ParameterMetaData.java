@@ -4,6 +4,7 @@ import org.sbml.jsbml.AbstractSBase;
 import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.util.StringTools;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -78,48 +79,52 @@ public class ParameterMetaData extends AbstractSBase {
     @Override
     public Map<String, String> writeXMLAttributes() {
         Map<String, String> attributes = new TreeMap<>();
-        if (isSetP())
-            attributes.put("p", Double.toString(p));
-        if (isSetT())
-            attributes.put("t", Double.toString(t));
-        if (isSetError())
-            attributes.put("error", Double.toString(error));
-        if (isSetDescription())
-            attributes.put("description", description);
-        if (isSetMin())
-            attributes.put("min", Double.toString(min));
-        if (isSetMax())
-            attributes.put("max", Double.toString(max));
+        if (isSetP()) {
+            attributes.put(PmfConstants.parameter_p, StringTools.toString(Locale.ENGLISH, p));
+        }
+        if (isSetT()) {
+            attributes.put(PmfConstants.parameter_t, StringTools.toString(Locale.ENGLISH, t));
+        }
+        if (isSetError()) {
+            attributes.put(PmfConstants.parameter_error, StringTools.toString(Locale.ENGLISH, error));
+        }
+        if (isSetDescription()) {
+            attributes.put(PmfConstants.parameter_description, description);
+        }
+        if (isSetMin()) {
+            attributes.put(PmfConstants.parameter_min, StringTools.toString(Locale.ENGLISH, min));
+        }
+        if (isSetMax()) {
+            attributes.put(PmfConstants.parameter_max, StringTools.toString(Locale.ENGLISH, max));
+        }
+
         return attributes;
     }
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        boolean isAttributeRead;
-
-        if (attributeName.equals("p")) {
-            p = parseDouble(value);
-            isAttributeRead = p != null;
-        } else if (attributeName.equals("t")) {
-            t = parseDouble(value);
-            isAttributeRead = t != null;
-        } else if (attributeName.equals("error")) {
-            error = parseDouble(value);
-            isAttributeRead = error != null;
-        } else if (attributeName.equals("description")) {
-            description = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals("min")) {
-            min = parseDouble(value);
-            isAttributeRead = min != null;
-        } else if (attributeName.equals("max")) {
-            max = parseDouble(value);
-            isAttributeRead = max != null;
-        } else {
-            isAttributeRead = false;
+        switch (attributeName) {
+            case PmfConstants.parameter_p:
+                p = parseDouble(value);
+                return p != null;
+            case PmfConstants.parameter_t:
+                t = parseDouble(value);
+                return t != null;
+            case PmfConstants.parameter_error:
+                error = parseDouble(value);
+                return error != null;
+            case PmfConstants.parameter_description:
+                description = value;
+                return true;
+            case PmfConstants.parameter_min:
+                min = parseDouble(value);
+                return min != null;
+            case PmfConstants.parameter_max:
+                max = parseDouble(value);
+                return max != null;
+            default:
+                return false;
         }
-
-        return isAttributeRead;
     }
 
     private Double parseDouble(String strValue) {
@@ -130,12 +135,13 @@ public class ParameterMetaData extends AbstractSBase {
     @Override
     public String toString() {
         return PmfConstants.parameterMetaData +
-                " [p=\"" + (isSetP() ? p : "") +
-                "\" t=\"" + (isSetT() ? t : "") +
-                "\" error=\"" + (isSetError() ? error : "") +
-                "\" description=\"" + (isSetDescription() ? description : "") +
-                "\" min=\"" + (isSetMin() ? min : "") +
-                "\" max=\"" + (isSetMax() ? max : "") + "\"]";
+                " [" + PmfConstants.parameter_p + "=\"" + (isSetP() ? p : "") +
+                "\" " + PmfConstants.parameter_t + "=\"" + (isSetT() ? t : "") +
+                "\" " + PmfConstants.parameter_error + "=\"" + (isSetError() ? error : "") +
+                "\" " + PmfConstants.parameter_description + "=\"" + (isSetDescription() ? description :
+                "") +
+                "\" " + PmfConstants.parameter_min + "=\"" + (isSetMin() ? min : "") +
+                "\" " + PmfConstants.parameter_max + "=\"" + (isSetMax() ? max : "") + "\"]";
     }
 
     @Override
@@ -158,7 +164,7 @@ public class ParameterMetaData extends AbstractSBase {
     public double getP() {
         if (isSetP())
             return p;
-        throw new PropertyUndefinedError("p", this);
+        throw new PropertyUndefinedError(PmfConstants.parameter_p, this);
     }
 
     public boolean isSetP() {
@@ -168,14 +174,14 @@ public class ParameterMetaData extends AbstractSBase {
     public void setP(double p) {
         Double oldP = this.p;
         this.p = p;
-        firePropertyChange("p", oldP, p);
+        firePropertyChange(PmfConstants.parameter_p, oldP, p);
     }
 
     public boolean unsetP() {
         if (isSetP()) {
             Double oldP = this.p;
             this.p = null;
-            firePropertyChange("p", oldP, p);
+            firePropertyChange(PmfConstants.parameter_p, oldP, p);
             return true;
         }
         return false;
@@ -185,7 +191,7 @@ public class ParameterMetaData extends AbstractSBase {
     public double getT() {
         if (isSetT())
             return t;
-        throw new PropertyUndefinedError("t", this);
+        throw new PropertyUndefinedError(PmfConstants.parameter_t, this);
     }
 
     public boolean isSetT() {
@@ -195,14 +201,14 @@ public class ParameterMetaData extends AbstractSBase {
     public void setT(double t) {
         Double oldT = this.t;
         this.t = t;
-        firePropertyChange("t", oldT, t);
+        firePropertyChange(PmfConstants.parameter_t, oldT, t);
     }
 
     public boolean unsetT() {
         if (isSetT()) {
             Double oldT = this.t;
             this.t = null;
-            firePropertyChange("t", oldT, t);
+            firePropertyChange(PmfConstants.parameter_t, oldT, t);
             return true;
         }
         return false;
@@ -212,7 +218,7 @@ public class ParameterMetaData extends AbstractSBase {
     public double getError() {
         if (isSetError())
             return error;
-        throw new PropertyUndefinedError("error", this);
+        throw new PropertyUndefinedError(PmfConstants.parameter_error, this);
     }
 
     public boolean isSetError() {
@@ -222,14 +228,14 @@ public class ParameterMetaData extends AbstractSBase {
     public void setError(double error) {
         Double oldError = this.error;
         this.error = error;
-        firePropertyChange("error", oldError, error);
+        firePropertyChange(PmfConstants.parameter_error, oldError, error);
     }
 
     public boolean unsetError() {
         if (isSetError()) {
             Double oldError = this.error;
             this.error = null;
-            firePropertyChange("error", oldError, error);
+            firePropertyChange(PmfConstants.parameter_error, oldError, error);
             return true;
         }
         return false;
@@ -247,14 +253,14 @@ public class ParameterMetaData extends AbstractSBase {
     public void setDescription(String description) {
         String oldDescription = this.description;
         this.description = description;
-        firePropertyChange("description", oldDescription, description);
+        firePropertyChange(PmfConstants.parameter_description, oldDescription, description);
     }
 
     public boolean unsetDescription() {
         if (isSetDescription()) {
             String oldDescription = this.description;
             this.description = null;
-            firePropertyChange("description", oldDescription, description);
+            firePropertyChange(PmfConstants.parameter_description, oldDescription, description);
             return true;
         }
         return false;
@@ -264,7 +270,7 @@ public class ParameterMetaData extends AbstractSBase {
     public double getMin() {
         if (isSetMin())
             return min;
-        throw new PropertyUndefinedError("min", this);
+        throw new PropertyUndefinedError(PmfConstants.parameter_min, this);
     }
 
     public boolean isSetMin() {
@@ -274,14 +280,14 @@ public class ParameterMetaData extends AbstractSBase {
     public void setMin(double min) {
         Double oldMin = this.min;
         this.min = min;
-        firePropertyChange("min", oldMin, min);
+        firePropertyChange(PmfConstants.parameter_min, oldMin, min);
     }
 
     public boolean unsetMin() {
         if (isSetMin()) {
             Double oldMin = min;
             min = null;
-            firePropertyChange("min", oldMin, min);
+            firePropertyChange(PmfConstants.parameter_min, oldMin, min);
             return true;
         }
         return false;
@@ -292,7 +298,7 @@ public class ParameterMetaData extends AbstractSBase {
     public double getMax() {
         if (isSetMax())
             return max;
-        throw new PropertyUndefinedError("max", this);
+        throw new PropertyUndefinedError(PmfConstants.parameter_max, this);
     }
 
     public boolean isSetMax() {
@@ -302,14 +308,14 @@ public class ParameterMetaData extends AbstractSBase {
     public void setMax(double max) {
         Double oldMax = this.max;
         this.max = max;
-        firePropertyChange("max", oldMax, max);
+        firePropertyChange(PmfConstants.parameter_max, oldMax, max);
     }
 
     public boolean unsetMax() {
         if (isSetMax()) {
             Double oldMax = max;
             max = null;
-            firePropertyChange("max", oldMax, max);
+            firePropertyChange(PmfConstants.parameter_max, oldMax, max);
             return true;
         }
         return false;
