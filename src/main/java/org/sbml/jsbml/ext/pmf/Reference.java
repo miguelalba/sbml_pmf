@@ -37,28 +37,6 @@ public class Reference extends AbstractSBase {
         }
     }
 
-
-    private enum Tag {
-        author("AU"),
-        year("PY"),
-        title("TI"),
-        abstract_text("AB"),
-        journal("T2"),
-        volume("VL"),
-        issue("IS"),
-        page("SP"),
-        approval_mode("LB"),
-        website("UR"),
-        type("M3"),
-        comment("N1");
-
-        String value;
-
-        Tag(String value) {
-            this.value = value;
-        }
-    }
-
     private String author;
     private Integer year;
     private String title;
@@ -118,49 +96,47 @@ public class Reference extends AbstractSBase {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        boolean isAttributeRead;
-
-        if (attributeName.equals(Tag.author.value)) {
-            author = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.year.value)) {
-            year = StringTools.parseSBMLInt(value);
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.title.value)) {
-            title = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.abstract_text.value)) {
-            abstractText = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.journal.value)) {
-            journal = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.volume.value)) {
-            volume = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.issue.value)) {
-            issue = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.page.value)) {
-            page = StringTools.parseSBMLInt(value);
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.approval_mode.value)) {
-            approvalMode = StringTools.parseSBMLInt(value);
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.website.value)) {
-            website = value;
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.type.value)) {
-            type = ReferenceType.valueOf(value);
-            isAttributeRead = true;
-        } else if (attributeName.equals(Tag.comment.value)) {
-            comment = value;
-            isAttributeRead = true;
-        } else {
-            isAttributeRead = false;
+        switch (attributeName) {
+            case PmfConstants.ref_author:
+                author = value;
+                return true;
+            case PmfConstants.ref_year:
+                year = StringTools.parseSBMLInt(value);
+                return true;
+            case PmfConstants.ref_title:
+                title = value;
+                return true;
+            case PmfConstants.ref_abstractText:
+                abstractText = value;
+                return true;
+            case PmfConstants.ref_journal:
+                journal = value;
+                return true;
+            case PmfConstants.ref_volume:
+                volume = value;
+                return true;
+            case PmfConstants.ref_issue:
+                issue = value;
+                return true;
+            case PmfConstants.ref_page:
+                page = StringTools.parseSBMLInt(value);
+                return true;
+            case PmfConstants.ref_approvalMode:
+                approvalMode = StringTools.parseSBMLInt(value);
+                return true;
+            case PmfConstants.ref_website:
+                website = value;
+                return true;
+            case PmfConstants.ref_type:
+                type = ReferenceType.valueOf(value);
+                return true;
+            case PmfConstants.ref_comment:
+                comment = value;
+                return true;
+            default:
+                return false;
         }
 
-        return isAttributeRead;
     }
 
     @Override
@@ -168,29 +144,29 @@ public class Reference extends AbstractSBase {
         Map<String, String> attributes = new TreeMap<>();
 
         if (isSetAuthor())
-            attributes.put(Tag.author.value, author);
+            attributes.put(PmfConstants.ref_author, author);
         if (isSetYear())
-            attributes.put(Tag.year.value, StringTools.toString(year));
+            attributes.put(PmfConstants.ref_year, StringTools.toString(year));
         if (isSetTitle())
-            attributes.put(Tag.title.value, title);
+            attributes.put(PmfConstants.ref_title, title);
         if (isSetAbstractText())
-            attributes.put(Tag.abstract_text.value, abstractText);
+            attributes.put(PmfConstants.ref_abstractText, abstractText);
         if (isSetJournal())
-            attributes.put(Tag.journal.value, journal);
+            attributes.put(PmfConstants.ref_journal, journal);
         if (isSetVolume())
-            attributes.put(Tag.volume.value, volume);
+            attributes.put(PmfConstants.ref_volume, volume);
         if (isSetIssue())
-            attributes.put(Tag.issue.value, issue);
+            attributes.put(PmfConstants.ref_issue, issue);
         if (isSetPage())
-            attributes.put(Tag.page.value, StringTools.toString(page));
+            attributes.put(PmfConstants.ref_page, StringTools.toString(page));
         if (isSetApprovalMode())
-            attributes.put(Tag.approval_mode.value, StringTools.toString(approvalMode));
+            attributes.put(PmfConstants.ref_approvalMode, StringTools.toString(approvalMode));
         if (isSetWebsite())
-            attributes.put(Tag.website.value, website);
+            attributes.put(PmfConstants.ref_website, website);
         if (isSetType())
-            attributes.put(Tag.type.value, type.name());
+            attributes.put(PmfConstants.ref_type, type.name());
         if (isSetComment())
-            attributes.put(Tag.comment.value, comment);
+            attributes.put(PmfConstants.ref_comment, comment);
 
         return attributes;
     }
@@ -212,14 +188,14 @@ public class Reference extends AbstractSBase {
     public void setAuthor(String author) {
         String oldAuthor = this.author;
         this.author = author;
-        firePropertyChange(Tag.author.value, oldAuthor, this.author);
+        firePropertyChange(PmfConstants.ref_author, oldAuthor, this.author);
     }
 
     public boolean unsetAuthor() {
         if (isSetAuthor()) {
             String oldAuthor = author;
             author = null;
-            firePropertyChange(Tag.author.value, oldAuthor, author);
+            firePropertyChange(PmfConstants.ref_author, oldAuthor, author);
             return true;
         }
         return false;
@@ -231,7 +207,7 @@ public class Reference extends AbstractSBase {
             return year;
         }
         // This is necessary if we cannot return null here
-        throw new PropertyUndefinedError(Tag.year.value, this);
+        throw new PropertyUndefinedError(PmfConstants.ref_year, this);
     }
 
     public boolean isSetYear() {
@@ -241,14 +217,14 @@ public class Reference extends AbstractSBase {
     public void setYear(int year) {
         Integer oldYear = this.year;
         this.year = year;
-        firePropertyChange(Tag.year.value, oldYear, year);
+        firePropertyChange(PmfConstants.ref_year, oldYear, year);
     }
 
     public boolean unsetYear() {
         if (isSetYear()) {
             Integer oldYear = year;
             year = null;
-            firePropertyChange(Tag.year.value, oldYear, year);
+            firePropertyChange(PmfConstants.ref_year, oldYear, year);
             return true;
         }
         return false;
@@ -266,14 +242,14 @@ public class Reference extends AbstractSBase {
     public void setTitle(String title) {
         String oldTitle = this.title;
         this.title = title;
-        firePropertyChange(Tag.title.value, oldTitle, title);
+        firePropertyChange(PmfConstants.ref_title, oldTitle, title);
     }
 
     public boolean unsetTitle() {
         if (isSetTitle()) {
             String oldTitle = title;
             title = null;
-            firePropertyChange(Tag.title.value, oldTitle, title);
+            firePropertyChange(PmfConstants.ref_title, oldTitle, title);
             return true;
         }
         return false;
@@ -291,14 +267,14 @@ public class Reference extends AbstractSBase {
     public void setAbstractText(String abstractText) {
         String oldAbstractText = this.abstractText;
         this.abstractText = abstractText;
-        firePropertyChange(Tag.abstract_text.value, oldAbstractText, abstractText);
+        firePropertyChange(PmfConstants.ref_abstractText, oldAbstractText, abstractText);
     }
 
     public boolean unsetAbstractText() {
         if (isSetAbstractText()) {
             String oldAbstractText = abstractText;
             abstractText = null;
-            firePropertyChange(Tag.abstract_text.value, oldAbstractText, abstractText);
+            firePropertyChange(PmfConstants.ref_abstractText, oldAbstractText, abstractText);
             return true;
         }
         return false;
@@ -316,14 +292,14 @@ public class Reference extends AbstractSBase {
     public void setJournal(String journal) {
         String oldJournal = this.journal;
         this.journal = journal;
-        firePropertyChange(Tag.journal.value, oldJournal, journal);
+        firePropertyChange(PmfConstants.ref_journal, oldJournal, journal);
     }
 
     public boolean unsetJournal() {
         if (isSetJournal()) {
             String oldJournal = journal;
             journal = null;
-            firePropertyChange(Tag.journal.value, oldJournal, journal);
+            firePropertyChange(PmfConstants.ref_journal, oldJournal, journal);
             return true;
         }
         return false;
@@ -341,14 +317,14 @@ public class Reference extends AbstractSBase {
     public void setVolume(String volume) {
         String oldVolume = this.volume;
         this.volume = volume;
-        firePropertyChange(Tag.volume.value, oldVolume, volume);
+        firePropertyChange(PmfConstants.ref_volume, oldVolume, volume);
     }
 
     public boolean unsetVolume() {
         if (isSetVolume()) {
             String oldVolume = volume;
             volume = null;
-            firePropertyChange(Tag.volume.value, oldVolume, volume);
+            firePropertyChange(PmfConstants.ref_volume, oldVolume, volume);
             return true;
         }
         return false;
@@ -366,14 +342,14 @@ public class Reference extends AbstractSBase {
     public void setIssue(String issue) {
         String oldIssue = this.issue;
         this.issue = issue;
-        firePropertyChange(Tag.issue.value, oldIssue, issue);
+        firePropertyChange(PmfConstants.ref_issue, oldIssue, issue);
     }
 
     public boolean unsetIssue() {
         if (isSetIssue()) {
             String oldIssue = issue;
             issue = null;
-            firePropertyChange(Tag.issue.value, oldIssue, issue);
+            firePropertyChange(PmfConstants.ref_issue, oldIssue, issue);
             return true;
         }
         return false;
@@ -385,7 +361,7 @@ public class Reference extends AbstractSBase {
             return page;
         }
         // This is necessary if we cannot return null here
-        throw new PropertyUndefinedError(Tag.page.value, this);
+        throw new PropertyUndefinedError(PmfConstants.ref_page, this);
     }
 
     public boolean isSetPage() {
@@ -395,14 +371,14 @@ public class Reference extends AbstractSBase {
     public void setPage(int page) {
         Integer oldPage = this.page;
         this.page = page;
-        firePropertyChange(Tag.page.value, oldPage, page);
+        firePropertyChange(PmfConstants.ref_page, oldPage, page);
     }
 
     public boolean unsetPage() {
         if (isSetPage()) {
             Integer oldPage = page;
             page = null;
-            firePropertyChange(Tag.page.value, oldPage, page);
+            firePropertyChange(PmfConstants.ref_page, oldPage, page);
             return true;
         }
         return false;
@@ -414,7 +390,7 @@ public class Reference extends AbstractSBase {
             return approvalMode;
         }
         // This is necessary if we cannot return null here
-        throw new PropertyUndefinedError(Tag.approval_mode.value, this);
+        throw new PropertyUndefinedError(PmfConstants.ref_approvalMode, this);
     }
 
     public boolean isSetApprovalMode() {
@@ -424,14 +400,14 @@ public class Reference extends AbstractSBase {
     public void setApprovalMode(int approvalMode) {
         Integer oldApprovalMode = this.approvalMode;
         this.approvalMode = approvalMode;
-        firePropertyChange(Tag.approval_mode.value, oldApprovalMode, approvalMode);
+        firePropertyChange(PmfConstants.ref_approvalMode, oldApprovalMode, approvalMode);
     }
 
     public boolean unsetApprovalMode() {
         if (isSetApprovalMode()) {
             Integer oldApprovalMode = approvalMode;
             approvalMode = null;
-            firePropertyChange(Tag.approval_mode.value, oldApprovalMode, approvalMode);
+            firePropertyChange(PmfConstants.ref_approvalMode, oldApprovalMode, approvalMode);
             return true;
         }
         return false;
@@ -449,14 +425,14 @@ public class Reference extends AbstractSBase {
     public void setWebsite(String website) {
         String oldWebsite = this.website;
         this.website = website;
-        firePropertyChange(Tag.website.value, oldWebsite, website);
+        firePropertyChange(PmfConstants.ref_website, oldWebsite, website);
     }
 
     public boolean unsetWebsite() {
         if (isSetWebsite()) {
             String oldWebsite = website;
             website = null;
-            firePropertyChange(Tag.website.value, oldWebsite, website);
+            firePropertyChange(PmfConstants.ref_website, oldWebsite, website);
             return true;
         }
         return false;
@@ -474,14 +450,14 @@ public class Reference extends AbstractSBase {
     public void setType(ReferenceType type) {
         ReferenceType oldType = this.type;
         this.type = type;
-        firePropertyChange(Tag.type.value, oldType, type);
+        firePropertyChange(PmfConstants.ref_type, oldType, type);
     }
 
     public boolean unsetType() {
         if (isSetType()) {
             ReferenceType oldType = type;
             type = null;
-            firePropertyChange(Tag.type.value, oldType, type);
+            firePropertyChange(PmfConstants.ref_type, oldType, type);
             return true;
         }
         return false;
@@ -499,14 +475,14 @@ public class Reference extends AbstractSBase {
     public void setComment(String comment) {
         String oldComment = this.comment;
         this.comment = comment;
-        firePropertyChange(Tag.comment.value, oldComment, comment);
+        firePropertyChange(PmfConstants.ref_comment, oldComment, comment);
     }
 
     public boolean unsetComment() {
         if (isSetComment()) {
             String oldComment = comment;
             comment = null;
-            firePropertyChange(Tag.comment.value, oldComment, comment);
+            firePropertyChange(PmfConstants.ref_comment, oldComment, comment);
             return true;
         }
         return false;
@@ -514,9 +490,7 @@ public class Reference extends AbstractSBase {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
         final Reference other = (Reference) object;

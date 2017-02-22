@@ -56,12 +56,27 @@ public class PmfConstants {
     public static final String name = "name";
     public static final String value = "value";
 
+    // Uncertainties
     public static final String rSquared = "rSquared";
     public static final String rootMeanSquare = "rootMeanSquared";
     public static final String sumOfSquaredErrors = "sumOfSquaredErrors";
     public static final String akaikeInformationCriterion = "akaikeInformationCriterion";
     public static final String bayesianInformationCriterion = "bayesianInformationCriterion";
     public static final String degreesOfFreedom = "degreesOfFreedom";
+
+    // References
+    public static final String ref_author = "AU";
+    public static final String ref_year = "PY";
+    public static final String ref_title = "TI";
+    public static final String ref_abstractText = "AB";
+    public static final String ref_journal = "T2";
+    public static final String ref_volume = "VL";
+    public static final String ref_issue = "IS";
+    public static final String ref_page = "SP";
+    public static final String ref_approvalMode = "LB";
+    public static final String ref_website = "UR";
+    public static final String ref_type = "M3";
+    public static final String ref_comment = "N1";
 
     public static final String src = "src";
 }
