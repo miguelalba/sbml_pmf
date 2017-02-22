@@ -609,12 +609,10 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final PmfModelPlugin other = (PmfModelPlugin) object;
+        PmfModelPlugin other = (PmfModelPlugin) object;
         return Objects.equals(listOfModelVariables, other.listOfModelVariables) &&
                 Objects.equals(listOfDataSources, other.listOfDataSources) &&
                 Objects.equals(listOfPrimaryModels, other.listOfPrimaryModels) &&

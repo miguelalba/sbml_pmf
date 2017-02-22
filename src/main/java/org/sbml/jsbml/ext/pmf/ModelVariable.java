@@ -148,12 +148,10 @@ public class ModelVariable extends AbstractSBase {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final ModelVariable other = (ModelVariable) object;
+        ModelVariable other = (ModelVariable) object;
         return Objects.equals(name, other.name) && Objects.equals(value, other.value);
     }
 

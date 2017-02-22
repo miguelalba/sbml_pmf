@@ -493,7 +493,7 @@ public class Reference extends AbstractSBase {
         if (object == null || getClass() != object.getClass())
             return false;
 
-        final Reference other = (Reference) object;
+        Reference other = (Reference) object;
         return Objects.equals(author, other.author) &&
                 Objects.equals(year, other.year) &&
                 Objects.equals(title, other.title) &&

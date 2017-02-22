@@ -101,12 +101,10 @@ public class DataSource extends AbstractSBase {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final DataSource other = (DataSource) object;
+        DataSource other = (DataSource) object;
         return Objects.equals(src, other.src);
     }
 

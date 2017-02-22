@@ -124,12 +124,10 @@ public class PmfSpeciesPlugin extends AbstractSBasePlugin {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final PmfSpeciesPlugin other = (PmfSpeciesPlugin) object;
+        PmfSpeciesPlugin other = (PmfSpeciesPlugin) object;
         return Objects.equals(metaData, other.metaData);
     }
 

@@ -90,12 +90,10 @@ public class PrimaryModel extends AbstractSBase {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final PrimaryModel other = (PrimaryModel) object;
+        PrimaryModel other = (PrimaryModel) object;
         return Objects.equals(src, other.src);
     }
 

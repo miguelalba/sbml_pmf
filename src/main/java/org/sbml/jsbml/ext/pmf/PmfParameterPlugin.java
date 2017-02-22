@@ -201,12 +201,10 @@ public class PmfParameterPlugin extends AbstractSBasePlugin {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final PmfParameterPlugin other = (PmfParameterPlugin) object;
+        PmfParameterPlugin other = (PmfParameterPlugin) object;
         return Objects.equals(metaData, other.metaData) && Objects.equals(listOfCorrelations, other.listOfCorrelations);
     }
 

@@ -152,10 +152,8 @@ public class CompartmentMetaData extends AbstractSBase {
     public boolean equals(Object object) {
         if (object == null)
             return false;
-        if (getClass() != object.getClass())
-            return false;
 
-        final CompartmentMetaData other = (CompartmentMetaData) object;
+        CompartmentMetaData other = (CompartmentMetaData) object;
         return Objects.equals(source, other.source) && Objects.equals(detail, other.detail);
     }
 

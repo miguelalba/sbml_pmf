@@ -140,12 +140,10 @@ public class ParameterMetaData extends AbstractSBase {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final ParameterMetaData other = (ParameterMetaData) object;
+        ParameterMetaData other = (ParameterMetaData) object;
         return Objects.equals(p, other.p) && Objects.equals(t, other.t) && Objects.equals(error, other.error) &&
                 Objects.equals(description, other.description) && Objects.equals(min, other.min) &&
                 Objects.equals(max, other.max);

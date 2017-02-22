@@ -180,12 +180,10 @@ public class RuleMetaData extends AbstractSBase {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final RuleMetaData other = (RuleMetaData) object;
+        RuleMetaData other = (RuleMetaData) object;
         return Objects.equals(formulaName, other.formulaName) && Objects.equals(pmmLabId, other.pmmLabId) &&
                 Objects.equals(modelClass, other.modelClass);
     }

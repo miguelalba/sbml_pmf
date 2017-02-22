@@ -144,12 +144,10 @@ public class Correlation extends AbstractSBase {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null)
-            return false;
-        if (getClass() != object.getClass())
+        if (object == null || getClass() != object.getClass())
             return false;
 
-        final Correlation other = (Correlation) object;
+        Correlation other = (Correlation) object;
         return Objects.equals(name, other.name) && Objects.equals(value, other.value);
     }
 
