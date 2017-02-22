@@ -872,3 +872,31 @@
 [14:39:45,555  WARN StringTools:404] - Could not create an integer from the string not an integer
 [14:39:45,556  WARN StringTools:404] - Could not create an integer from the string 0.5
 [14:39:45,556  WARN StringTools:404] - Could not create an integer from the string not an integer
+[16:41:44,242  WARN SBMLCoreParser:218] - Could not recognize the attribute 'r2' on the element model. Please check the specification for SBML.
+[16:41:44,289  WARN SBMLCoreParser:218] - Could not recognize the attribute 'sse' on the element model. Please check the specification for SBML.
+[16:41:44,289  WARN SBMLCoreParser:218] - Could not recognize the attribute 'rms' on the element model. Please check the specification for SBML.
+[16:41:44,289  WARN SBMLCoreParser:218] - Could not recognize the attribute 'dof' on the element model. Please check the specification for SBML.
+[16:41:44,289  WARN SBMLCoreParser:218] - Could not recognize the attribute 'bic' on the element model. Please check the specification for SBML.
+[16:48:11,073  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'rms' on the element model is not part of the SBML specifications (Model).
+[16:48:11,073  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'sse' on the element model is not part of the SBML specifications (Model).
+[16:48:11,073  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'bic' on the element model is not part of the SBML specifications (Model).
+[16:48:11,088  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'dof' on the element model is not part of the SBML specifications (Model).
+[16:48:11,088  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'r2' on the element model is not part of the SBML specifications (Model).
+[17:04:36,236  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'rms' on the element model is not part of the SBML specifications (Model).
+[17:04:36,236  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'sse' on the element model is not part of the SBML specifications (Model).
+[17:04:36,252  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'bic' on the element model is not part of the SBML specifications (Model).
+[17:04:36,252  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'dof' on the element model is not part of the SBML specifications (Model).
+[17:04:36,252  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'r2' on the element model is not part of the SBML specifications (Model).
+[17:12:47,049  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'rms' on the element model is not part of the SBML specifications (Model).
+[17:12:47,049  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'sse' on the element model is not part of the SBML specifications (Model).
+[17:12:47,049  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'bic' on the element model is not part of the SBML specifications (Model).
+[17:12:47,049  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'dof' on the element model is not part of the SBML specifications (Model).
+[17:12:47,049  WARN AbstractReaderWriter:97] - processAttribute: The attribute 'r2' on the element model is not part of the SBML specifications (Model).
+[10:40:31,412  WARN StringTools:382] - Could not create a double from the string '0,998'
+[10:40:31,452  WARN StringTools:382] - Could not create a double from the string '0,117'
+[10:40:31,452  WARN StringTools:382] - Could not create a double from the string '-32,863'
+[10:40:31,452  WARN StringTools:382] - Could not create a double from the string '0,027'
+[10:43:32,227  WARN StringTools:382] - Could not create a double from the string '0,998'
+[10:43:32,253  WARN StringTools:382] - Could not create a double from the string '0,117'
+[10:43:32,254  WARN StringTools:382] - Could not create a double from the string '-32,863'
+[10:43:32,254  WARN StringTools:382] - Could not create a double from the string '0,027'

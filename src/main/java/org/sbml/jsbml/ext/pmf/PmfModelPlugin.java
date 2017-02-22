@@ -2,10 +2,8 @@ package org.sbml.jsbml.ext.pmf;
 
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Model;
-import org.sbml.jsbml.PropertyUndefinedError;
 import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.ext.AbstractSBasePlugin;
-import org.sbml.jsbml.util.StringTools;
 
 import java.text.MessageFormat;
 import java.util.Objects;
@@ -18,12 +16,7 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
     private ListOf<ModelVariable> listOfModelVariables;
     private ListOf<DataSource> listOfDataSources;
     private ListOf<PrimaryModel> listOfPrimaryModels;
-    private Double r2;
-    private Double rms;
-    private Double sse;
-    private Double aic;
-    private Double bic;
-    private Integer dof;
+    private ModelMetaData metaData;
 
     public PmfModelPlugin(PmfModelPlugin plugin) {
         super(plugin);
@@ -34,18 +27,9 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
             setListOfDataSources(plugin.listOfDataSources.clone());
         if (plugin.isSetListOfPrimaryModels())
             setListOfPrimaryModels(plugin.listOfPrimaryModels.clone());
-        if (plugin.isSetR2())
-            setR2(plugin.getR2());
-        if (plugin.isSetRMS())
-            setRMS(plugin.getRMS());
-        if (plugin.isSetSSE())
-            setSSE(plugin.getSSE());
-        if (plugin.isSetAIC())
-            setAIC(plugin.getAIC());
-        if (plugin.isSetBIC())
-            setBIC(plugin.getBIC());
-        if (plugin.isSetDOF())
-            setDOF(plugin.getDOF());
+        if (plugin.isSetMetaData()) {
+            setMetaData(plugin.metaData.clone());
+        }
     }
 
     public PmfModelPlugin(Model model) {
@@ -73,31 +57,6 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
 
     @Override
     public boolean readAttribute(String attributeName, String prefix, String value) {
-        if (attributeName.equals("r2")) {
-            setR2(StringTools.parseSBMLDouble(value));
-            return true;
-        }
-        if (attributeName.equals("rms")) {
-            setRMS(StringTools.parseSBMLDouble(value));
-            return true;
-        }
-        if (attributeName.equals("sse")) {
-            setSSE(StringTools.parseSBMLDouble(value));
-            return true;
-        }
-        if (attributeName.equals("aic")) {
-            setAIC(StringTools.parseSBMLDouble(value));
-            return true;
-        }
-        if (attributeName.equals("bic")) {
-            setBIC(StringTools.parseSBMLDouble(value));
-            return true;
-        }
-        if (attributeName.equals("dof")) {
-            setDOF(StringTools.parseSBMLInt(value));
-            return true;
-        }
-
         return false;
     }
 
@@ -119,6 +78,8 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         if (isSetListOfDataSources())
             childCount++;
         if (isSetListOfPrimaryModels())
+            childCount++;
+        if (isSetMetaData())
             childCount++;
         return childCount;
     }
@@ -147,6 +108,11 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         if (isSetListOfPrimaryModels()) {
             if (pos == childIndex)
                 return getListOfPrimaryModels();
+            pos++;
+        }
+        if (isSetMetaData()) {
+            if (pos == childIndex)
+                return getMetaData();
             pos++;
         }
         throw new IndexOutOfBoundsException(
@@ -617,159 +583,25 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         return false;
     }
 
-    // --- r2 attribute ---
-    public double getR2() {
-        if (isSetR2()) {
-            return r2;
+    // --- ModelMetaData ---
+    public ModelMetaData getMetaData() { return metaData; }
+
+    public boolean isSetMetaData() { return metaData != null; }
+
+    public void setMetaData(ModelMetaData metaData) {
+        unsetMetaData();
+        this.metaData = metaData;
+        if (extendedSBase != null) {
+            this.metaData.setPackageVersion(-1);
+            this.extendedSBase.registerChild(this.metaData);
         }
-        throw new PropertyUndefinedError(PmfConstants.r2, this);
     }
 
-    public boolean isSetR2() {
-        return r2 != null;
-    }
-
-    public void setR2(double r2) {
-        Double oldR2 = this.r2;
-        this.r2 = r2;
-        firePropertyChange(PmfConstants.r2, oldR2, this.r2);
-    }
-
-    public boolean unsetR2() {
-        if (isSetR2()) {
-            Double oldR2 = r2;
-            r2 = null;
-            firePropertyChange(PmfConstants.r2, oldR2, r2);
-            return true;
-        }
-        return false;
-    }
-
-    // --- rms attribute ---
-    public double getRMS() {
-        if (isSetRMS()) {
-            return rms;
-        }
-        throw new PropertyUndefinedError(PmfConstants.rms, this);
-    }
-
-    public boolean isSetRMS() { return rms != null; }
-
-    public void setRMS(double rms) {
-        Double oldRMS = this.rms;
-        this.rms = rms;
-        firePropertyChange(PmfConstants.rms, oldRMS, this.rms);
-    }
-
-    public boolean unsetRMS() {
-        if (isSetRMS()) {
-            Double oldRMS = rms;
-            rms = null;
-            firePropertyChange(PmfConstants.rms, oldRMS, rms);
-            return true;
-        }
-        return false;
-    }
-
-    // --- sse attribute ---
-    public double getSSE() {
-        if (isSetSSE()) {
-            return sse;
-        }
-        throw new PropertyUndefinedError(PmfConstants.sse, this);
-    }
-
-    public boolean isSetSSE() { return sse != null; }
-
-    public void setSSE(double sse) {
-        Double oldSSE = this.sse;
-        this.sse = sse;
-        firePropertyChange(PmfConstants.sse, oldSSE, sse);
-    }
-
-    public boolean unsetSSE() {
-        if (isSetSSE()) {
-            Double oldSSE = sse;
-            sse = null;
-            firePropertyChange(PmfConstants.sse, oldSSE, sse);
-            return true;
-        }
-        return false;
-    }
-
-    // --- aic attribute ---
-    public double getAIC() {
-        if (isSetAIC()) {
-            return aic;
-        }
-        throw new PropertyUndefinedError(PmfConstants.aic, this);
-    }
-
-    public boolean isSetAIC() { return aic != null; }
-
-    public void setAIC(double aic) {
-        Double oldAIC = this.aic;
-        this.aic = aic;
-        firePropertyChange(PmfConstants.aic, oldAIC, aic);
-    }
-
-    public boolean unsetAIC() {
-        if (isSetAIC()) {
-            Double oldAIC = aic;
-            aic = null;
-            firePropertyChange(PmfConstants.aic, oldAIC, aic);
-            return true;
-        }
-        return false;
-    }
-
-    // --- bic attribute ---
-    public double getBIC() {
-        if (isSetBIC()) {
-            return bic;
-        }
-        throw new PropertyUndefinedError(PmfConstants.bic, this);
-    }
-
-    public boolean isSetBIC() { return bic != null; }
-
-    public void setBIC(double bic) {
-        Double oldBIC = this.bic;
-        this.bic = bic;
-        firePropertyChange(PmfConstants.bic, oldBIC, bic);
-    }
-
-    public boolean unsetBIC() {
-        if (isSetBIC()) {
-            Double oldBIC = bic;
-            bic = null;
-            firePropertyChange(PmfConstants.bic, oldBIC, bic);
-            return true;
-        }
-        return false;
-    }
-
-    // --- dof attribute ---
-    public int getDOF() {
-        if (isSetDOF()) {
-            return dof;
-        }
-        throw new PropertyUndefinedError(PmfConstants.dof, this);
-    }
-
-    public boolean isSetDOF() { return dof != null; }
-
-    public void setDOF(int dof) {
-        Integer oldDOF = this.dof;
-        this.dof = dof;
-        firePropertyChange(PmfConstants.dof, oldDOF, dof);
-    }
-
-    public boolean unsetDOF() {
-        if (isSetDOF()) {
-            Integer oldDOF = dof;
-            dof = null;
-            firePropertyChange(PmfConstants.dof, oldDOF, dof);
+    public boolean unsetMetaData() {
+        if (isSetMetaData()) {
+            ModelMetaData oldMetaData = metaData;
+            metaData = null;
+            firePropertyChange(PmfConstants.modelMetaData, oldMetaData, metaData);
             return true;
         }
         return false;
@@ -786,16 +618,11 @@ public class PmfModelPlugin extends AbstractSBasePlugin {
         return Objects.equals(listOfModelVariables, other.listOfModelVariables) &&
                 Objects.equals(listOfDataSources, other.listOfDataSources) &&
                 Objects.equals(listOfPrimaryModels, other.listOfPrimaryModels) &&
-                Objects.equals(r2, other.r2) &&
-                Objects.equals(rms, other.rms) &&
-                Objects.equals(sse, other.sse) &&
-                Objects.equals(aic, other.aic) &&
-                Objects.equals(bic, other.bic) &&
-                Objects.equals(dof, other.dof);
+                Objects.equals(metaData, other.metaData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(listOfModelVariables, listOfDataSources, listOfPrimaryModels, r2, rms, sse, aic, bic, dof);
+        return Objects.hash(listOfModelVariables, listOfDataSources, listOfPrimaryModels, metaData);
     }
 }

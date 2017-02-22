@@ -15,6 +15,7 @@ public class Test {
 
         SBMLDocument doc = new SBMLDocument(3, 1);
         doc.enablePackage(PmfConstants.shortLabel);
+
         Model model = doc.createModel("amodel");
 
         // Test PmfModelPlugin: model variables, data sources and primary models
@@ -22,6 +23,14 @@ public class Test {
         plugin.createModelVariable("pH", 5.0);
         plugin.createDataSource("someData.numl");
         plugin.createPrimaryModel("someModel.sbml");
+
+        ModelMetaData modelMetaData = new ModelMetaData();
+        modelMetaData.setDegreesOfFreedom(2);
+        modelMetaData.setBayesianInformationCriterion(-32.863);
+        modelMetaData.setRootMeanSquare(0.117);
+        modelMetaData.setRSquared(0.998);
+        modelMetaData.setSumOfSquaredErrors(0.027);
+        plugin.setMetaData(modelMetaData);
 
         // Test PmfCompartmentPlugin: source and detail
         Compartment compartment = model.createCompartment("Culture_medium");

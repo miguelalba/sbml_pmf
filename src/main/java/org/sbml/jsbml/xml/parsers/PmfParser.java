@@ -92,6 +92,12 @@ public class PmfParser extends AbstractReaderWriter implements PackageParser {
         if (elementName.equals(PmfConstants.listOfPrimaryModels)) {
             return plugin.getListOfPrimaryModels();
         }
+        if (elementName.equals(PmfConstants.modelMetaData)) {
+            ModelMetaData metaData = new ModelMetaData();
+            plugin.setMetaData(metaData);
+            return metaData;
+        }
+
         return model;
     }
 

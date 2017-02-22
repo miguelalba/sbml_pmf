@@ -41,6 +41,7 @@ public class PmfConstants {
     public static final String reference = "reference";
 
     public static final String compartmentMetaData = "compartmentMetaData";
+    public static final String modelMetaData = "modelMetaData";
     public static final String parameterMetaData = "parameterMetaData";
     public static final String ruleMetaData = "ruleMetaData";
     public static final String speciesMetaData = "speciesMetaData";
@@ -54,12 +55,13 @@ public class PmfConstants {
     // Attributes
     public static final String name = "name";
     public static final String value = "value";
-    public static final String r2 = "r2";
-    public static final String rms = "rms";
-    public static final String sse = "sse";
-    public static final String aic = "aic";
-    public static final String bic = "bic";
-    public static final String dof = "dof";
+
+    public static final String rSquared = "rSquared";
+    public static final String rootMeanSquare = "rootMeanSquared";
+    public static final String sumOfSquaredErrors = "sumOfSquaredErrors";
+    public static final String akaikeInformationCriterion = "akaikeInformationCriterion";
+    public static final String bayesianInformationCriterion = "bayesianInformationCriterion";
+    public static final String degreesOfFreedom = "degreesOfFreedom";
 
     public static final String src = "src";
 }
